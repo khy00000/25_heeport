@@ -15,9 +15,25 @@
 
 @font-face {
   font-family: "UntitledSans";
+  font-weight: 200;
+  font-style: normal;
+  src: url("./assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Light.otf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "UntitledSans";
   font-weight: 300;
   font-style: normal;
   src: url("./assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Regular.otf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "UntitledSans";
+  font-weight: 400;
+  font-style: normal;
+  src: url("./assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Medium.otf")
     format("truetype");
 }
 
@@ -32,15 +48,44 @@
 * {
   margin: 0;
   padding: 0;
-  background-color: black;
-  color: white;
-  /* background-color: rgb(207, 240, 245); */
-  font-family: "UntitledSans";
   box-sizing: border-box;
+}
+
+body {
+  font-family: "UntitledSans";
+  font-weight: 300;
+  background-color: #1d1d1d;
+  color: white;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-weight: 300;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  display: block;
+}
+
+.blind {
+  opacity: 0;
+  visibility: hidden;
 }
 
 section {
@@ -51,17 +96,17 @@ section {
 
 .intro .intro-row1 {
   width: 100%;
-  height: 20vh;
-  background-color: rgb(169, 190, 190);
+  height: 40vh;
   position: relative;
 }
 
 .intro .intro-row1 nav {
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: fixed;
+  top: 1em;
+  right: 1em;
 }
 
+/* works */
 .intro .intro-row1 nav a {
   display: block;
   border: 1px solid white;
@@ -69,9 +114,16 @@ section {
   border-radius: 100px 100px;
   font-size: 17px;
   position: relative;
+  transition: 0.5s ease-in;
 }
 
-.intro .intro-row1 nav a::before {
+.intro .intro-row1 nav a:hover {
+  border: 1px solid aqua;
+  background-color: aqua;
+  color: black;
+}
+
+.intro .intro-row1 nav a::after {
   content: "";
   background-image: url(./assets/img/arrow-w.svg);
   background-size: 13px 13px;
@@ -81,8 +133,218 @@ section {
   top: 50%;
   right: 13px;
   transform: translateY(-50%);
+  transition: 0.5s ease-in;
 }
 
+.intro .intro-row1 nav a:hover::after {
+  background-image: url(./assets/img/arrow.svg);
+}
+
+/* 희연킴 로고 */
 .intro .intro-row1 .logo {
+  position: absolute;
+  top: 17px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.logo-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 텍스트 */
+.intro .intro-row2 {
+  width: 100%;
+  height: 60vh;
+  position: relative;
+}
+
+.intro .intro-row2 .intro-text-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.intro .intro-row2 .intro-text-wrap p {
+  font-family: "UntitledSerif";
+  font-size: 60px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* 어바웃 */
+.about {
+  height: 150vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about h1 {
+  font-size: 22px;
+  padding-bottom: 3em;
+}
+
+.about .about-item {
+  height: 17vh;
+  position: relative;
+}
+
+.about .about-item span {
+  font-size: 20px;
+  position: absolute;
+  bottom: 50px;
+  left: -60px;
+}
+
+.about .about-item p {
+  font-family: "UntitledSerif";
+  font-size: 100px;
+  letter-spacing: -0.8px;
+  line-height: 1;
+}
+
+/* how i work */
+.howiwork {
+  display: flex;
+  padding: 5em;
+}
+
+.howiwork h1 {
+  width: 50%;
+  font-size: 30px;
+}
+
+.howiwork p {
+  font-family: "UntitledSerif";
+  width: 50%;
   font-size: 40px;
+}
+
+/* works */
+.works {
+  height: 300vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+/* 배경 글자 */
+.works .works-txt-wrap {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  overflow: hidden;
+}
+
+.works-txt {
+  display: flex;
+}
+
+.works-txt h1 {
+  white-space: nowrap;
+  font-size: 200px;
+  font-weight: 400;
+  margin-right: 30px;
+}
+
+/* 워크 박스 */
+.works-list {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 0.5em;
+}
+
+.works-list:nth-child(2) {
+  margin-top: 50vh;
+}
+
+.works-list .works-list-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.works-list .works-list-wrap .works-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  padding: 1em;
+}
+
+.works-item-title h2 {
+  font-weight: 300;
+  font-size: 70px;
+  margin-bottom: 15px;
+}
+
+.works-item p {
+  font-weight: 300;
+  font-size: 30px;
+}
+
+.explain-list {
+  display: flex;
+  gap: 10px;
+}
+
+.explain-item {
+  border: 1px solid white;
+  padding: 0.3em 0.7em;
+  border-radius: 100px 100px;
+}
+
+.works-list-wrap .works-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: rgb(196, 208, 208);
+}
+
+.works-list-wrap .works-img img {
+  transform: scale(2);
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* 푸터 */
+.footer_top {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "UntitledSerif";
+  text-align: center;
+  font-size: 70px;
+}
+
+/* 푸터 희연킴 로고 */
+.footer_bottom {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  font-weight: 400;
 }
