@@ -165,13 +165,14 @@ section {
   transition: transform 0.3s ease;
 }
 
-.logo:hover .hover-m {
-  transform: translate(-20px, 0px);
+.moving {
+  pointer-events: none;
 }
 
-.logo:hover .hover-k {
-  transform: translate(20px, 0px);
+.reset {
+  transform: translateX(0px);
 }
+
 
 /* 텍스트 */
 .intro .intro-row2 {
