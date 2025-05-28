@@ -140,20 +140,38 @@ section {
   background-image: url(./assets/img/arrow.svg);
 }
 
+.intro .intro-row1 .logo {
+  position: relative;
+  cursor: pointer;
+}
+
 /* 희연킴 로고 */
 .intro .intro-row1 .logo {
   position: absolute;
   top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  /* font-size: 30px;
-  font-weight: 400; */
+  transition: none;
+  font-size: 30px;
+  font-weight: 400;
 }
 
-/* .logo-flex {
+.intro .intro-row1 .logo .logo-flex{
   display: flex;
   justify-content: space-between;
-} */
+}
+
+.hover-m, .hover-k {
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .hover-m {
+  transform: translate(-20px, 0px);
+}
+
+.logo:hover .hover-k {
+  transform: translate(20px, 0px);
+}
 
 /* 텍스트 */
 .intro .intro-row2 {
