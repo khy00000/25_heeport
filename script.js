@@ -39,18 +39,30 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.fonts.ready.then(() => {
   // SplitText 적용
-const split1 = new SplitText(".split1", { type: "lines", linesClass: "line" });
-const split2 = new SplitText(".split2", { type: "lines", linesClass: "line" });
-const split3 = new SplitText(".split3", { type: "lines", linesClass: "line" });
-const split4 = new SplitText(".split4", { type: "lines", linesClass: "line" });
+  const split1 = new SplitText(".split1", {
+    type: "lines",
+    linesClass: "line",
+  });
+  const split2 = new SplitText(".split2", {
+    type: "lines",
+    linesClass: "line",
+  });
+  const split3 = new SplitText(".split3", {
+    type: "lines",
+    linesClass: "line",
+  });
+  const split4 = new SplitText(".split4", {
+    type: "lines",
+    linesClass: "line",
+  });
 
   // 초기 상태
   gsap.set(".introwrap-2", { autoAlpha: 0 });
 
-  function animateIn(split, delay = 0) {
+  function animateIn(split) {
     return gsap.fromTo(
       split.lines,
-      { yPercent: 100,},
+      { yPercent: 100 },
       {
         yPercent: 0,
         duration: 0.4,
@@ -71,15 +83,16 @@ const split4 = new SplitText(".split4", { type: "lines", linesClass: "line" });
 
   // 첫 로딩 시 intro1 등장
   let intro1In = gsap.timeline();
-  intro1In.add(animateIn(split1, 0));
-  intro1In.add(animateIn(split2, 0.3), ">");
+  intro1In.add(animateIn(split1, 0)).add(animateIn(split2, 0.3), ">");
 
-  // ScrollTrigger로 등장/퇴장 전환 / ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에
+  // ScrollTrigger로 등장/퇴장 전환 
+  // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에
   ScrollTrigger.create({
     trigger: ".intro-row2",
     start: "top top",
-    end: "bottom bottom",
-    scrub: true,
+    end: "bottom top",
+    scrub: false,
+
     onEnter: () => {
       gsap
         .timeline()
@@ -90,6 +103,7 @@ const split4 = new SplitText(".split4", { type: "lines", linesClass: "line" });
         .add(animateIn(split3, 0.3))
         .add(animateIn(split4, 0.6), ">-0.3");
     },
+
     onLeaveBack: () => {
       gsap
         .timeline()
