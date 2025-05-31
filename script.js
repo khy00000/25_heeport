@@ -117,3 +117,14 @@ document.fonts.ready.then(() => {
     },
   });
 });
+
+//어바웃 애니메이션 효과
+gsap.utils.toArray(".about-item").forEach((item) => {
+  ScrollTrigger.create({
+    trigger: item,
+    start: "top 50%",
+    markers: true,
+    onEnter: () => item.classList.add("active"),
+    onLeaveBack: () => item.classList.remove("active")
+  });
+});

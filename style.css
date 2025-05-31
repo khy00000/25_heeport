@@ -203,7 +203,7 @@ section {
   will-change: transform, opacity;
 }
 
-/* 마스크 효과 */
+/* 애니메이션 마스크 효과 */
 .line {
   display: block;
   overflow: hidden;
@@ -234,6 +234,12 @@ section {
 .about .about-item {
   height: 17vh;
   position: relative;
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+.about-item.active {
+  opacity: 1;
 }
 
 .about .about-item span {
