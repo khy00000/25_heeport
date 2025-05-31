@@ -33,31 +33,28 @@ logo.addEventListener("mouseenter", () => {
   }, 600);
 });
 
+// 인트로 텍스트 효과
 // from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값
-//인트로 텍스트 효과
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.fonts.ready.then(() => {
-  // SplitText 적용
-  const split1 = new SplitText(".split1", {
-    type: "lines",
-    linesClass: "line",
-  });
-  const split2 = new SplitText(".split2", {
-    type: "lines",
-    linesClass: "line",
-  });
-  const split3 = new SplitText(".split3", {
-    type: "lines",
-    linesClass: "line",
-  });
-  const split4 = new SplitText(".split4", {
-    type: "lines",
-    linesClass: "line",
-  });
+  // Split 아이템
+  const splitTargets = [
+    ".split1",
+    ".split2",
+    ".split3",
+    ".split4"
+  ];
+  const splits = splitTargets.map(
+    (sel) =>
+      new SplitText(sel, {
+        type: "lines",
+        linesClass: "line",
+        mask: "lines",
+      })
+  );
 
-  // 초기 상태
-  gsap.set(".introwrap-2", { autoAlpha: 0 });
+  const [split1, split2, split3, split4] = splits;
 
   function animateIn(split) {
     return gsap.fromTo(
@@ -81,9 +78,11 @@ document.fonts.ready.then(() => {
     });
   }
 
+  // 초기 상태
+  gsap.set(".introwrap-2", { autoAlpha: 0 });
+
   // 첫 로딩 시 intro1 등장
-  let intro1In = gsap.timeline();
-  intro1In.add(animateIn(split1, 0)).add(animateIn(split2, 0.3), ">");
+  gsap.timeline().add(animateIn(split1, 0)).add(animateIn(split2, 0.3), ">");
 
   // ScrollTrigger로 등장/퇴장 전환
   // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에
@@ -116,6 +115,19 @@ document.fonts.ready.then(() => {
         .add(animateIn(split2, 0.6), ">-0.3");
     },
   });
+
+  //howiwork 스피릿 효과
+//   ScrollTrigger.create({
+//     trigger: ".howiwork",
+//     start: "top 80%",
+
+//     onEnter: () => {
+//       gsap
+//         .timeline()
+//         .add(animateIn(split5, 0))
+//         .add(animateIn(split6, 0.3), ">");
+//     },
+//   });
 });
 
 //어바웃 애니메이션 효과
@@ -123,8 +135,37 @@ gsap.utils.toArray(".about-item").forEach((item) => {
   ScrollTrigger.create({
     trigger: item,
     start: "top 50%",
-    markers: true,
     onEnter: () => item.classList.add("active"),
-    onLeaveBack: () => item.classList.remove("active")
+    onLeaveBack: () => item.classList.remove("active"),
   });
+});
+
+//howiwork 효과 수정
+window.addEventListener("load", () => {
+  gsap.set(".split5, .split6", { autoAlpha: 0 });
+
+  ScrollTrigger.create({
+    trigger: ".howiwork",
+    start: "top center",
+    end: "bottom bottom",
+    once: true,
+    markers: true,
+    
+    onEnter: () => {
+      gsap.timeline()
+        .fromTo(
+          ".split5",
+          { y: 50, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power1.out" }
+        )
+        .fromTo(
+          ".split6",
+          { y: 50, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power1.out" },
+          ">-0.3"
+        );
+    },
+  });
+
+  ScrollTrigger.refresh(); // 강제로 트리거 새로고침
 });

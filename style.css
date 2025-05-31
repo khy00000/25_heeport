@@ -190,7 +190,7 @@ section {
   transition: opacity 0.3s ease;
 }
 
-.intro .intro-row2 .intro-text-wrap p {
+.intro .intro-row2 .intro-text-wrap div {
   font-family: "UntitledSerif";
   font-size: 60px;
   display: inline-block;
@@ -199,20 +199,13 @@ section {
   overflow: hidden;
 }
 
-.intro .intro-row2 .intro-text-wrap p * {
-  will-change: transform, opacity;
-}
-
 /* 애니메이션 마스크 효과 */
 .line {
   display: block;
   overflow: hidden;
 }
 
-.split1 .line > *,
-.split2 .line > *,
-.split3 .line > *,
-.split4 .line > * {
+.line > * {
   display: inline-block;
   transform: translateY(100%);
 }
@@ -234,7 +227,7 @@ section {
 .about .about-item {
   height: 17vh;
   position: relative;
-  opacity: 0.35;
+  opacity: 0.2;
   transition: opacity 0.3s ease;
 }
 
@@ -267,10 +260,22 @@ section {
   font-size: 30px;
 }
 
-.howiwork p {
-  font-family: "UntitledSerif";
+.howiwork .howiworktx {
   width: 50%;
+  max-width: 700px;
+}
+
+.split5,
+.split6 {
+  opacity: 0;
+  white-space: normal;
+  font-family: "UntitledSerif";
   font-size: 40px;
+  will-change: transform, opacity;
+}
+
+.split5 {
+  margin-bottom: 50px;
 }
 
 /* works */
