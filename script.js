@@ -85,12 +85,13 @@ document.fonts.ready.then(() => {
   let intro1In = gsap.timeline();
   intro1In.add(animateIn(split1, 0)).add(animateIn(split2, 0.3), ">");
 
-  // ScrollTrigger로 등장/퇴장 전환 
+  // ScrollTrigger로 등장/퇴장 전환
   // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에
+  // 트리거 뷰포트
   ScrollTrigger.create({
     trigger: ".intro-row2",
-    start: "top top",
-    end: "bottom top",
+    start: "top-=150 top",
+    end: "bottom bottom",
     scrub: false,
 
     onEnter: () => {
