@@ -33,45 +33,18 @@ logo.addEventListener("mouseenter", () => {
   }, 600);
 });
 
-// 인트로 텍스트 효과
 // from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.fonts.ready.then(() => {
-  // 로딩페이지 애니메이션
+  // 로딩 페이지 애니메이션
   const loadingSplit = SplitText.create(".loading-logo", {
     type: "chars",
     wordsClass: "chars-mask",
     mask: "chars",
   });
 
-  const tl = gsap.timeline();
-
-  tl.set(".loading", { y: 0 })
-
-    // 1. 로고 마스크 애니메이션
-    .from(loadingSplit.chars, {
-      y: "-100%",
-      stagger: 0.08,
-      duration: 1.3,
-      ease: "back.out(1.7)",
-    })
-
-    // 2. 로딩 섹션 위로 사라지기
-    .to(
-      ".loading",
-      {
-        yPercent: -100,
-        duration: 1,
-        ease: "power3.inOut",
-      },
-      "+=0.3"
-    )
-
-    // 3. display 제거
-    .set([".loading", ".loading-logo"], { display: "none" });
-
-  // Split 아이템
+  // 인트로 애니메이션 아이템
   const splitTargets = [".split1", ".split2", ".split3", ".split4"];
   const splits = splitTargets.map(
     (sel) =>
@@ -106,13 +79,39 @@ document.fonts.ready.then(() => {
     });
   }
 
+  const tl = gsap.timeline();
+
   // 초기 상태
-  gsap.set(".introwrap-2", { autoAlpha: 0 });
+  tl.set(".loading", { y: 0 })
+    .set(".introwrap-2", { autoAlpha: 0 })
 
-  // 첫 로딩 시 intro1 등장
-  gsap.timeline().add(animateIn(split1, 0)).add(animateIn(split2, 0.3), ">");
+    // 1. 로고 마스크 애니메이션
+    .from(loadingSplit.chars, {
+      y: "-100%",
+      stagger: 0.08,
+      duration: 1.3,
+      ease: "back.out(1.7)",
+    })
 
-  // ScrollTrigger로 등장/퇴장 전환
+    // 2. 로딩 섹션 위로 사라지기
+    .to(
+      ".loading",
+      {
+        yPercent: -100,
+        duration: 1,
+        ease: "power3.inOut",
+      },
+      "+=0.3"
+    )
+
+    // 3. display 제거
+    .set([".loading", ".loading-logo"], { display: "none" })
+
+    // 4. 로딩 후 intro1 등장
+    .add(animateIn(split1, 0))
+    .add(animateIn(split2, 0.3), ">");
+
+  // 인트로 ScrollTrigger로 등장/퇴장 전환
   // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에
   // 트리거 뷰포트
   ScrollTrigger.create({
@@ -143,22 +142,9 @@ document.fonts.ready.then(() => {
         .add(animateIn(split2, 0.6), ">-0.3");
     },
   });
-
-  //howiwork 스피릿 효과
-  //   ScrollTrigger.create({
-  //     trigger: ".howiwork",
-  //     start: "top 80%",
-
-  //     onEnter: () => {
-  //       gsap
-  //         .timeline()
-  //         .add(animateIn(split5, 0))
-  //         .add(animateIn(split6, 0.3), ">");
-  //     },
-  //   });
 });
 
-//어바웃 애니메이션 효과
+//어바웃 애니메이션
 gsap.utils.toArray(".about-item").forEach((item) => {
   ScrollTrigger.create({
     trigger: item,
@@ -168,7 +154,7 @@ gsap.utils.toArray(".about-item").forEach((item) => {
   });
 });
 
-//howiwork 효과 수정
+//howiwork 애니메이션
 window.addEventListener("load", () => {
   gsap.set(".split5, .split6", { autoAlpha: 0 });
 
