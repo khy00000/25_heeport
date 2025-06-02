@@ -38,13 +38,41 @@ logo.addEventListener("mouseenter", () => {
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.fonts.ready.then(() => {
+  // 로딩페이지 애니메이션
+  const loadingSplit = SplitText.create(".loading-logo", {
+    type: "chars",
+    wordsClass: "chars-mask",
+    mask: "chars",
+  });
+
+  const tl = gsap.timeline();
+
+  tl.set(".loading", { y: 0 })
+
+    // 1. 로고 마스크 애니메이션
+    .from(loadingSplit.chars, {
+      y: "-100%",
+      stagger: 0.08,
+      duration: 1.3,
+      ease: "back.out(1.7)",
+    })
+
+    // 2. 로딩 섹션 위로 사라지기
+    .to(
+      ".loading",
+      {
+        yPercent: -100,
+        duration: 1,
+        ease: "power3.inOut",
+      },
+      "+=0.3"
+    )
+
+    // 3. display 제거
+    .set([".loading", ".loading-logo"], { display: "none" });
+
   // Split 아이템
-  const splitTargets = [
-    ".split1",
-    ".split2",
-    ".split3",
-    ".split4"
-  ];
+  const splitTargets = [".split1", ".split2", ".split3", ".split4"];
   const splits = splitTargets.map(
     (sel) =>
       new SplitText(sel, {
@@ -117,17 +145,17 @@ document.fonts.ready.then(() => {
   });
 
   //howiwork 스피릿 효과
-//   ScrollTrigger.create({
-//     trigger: ".howiwork",
-//     start: "top 80%",
+  //   ScrollTrigger.create({
+  //     trigger: ".howiwork",
+  //     start: "top 80%",
 
-//     onEnter: () => {
-//       gsap
-//         .timeline()
-//         .add(animateIn(split5, 0))
-//         .add(animateIn(split6, 0.3), ">");
-//     },
-//   });
+  //     onEnter: () => {
+  //       gsap
+  //         .timeline()
+  //         .add(animateIn(split5, 0))
+  //         .add(animateIn(split6, 0.3), ">");
+  //     },
+  //   });
 });
 
 //어바웃 애니메이션 효과
@@ -149,10 +177,10 @@ window.addEventListener("load", () => {
     start: "top center",
     end: "bottom bottom",
     once: true,
-    markers: true,
-    
+
     onEnter: () => {
-      gsap.timeline()
+      gsap
+        .timeline()
         .fromTo(
           ".split5",
           { y: 50, autoAlpha: 0 },

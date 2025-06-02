@@ -54,7 +54,7 @@
 body {
   font-family: "UntitledSans";
   font-weight: 300;
-  background-color: #1d1d1d;
+  background-color: #151515;
   color: white;
   letter-spacing: -0.5px;
   line-height: 1.2;
@@ -94,6 +94,43 @@ section {
   padding: 2em;
 }
 
+/* 로딩 페이지 */
+.loading {
+  background-color: #1d1d1d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.loading-logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  color: rgb(255, 255, 255);
+  font-size: 200px;
+  white-space: nowrap;
+  font-weight: 400;
+  letter-spacing: -4px;
+}
+
+.chars-mask {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.chars-mask > * {
+  display: inline-block;
+  transform: translateY(100%);
+  overflow: hidden;
+}
+
+/* 인트로 */
 .intro .intro-row1 {
   width: 100%;
   height: 40vh;
@@ -104,6 +141,7 @@ section {
   position: fixed;
   top: 1em;
   right: 1em;
+  z-index: 99;
 }
 
 /* works */
