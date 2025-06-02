@@ -88,7 +88,7 @@ document.fonts.ready.then(() => {
     // 1. 로고 마스크 애니메이션
     .from(loadingSplit.chars, {
       y: "-100%",
-      stagger: 0.08,
+      stagger: 0.05,
       duration: 1.3,
       ease: "back.out(1.7)",
     })
@@ -97,18 +97,18 @@ document.fonts.ready.then(() => {
     .to(
       ".loading",
       {
-        yPercent: -100,
+        clipPath: "inset(0% 0% 100% 0%)",
         duration: 1,
         ease: "power3.inOut",
       },
       "+=0.3"
     )
 
-    // 3. display 제거
+    // 3. 로딩 페이지 제거
     .set([".loading", ".loading-logo"], { display: "none" })
 
     // 4. 로딩 후 intro1 등장
-    .add(animateIn(split1, 0))
+    .add(animateIn(split1, 0), "-=0.3")
     .add(animateIn(split2, 0.3), ">");
 
   // 인트로 ScrollTrigger로 등장/퇴장 전환
@@ -144,7 +144,7 @@ document.fonts.ready.then(() => {
   });
 });
 
-//어바웃 애니메이션
+// 어바웃 애니메이션
 gsap.utils.toArray(".about-item").forEach((item) => {
   ScrollTrigger.create({
     trigger: item,
@@ -154,7 +154,7 @@ gsap.utils.toArray(".about-item").forEach((item) => {
   });
 });
 
-//howiwork 애니메이션
+// howiwork 애니메이션
 window.addEventListener("load", () => {
   gsap.set(".split5, .split6", { autoAlpha: 0 });
 
