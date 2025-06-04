@@ -52,7 +52,8 @@ document.fonts.ready.then(() => {
 
   // 인트로 애니메이션 아이템
   const introtxts = [".split1", ".split2", ".split3", ".split4"];
-  const introtxt = introtxts.map((item) =>
+  const introtxt = introtxts.map(
+    (item) =>
       new SplitText(item, {
         type: "lines",
         linesClass: "line",
@@ -83,10 +84,11 @@ document.fonts.ready.then(() => {
     });
   }
 
-  const tl = gsap.timeline();
+  const loadtl = gsap.timeline();
 
   // 로딩 페이지 초기 상태
-  tl.set(".loading", { y: 0 })
+  loadtl
+    .set(".loading", { y: 0 })
     .set(".introwrap-2", { autoAlpha: 0 })
 
     // 1. 로고 마스크 애니메이션
@@ -148,18 +150,79 @@ document.fonts.ready.then(() => {
   });
 
   // work 애니메이션
-//   const cards = gsap.utils.toArray(".works-list-wrap");
-//   const introCard = cards[0];
+  const works = gsap.utils.toArray(".works-list-wrap");
+  const introWorks = works[0];
 
-//   const titles = gsap.utils.toArray(".works-item-title h2");
-//   titles.forEach((title) => {
-//     const workSplit = new SplitText(title, {
-//       type: "chars",
-//       charsClass: "work-chars",
-//       tah: "div",
-//       mask: "chars",
-//     });
-//   });
+  const marquee = document.querySelector(".works-txt-wrap .works-txt");
+
+  const worksimgWrap = introWorks.querySelector(".works-img");
+  const worksimg = introWorks.querySelector(".works-img img");
+
+  const title = document.querySelectorAll(".works-item-title");
+  const description = document.querySelectorAll(".description-list");
+
+  const titles = gsap.utils.toArray(".works-item-title h2");
+  const workSplit = titles.map(
+    (title) =>
+      new SplitText(title, {
+        type: "chars",
+        charsClass: "work-chars",
+      })
+  );
+
+  function worksIn(title, description) {
+    gsap.to(title, { x: "0%", duration: 0.75, ease: "power4.out" });
+    gsap.to(description, {
+      x: 0,
+      opacity: 1,
+      duration: 0.75,
+      delay: 0.1,
+      ease: "power4.out",
+    });
+  }
+
+  function worksOut(title, description) {
+    gsap.to(title, { x: "100%", duration: 0.5, ease: "power4.out" });
+    gsap.to(description, {
+      x: "40px",
+      opacity: 0,
+      duration: 0.5,
+      ease: "power4.out",
+    });
+  }
+
+  // work 입장 애니메이션
+  const workstl = gsap.timeline();
+
+  // work 이미지 초기 상태
+  workstl
+    .to(worksimgWrap, { scale: 0.5, borderRadius: "400px" })
+    .to(worksimg, { scale: 1.5 })
+    .set(title, { autoAlpha: 0, x: 0 })
+    .set(description, { autoAlpha: 0, x: 0 })
+    .set(".scroll", { autoAlpha: 0, x: 0 })
+    .to(marquee, {
+      xPercent: -50,
+      ease: "none",
+      duration: 15,
+      repeat: -1,
+    });
+
+  // work 스코롤
+  const scrollTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".works",
+      start: "top top",
+      end: "+=2000",
+      pin: true,
+      scrub: 2,
+    },
+  });
+
+  scrollTl
+    .to(marquee, { opacity: 0, ease: "none" }, 0)
+    .to(worksimgWrap, { scale: 1, borderRadius: "40px", ease: "power2.out" }, 0)
+    .to(worksimg, { scale: 1, ease: "power2.out" }, 0);
 });
 
 // 어바웃 애니메이션

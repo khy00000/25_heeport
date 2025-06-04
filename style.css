@@ -324,7 +324,7 @@ section {
 
 /* works */
 .works {
-  height: 300vh;
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -343,6 +343,7 @@ section {
 
 .works-txt {
   display: flex;
+  position: relative;
 }
 
 .works-txt h1 {
@@ -354,10 +355,11 @@ section {
 
 /* 워크 박스 */
 .works-list {
-  position: relative;
   width: 100vw;
   height: 100vh;
-  padding: 0.5em;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .works-list .works-list-wrap {
@@ -365,18 +367,14 @@ section {
   width: 100%;
   height: 100%;
   will-change: transform;
-  margin: 10vh 0;
+  padding: 0.5em;
 }
 
 .works-list-wrap .works-img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   border-radius: 100px;
   overflow: hidden;
-  background-color: rgb(196, 208, 208);
 }
 
 .works-list-wrap .works-img img {
@@ -385,7 +383,7 @@ section {
   will-change: transform;
 }
 
-.works-list-wrap .works-item {
+.works-item {
   position: absolute;
   top: 0;
   left: 0;
@@ -398,26 +396,26 @@ section {
   padding: 1em;
 }
 
-.works-item p {
-  font-weight: 300;
-  font-size: 30px;
-}
-
-.works-item-title h2 {
+.works-item-title {
   font-weight: 300;
   font-size: 70px;
   margin-bottom: 15px;
 }
 
-.explain-list {
+.description-list {
   display: flex;
   gap: 10px;
 }
 
-.explain-item {
+.description-item {
   border: 1px solid white;
   padding: 0.3em 0.7em;
   border-radius: 100px 100px;
+}
+
+.works-item p {
+  font-weight: 300;
+  font-size: 30px;
 }
 
 /* works 텍스트 스프릿 애니메이션 */
@@ -427,7 +425,7 @@ section {
   display: inline-block;
 }
 
-.work-chars span {
+.work-chars > * {
   transform: translateX(100%);
   display: inline-block;
   will-change: transform;
