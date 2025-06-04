@@ -33,33 +33,37 @@ logo.addEventListener("mouseenter", () => {
   }, 600);
 });
 
+// 레니스 등록
+const lenis = new Lenis();
+lenis.on("scroll", ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
 // from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.fonts.ready.then(() => {
   // 로딩 페이지 애니메이션
-  const loadingSplit = SplitText.create(".loading-logo", {
+  const loadingSplit = new SplitText(".loading-logo", {
     type: "chars",
-    wordsClass: "chars-mask",
+    charsClass: "chars-mask",
     mask: "chars",
   });
 
   // 인트로 애니메이션 아이템
-  const splitTargets = [".split1", ".split2", ".split3", ".split4"];
-  const splits = splitTargets.map(
-    (sel) =>
-      new SplitText(sel, {
+  const introtxts = [".split1", ".split2", ".split3", ".split4"];
+  const introtxt = introtxts.map((item) =>
+      new SplitText(item, {
         type: "lines",
         linesClass: "line",
         mask: "lines",
       })
   );
+  const [split1, split2, split3, split4] = introtxt;
 
-  const [split1, split2, split3, split4] = splits;
-
-  function animateIn(split) {
+  function animateIn(introitem) {
     return gsap.fromTo(
-      split.lines,
+      introitem.lines,
       { yPercent: 100 },
       {
         yPercent: 0,
@@ -70,8 +74,8 @@ document.fonts.ready.then(() => {
     );
   }
 
-  function animateOut(split) {
-    return gsap.to(split.lines, {
+  function animateOut(introitem) {
+    return gsap.to(introitem.lines, {
       yPercent: -100,
       duration: 0.4,
       ease: "power1.out",
@@ -81,7 +85,7 @@ document.fonts.ready.then(() => {
 
   const tl = gsap.timeline();
 
-  // 초기 상태
+  // 로딩 페이지 초기 상태
   tl.set(".loading", { y: 0 })
     .set(".introwrap-2", { autoAlpha: 0 })
 
@@ -142,6 +146,20 @@ document.fonts.ready.then(() => {
         .add(animateIn(split2, 0.6), ">-0.3");
     },
   });
+
+  // work 애니메이션
+//   const cards = gsap.utils.toArray(".works-list-wrap");
+//   const introCard = cards[0];
+
+//   const titles = gsap.utils.toArray(".works-item-title h2");
+//   titles.forEach((title) => {
+//     const workSplit = new SplitText(title, {
+//       type: "chars",
+//       charsClass: "work-chars",
+//       tah: "div",
+//       mask: "chars",
+//     });
+//   });
 });
 
 // 어바웃 애니메이션

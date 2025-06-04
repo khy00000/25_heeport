@@ -45,6 +45,11 @@
     format("truetype");
 }
 
+html {
+  scroll-behavior: auto !important;
+  overflow: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -326,7 +331,7 @@ section {
   padding: 0;
 }
 
-/* 배경 글자 */
+/* 워크 백그라운드 글자 */
 .works .works-txt-wrap {
   width: 100%;
   position: absolute;
@@ -355,50 +360,12 @@ section {
   padding: 0.5em;
 }
 
-.works-list:nth-child(2) {
-  margin-top: 50vh;
-}
-
 .works-list .works-list-wrap {
   position: relative;
   width: 100%;
   height: 100%;
   will-change: transform;
-}
-
-.works-list .works-list-wrap .works-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1;
-  padding: 1em;
-}
-
-.works-item-title h2 {
-  font-weight: 300;
-  font-size: 70px;
-  margin-bottom: 15px;
-}
-
-.works-item p {
-  font-weight: 300;
-  font-size: 30px;
-}
-
-.explain-list {
-  display: flex;
-  gap: 10px;
-}
-
-.explain-item {
-  border: 1px solid white;
-  padding: 0.3em 0.7em;
-  border-radius: 100px 100px;
+  margin: 10vh 0;
 }
 
 .works-list-wrap .works-img {
@@ -415,6 +382,54 @@ section {
 .works-list-wrap .works-img img {
   transform: scale(2);
   object-fit: cover;
+  will-change: transform;
+}
+
+.works-list-wrap .works-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  padding: 1em;
+}
+
+.works-item p {
+  font-weight: 300;
+  font-size: 30px;
+}
+
+.works-item-title h2 {
+  font-weight: 300;
+  font-size: 70px;
+  margin-bottom: 15px;
+}
+
+.explain-list {
+  display: flex;
+  gap: 10px;
+}
+
+.explain-item {
+  border: 1px solid white;
+  padding: 0.3em 0.7em;
+  border-radius: 100px 100px;
+}
+
+/* works 텍스트 스프릿 애니메이션 */
+.work-chars {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.work-chars span {
+  transform: translateX(100%);
+  display: inline-block;
   will-change: transform;
 }
 
