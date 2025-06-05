@@ -26,3 +26,33 @@
         }
       },
     });
+
+      const titles = gsap.utils.toArray(".works-item-title h2");
+  const workSplit = titles.map(
+    (title) =>
+      new SplitText(title, {
+        type: "chars",
+        charsClass: "work-chars",
+      })
+  );
+
+  function worksIn(title, description) {
+    gsap.to(title, { x: "0%", duration: 0.75, ease: "power4.out" });
+    gsap.to(description, {
+      x: 0,
+      opacity: 1,
+      duration: 0.75,
+      delay: 0.1,
+      ease: "power4.out",
+    });
+  }
+
+  function worksOut(title, description) {
+    gsap.to(title, { x: "100%", duration: 0.5, ease: "power4.out" });
+    gsap.to(description, {
+      x: "40px",
+      opacity: 0,
+      duration: 0.5,
+      ease: "power4.out",
+    });
+  }
