@@ -156,78 +156,97 @@ document.fonts.ready.then(() => {
     repeat: -1,
   });
 
-  // works 애니메이션
+  const works = gsap.utils.toArray(".works-list-wrap");
+  const works1 = works[0];
+  const works2 = works[1];
+  const works3 = works[2];
+  const imgWrap1 = works1.querySelector(".works-img");
+  const imgWrap2 = works2.querySelector(".works-img");
+  const imgWrap3 = works3.querySelector(".works-img");
+
+  const titles = gsap.utils.toArray(".works-item-title");
+  const titleSplits = titles.map(
+    (title) =>
+      new SplitText(title, {
+        types: "chars",
+        lineClass: "work-chars",
+        mask: "chars",
+      })
+  );
+
+  const descriptionLists = gsap.utils.toArray(".description-list");
+  const descSplits = descriptionLists.map(
+    (desc) =>
+      new SplitText(desc, {
+        types: "chars",
+        lineClass: "work-chars",
+        mask: "chars",
+      })
+  );
+
+  const scrolls = gsap.utils.toArray(".scroll");
+  const scrollSplits = scrolls.map(
+    (scroll) =>
+      new SplitText(scroll, {
+        types: "chars",
+        lineClass: "work-chars",
+        mask: "chars",
+      })
+  );
+
+  const allchars = [...titleSplits, ...descSplits, ...scrollSplits];
+  const flatChars = allchars.flatMap((arr) => arr.chars || arr);
+
+  gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
+  gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: 900 });
+  gsap.set(flatChars, { opacity: 0, x: 100 });
+
   const workTl = gsap.timeline({
     scrollTrigger: {
       trigger: ".works",
       start: "top top",
-      end: "+=2000",
+      end: "+=3000",
       scrub: 2,
       pin: true,
     },
   });
 
-  document.querySelectorAll(".works-list-wrap").forEach((wrap, index) => {
-    const imgWrap = wrap.querySelector(".works-img");
-    const title = wrap.querySelector(".works-item-title");
-    const descriptions = wrap.querySelectorAll(".description-item");
-    const scrollText = wrap.querySelector(".scroll");
-
-    // 1~3번째 모든 텍스트 스피릿
-    const splitTitle = new SplitText(title, {
-      types: "chars",
-      lineClass: "work-chars",
-      mask: "chars",
+  workTl
+    .to(".works-txt", { opacity: 0 })
+    .to(
+      imgWrap1,
+      { scale: 1, borderRadius: "40px", duration: 3, ease: "power2.out" },
+      "<"
+    )
+    .to([titleSplits[0].chars, descSplits[0].chars, scrollSplits[0].chars], {
+      x: 0,
+      opacity: 1,
+      duration: 1,
+    })
+    .to({}, { duration: 2 })
+    .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
+    .to(
+      works1,
+      { scale: 0.7, opacity: 0.5, duration: 3, ease: "power2.out" },
+      "<"
+    )
+    .to([titleSplits[1].chars, descSplits[1].chars, scrollSplits[1].chars], {
+      x: 0,
+      opacity: 1,
+      duration: 1,
+    })
+    .to({}, { duration: 2 })
+    .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
+    .to(
+      works2,
+      { scale: 0.7, opacity: 0.5, duration: 3, ease: "power2.out" },
+      "<"
+    )
+    .to([titleSplits[2].chars, descSplits[2].chars, scrollSplits[2].chars], {
+      x: 0,
+      opacity: 1,
+      duration: 1,
     });
-
-    const splitScroll = new SplitText(scrollText, {
-      types: "chars",
-      lineClass: "work-chars",
-      mask: "chars",
-    });
-
-    const splitDescriptions = Array.from(descriptions).map(
-      (desc) =>
-        new SplitText(desc, {
-          types: "chars",
-          lineClass: "work-chars",
-          mask: "chars",
-        })
-    );
-
-    // 모든 스피릿 배열을 하나의 배열로 만듦
-    const allChars = [
-      splitTitle.chars,
-      ...splitDescriptions.flatMap((sd) => sd.chars),
-      splitScroll.chars,
-    ].flat();
-
-    // 초기 설정
-    workTl
-      .set(imgWrap[0], { scale: 0.5, borderRadius: "400px" })
-      .set(allChars, { autoAlpha: 0, x: 100 });
-
-    workTl
-      .to(".works-txt", { opacity: 0 })
-      .to(
-        imgWrap[0],
-        {
-          scale: 1,
-          borderRadius: "40px",
-          ease: "none",
-        },
-        0
-      )
-      .to(
-        allChars,
-        {
-          autoAlpha: 1,
-          x: 0,
-          ease: "power2.out",
-        },
-        ">0.1"
-      );
-  });
 });
 
 // 어바웃 애니메이션
