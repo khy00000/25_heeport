@@ -1,19 +1,4 @@
 @font-face {
-  font-family: "shone";
-  font-weight: 300;
-  font-style: normal;
-  src: url("./assets/fonts/Söhne/TestSöhne-regular.otf") format("truetype");
-}
-
-@font-face {
-  font-family: "signifier";
-  font-weight: 300;
-  font-style: normal;
-  src: url("./assets/fonts/Signifier/TestSignifier-Regular.otf")
-    format("truetype");
-}
-
-@font-face {
   font-family: "UntitledSans";
   font-weight: 200;
   font-style: normal;
@@ -108,7 +93,7 @@ section {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  z-index: 9;
+  z-index: 99;
   clip-path: inset(0% 0% 0% 0%);
 }
 
@@ -147,7 +132,7 @@ section {
   position: fixed;
   top: 1em;
   right: 1em;
-  z-index: 99;
+  z-index: 9;
 }
 
 /* works */
@@ -455,9 +440,21 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   font-family: "UntitledSerif";
   text-align: center;
   font-size: 70px;
+}
+
+.footertop-mask {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.footertop-mask > * {
+  display: inline-block;
+  transform: translateY(100%);
+  overflow: hidden;
 }
 
 /* 푸터 희연킴 로고 */
@@ -468,4 +465,16 @@ section {
   justify-content: center;
   font-size: 50px;
   font-weight: 400;
+  gap: 1rem;
+}
+
+.footerlogo-mask {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.footerlogo-mask > * {
+  display: inline-block;
+  transform: translateY(100%);
+  overflow: hidden;
 }

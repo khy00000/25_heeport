@@ -221,7 +221,7 @@ document.fonts.ready.then(() => {
     .to([titleSplits[0].chars, descSplits[0].chars, scrollSplits[0].chars], {
       x: 0,
       opacity: 1,
-      duration: 1,
+      duration: 2,
     })
     .to({}, { duration: 2 })
     .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
@@ -233,7 +233,7 @@ document.fonts.ready.then(() => {
     .to([titleSplits[1].chars, descSplits[1].chars, scrollSplits[1].chars], {
       x: 0,
       opacity: 1,
-      duration: 1,
+      duration: 2,
     })
     .to({}, { duration: 2 })
     .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
@@ -245,8 +245,57 @@ document.fonts.ready.then(() => {
     .to([titleSplits[2].chars, descSplits[2].chars, scrollSplits[2].chars], {
       x: 0,
       opacity: 1,
-      duration: 1,
-    });
+      duration: 2,
+    })
+    .to({}, { duration: 2 });
+
+  // footer 애니메이션
+  const footertops = document.querySelectorAll(".footer_top p");
+  const footertopSplits = Array.from(footertops).map(
+    (el) =>
+      new SplitText(el, {
+        type: "chars",
+        charsClass: "footertop-mask",
+        mask: "chars",
+      })
+  );
+
+  const footerlogoSplit = new SplitText(".footer_bottom", {
+    type: "chars",
+    charsClass: "footerlogo-mask",
+    mask: "chars",
+  });
+
+  gsap.set(footertopSplits[0].chars, { x: 100 });
+  gsap.set(footertopSplits[1].chars, { x: 100 });
+  gsap.set(footerlogoSplit.chars, { x: 100 });
+
+  const footerTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".footer",
+      start: "top 80%",
+      end: "bottom bottom",
+      toggleActions: "restart none none none", // in, out, inBack, outBack
+    },
+  });
+
+  footerTl
+    .to(footertopSplits[0].chars, {
+      x: 0,
+    })
+    .to(
+      footertopSplits[1].chars,
+      {
+        x: 0,
+      },
+      "<0.3"
+    )
+    .to(
+      footerlogoSplit.chars,
+      {
+        x: 0,
+      }
+    );
 });
 
 // 어바웃 애니메이션
