@@ -1,4 +1,4 @@
-// 로고 마우스엔터 효과
+// 인트로 탑 로고 마우스엔터 효과
 const logo = document.querySelector(".logo");
 const letters = document.querySelectorAll(".hover-k, .hover-m");
 let hoverCount = 0;
@@ -50,7 +50,7 @@ document.fonts.ready.then(() => {
     mask: "chars",
   });
 
-  // 인트로 애니메이션 아이템
+  // 인트로 애니메이션
   const introtxts = [".split1", ".split2", ".split3", ".split4"];
   const introtxt = introtxts.map(
     (item) =>
@@ -117,7 +117,7 @@ document.fonts.ready.then(() => {
     .add(animateIn(split1, 0), "-=0.3")
     .add(animateIn(split2, 0.3), ">");
 
-  // 인트로 애니메이션
+  // 인트로 하단 애니메이션
   // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에 / 왼 트리거 오 뷰포트
   ScrollTrigger.create({
     trigger: ".intro-row2",
@@ -148,6 +148,42 @@ document.fonts.ready.then(() => {
     },
   });
 
+  // 어바웃 애니메이션
+  gsap.utils.toArray(".about-item").forEach((item) => {
+    ScrollTrigger.create({
+      trigger: item,
+      start: "top 50%",
+      onEnter: () => item.classList.add("active"),
+      onLeaveBack: () => item.classList.remove("active"),
+    });
+  });
+
+  // howiwork
+  gsap.set(".split5, .split6", { autoAlpha: 0 });
+
+  ScrollTrigger.create({
+    trigger: ".howiwork",
+    start: "top center",
+    end: "bottom bottom",
+    once: true,
+
+    onEnter: () => {
+      gsap
+        .timeline()
+        .fromTo(
+          ".split5",
+          { y: 50, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power1.out" }
+        )
+        .fromTo(
+          ".split6",
+          { y: 50, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power1.out" },
+          ">-0.3"
+        );
+    },
+  });
+
   // works 배경 텍스트 루프 애니메이션
   gsap.to(".works-txt", {
     xPercent: -50,
@@ -156,6 +192,7 @@ document.fonts.ready.then(() => {
     repeat: -1,
   });
 
+  // works 애니메이션
   const works = gsap.utils.toArray(".works-list-wrap");
   const works1 = works[0];
   const works2 = works[1];
@@ -223,7 +260,7 @@ document.fonts.ready.then(() => {
       opacity: 1,
       duration: 2,
     })
-    .to({}, { duration: 2 })
+    .addPause()
     .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
       works1,
@@ -235,7 +272,7 @@ document.fonts.ready.then(() => {
       opacity: 1,
       duration: 2,
     })
-    .to({}, { duration: 2 })
+    .addPause()
     .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
       works2,
@@ -247,7 +284,7 @@ document.fonts.ready.then(() => {
       opacity: 1,
       duration: 2,
     })
-    .to({}, { duration: 2 });
+    .addPause();
 
   // footer 애니메이션
   const footertops = document.querySelectorAll(".footer_top p");
@@ -290,50 +327,9 @@ document.fonts.ready.then(() => {
       },
       "<0.3"
     )
-    .to(
-      footerlogoSplit.chars,
-      {
-        x: 0,
-      }
-    );
-});
+    .to(footerlogoSplit.chars, {
+      x: 0,
+    });
 
-// 어바웃 애니메이션
-gsap.utils.toArray(".about-item").forEach((item) => {
-  ScrollTrigger.create({
-    trigger: item,
-    start: "top 50%",
-    onEnter: () => item.classList.add("active"),
-    onLeaveBack: () => item.classList.remove("active"),
-  });
-});
-
-// howiwork 애니메이션
-window.addEventListener("load", () => {
-  gsap.set(".split5, .split6", { autoAlpha: 0 });
-
-  ScrollTrigger.create({
-    trigger: ".howiwork",
-    start: "top center",
-    end: "bottom bottom",
-    once: true,
-
-    onEnter: () => {
-      gsap
-        .timeline()
-        .fromTo(
-          ".split5",
-          { y: 50, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power1.out" }
-        )
-        .fromTo(
-          ".split6",
-          { y: 50, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power1.out" },
-          ">-0.3"
-        );
-    },
-  });
-
-  ScrollTrigger.refresh(); // 강제로 트리거 새로고침
+  ScrollTrigger.refresh(); // 트리거 새로고침
 });
