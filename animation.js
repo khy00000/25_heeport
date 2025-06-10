@@ -33,12 +33,6 @@ logo.addEventListener("mouseenter", () => {
   }, 600);
 });
 
-// 레니스 등록
-const lenis = new Lenis();
-lenis.on("scroll", ScrollTrigger.update);
-gsap.ticker.add((time) => lenis.raf(time * 1000));
-gsap.ticker.lagSmoothing(0);
-
 // from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -260,7 +254,7 @@ document.fonts.ready.then(() => {
       opacity: 1,
       duration: 2,
     })
-    .addPause()
+    .to({}, { duration: 4 })
     .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
       works1,
@@ -272,7 +266,7 @@ document.fonts.ready.then(() => {
       opacity: 1,
       duration: 2,
     })
-    .addPause()
+    .to({}, { duration: 4 })
     .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
       works2,
@@ -284,7 +278,7 @@ document.fonts.ready.then(() => {
       opacity: 1,
       duration: 2,
     })
-    .addPause();
+    .to({}, { duration: 4 });
 
   // footer 애니메이션
   const footertops = document.querySelectorAll(".footer_top p");
