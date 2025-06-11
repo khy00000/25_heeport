@@ -1,3 +1,5 @@
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 // Lenis + ScrollTrigger 연동
 const lenis = new Lenis();
 lenis.on("scroll", ScrollTrigger.update);
@@ -64,18 +66,28 @@ const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 2);
 hemiLight.position.set(0, 0, 0);
 scene.add(hemiLight);
 
-let loadtl = gsap.timeline();
-
 // 임시 루프
-function basicAnimate() {
-  renderer.render(scene, camera);
-  requestAnimationFrame(basicAnimate);
-}
-basicAnimate();
+// function basicAnimate() {
+//   renderer.render(scene, camera);
+//   requestAnimationFrame(basicAnimate);
+// }
+// basicAnimate();
 
 // GLB 모델 로드
-let vdu;
+const models = [];
 const loader = new THREE.GLTFLoader();
+let vdu, keyboard;
+
+// 모든 모델 로드 체크
+let loadedCount = 0;
+const totalModels = 2;
+// 중복 호출 방지
+let isAnimationStarted = false;
+// 로드만 체크
+function checkAllLoaded() {
+  loadedCount++;
+  console.log(`✅ 모델 로드됨 (${loadedCount}/${totalModels})`);
+}
 
 loader.load("./assets/glb/vdu.glb", (gltf) => {
   vdu = gltf.scene;
@@ -95,25 +107,51 @@ loader.load("./assets/glb/vdu.glb", (gltf) => {
   // 초기 크기 설정
   vdu.scale.set(0, 0, 0);
   vdu.rotation.set(0, 0, 0);
-  vdu.position.set(0, 0, 0);
+  vdu.position.set(-1.5, 0, 0);
+  models.push(vdu);
   scene.add(vdu);
-
-  cancelAnimationFrame(basicAnimate);
-
-  // 로딩 애니메이션이 끝난 후 이벤트 콜백
-  loadtl.eventCallback("onComplete", () => {
-    setTimeout(() => {
-      introAnimation();
-      animate();
-    }, 1000);
-  });
+  checkAllLoaded();
 });
 
-function introAnimation() {
+loader.load("./assets/glb/keyboard2.glb", (gltf) => {
+  keyboard = gltf.scene;
+  keyboard.traverse((child) => {
+    if (child.isMesh && child.material) {
+      // 금속 느낌
+      child.material.metalness = 0.3;
+      child.material.roughness = 0.4;
+      child.material.envMapIntensity = 1.5;
+
+      // 그림자 설정
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  // 초기 크기 설정
+  keyboard.scale.set(0, 0, 0);
+  keyboard.rotation.set(0, 0, 0);
+  keyboard.position.set(0.5, 0, 0);
+  models.push(keyboard);
+  scene.add(keyboard);
+  checkAllLoaded();
+});
+
+function introVduAnimation() {
   gsap.to(vdu.scale, {
     x: 1,
     y: 1,
     z: 1,
+    duration: 3,
+    ease: "power2.out",
+  });
+}
+
+function introKeyboardAnimation() {
+  gsap.to(keyboard.scale, {
+    x: 8,
+    y: 8,
+    z: 8,
     duration: 3,
     ease: "power2.out",
   });
@@ -134,27 +172,47 @@ const footer = document.querySelector(".footer");
 const Destination = footer.offsetTop;
 
 // 위아래 둥둥 애니메이션 루프
-function animate() {
-  const floatOffset =
-    // 부드러운 곡선 형태 값 -0.2 ~ +0.2
-    Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
-  // 포지션 계속 바꾸며 y축 위아래로
-  vdu.position.y = floatOffset;
+function animate(models) {
+  function render() {
+    const floatOffset =
+      Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
+    const scrollProgress = Math.min(currentScroll / Destination, 1);
 
-  // 스코롤 진행도(현재 스코롤 위치 기준으로 섹션 시작 위치까지 스코롤 진행률 0~1(%) 계산)
-  const scrollProgress = Math.min(currentScroll / Destination, 1);
+    models.forEach((model) => {
+      model.position.y = floatOffset;
+      if (scrollProgress < 1) {
+        model.rotation.x = scrollProgress * Math.PI * 2;
+        model.rotation.y += 0.001 * rotationSpeed;
+      }
+    });
 
-  // 스코롤 진행도 100%이하 x축 1바퀴, 푸터까지 오른쪽 방향으로 조금씩 회전
-  if (scrollProgress < 1) {
-    vdu.rotation.x = scrollProgress * Math.PI * 2;
-    vdu.rotation.y += 0.001 * rotationSpeed;
+    renderer.render(scene, camera);
+    requestAnimationFrame(render); // model 안 잃어버림
   }
 
-  // 장면 렌더링 업데이트 매끄러운 실시간 애니메이션
-  renderer.render(scene, camera);
-  // 다음 프레임 예약
-  requestAnimationFrame(animate);
+  render(); // 루프 시작
 }
+
+// function animate(models) {
+//   function render() {
+//     const floatOffset = Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
+//     const scrollProgress = Math.min(currentScroll / Destination, 1);
+
+//     models.forEach((model) => {
+//       model.position.y = floatOffset;
+
+//       if (scrollProgress < 1) {
+//         model.rotation.x = scrollProgress * Math.PI * 2;
+//         model.rotation.y += 0.001 * rotationSpeed;
+//       }
+//     });
+
+//     renderer.render(scene, camera);
+//     requestAnimationFrame(render);
+//   }
+
+//   render();
+// }
 
 // 반응형
 window.addEventListener("resize", () => {

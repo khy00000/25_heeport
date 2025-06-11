@@ -34,7 +34,6 @@ logo.addEventListener("mouseenter", () => {
 });
 
 // from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값
-gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.fonts.ready.then(() => {
   // 로딩 페이지 애니메이션
@@ -109,7 +108,16 @@ document.fonts.ready.then(() => {
 
     // 4. 로딩 후 intro1 등장
     .add(animateIn(split1, 0), "-=0.3")
-    .add(animateIn(split2, 0.3), ">");
+    .add(animateIn(split2, 0.3), ">")
+    .call(() => {
+      if (loadedCount === totalModels && !isAnimationStarted) {
+        isAnimationStarted = true;
+        // 모든 모델 로드 완료 후 애니메이션 실행
+        introVduAnimation();
+        introKeyboardAnimation();
+        animate(models);
+      }
+    });
 
   // 인트로 하단 애니메이션
   // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에 / 왼 트리거 오 뷰포트
