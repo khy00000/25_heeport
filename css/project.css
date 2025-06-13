@@ -1,0 +1,47 @@
+#project {
+  background-color: white;
+  color: black;
+  width: 100%;
+}
+
+/* 인트로 */
+#project .intro {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+#project .intro .intro-wrap {
+  font-size: 15px;
+}
+
+#project .intro .intro-wrap .project-tool-wrap {
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.project-title h1 {
+  font-size: 100px;
+}
+
+/* 이미지 */
+.project-img {
+  width: 100%;
+  height: 100vh;
+}
+
+.project-img a {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.project-img a img {
+  object-fit: cover;
+}

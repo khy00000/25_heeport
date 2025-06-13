@@ -1,3 +1,10 @@
+#main {
+  scroll-behavior: auto !important;
+  overflow: hidden;
+  background-color: #151515;
+  color: white;
+}
+
 /* 로딩 페이지 */
 .loading {
   background-color: #1d1d1d;
@@ -68,7 +75,7 @@
 
 .intro .intro-row1 nav a::after {
   content: "";
-  background-image: url(./assets/img/arrow-w.svg);
+  background-image: url(../assets/img/arrow-w.svg);
   background-size: 13px 13px;
   width: 13px;
   height: 13px;
@@ -80,7 +87,7 @@
 }
 
 .intro .intro-row1 nav a:hover::after {
-  background-image: url(./assets/img/arrow.svg);
+  background-image: url(../assets/img/arrow.svg);
 }
 
 .intro .intro-row1 .logo {

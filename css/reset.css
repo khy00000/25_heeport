@@ -2,7 +2,7 @@
   font-family: "UntitledSans";
   font-weight: 200;
   font-style: normal;
-  src: url("./assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Light.otf")
+  src: url("../assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Light.otf")
     format("truetype");
 }
 
@@ -10,7 +10,7 @@
   font-family: "UntitledSans";
   font-weight: 300;
   font-style: normal;
-  src: url("./assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Regular.otf")
+  src: url("../assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Regular.otf")
     format("truetype");
 }
 
@@ -18,7 +18,7 @@
   font-family: "UntitledSans";
   font-weight: 400;
   font-style: normal;
-  src: url("./assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Medium.otf")
+  src: url("../assets/fonts/UntitledCollection/UntitledSans/TestUntitledSans-Medium.otf")
     format("truetype");
 }
 
@@ -26,13 +26,8 @@
   font-family: "UntitledSerif";
   font-weight: 300;
   font-style: normal;
-  src: url("./assets/fonts/UntitledCollection/UntitledSerif/TestUntitledSerif-Regular.otf")
+  src: url("../assets/fonts/UntitledCollection/UntitledSerif/TestUntitledSerif-Regular.otf")
     format("truetype");
-}
-
-html {
-  scroll-behavior: auto !important;
-  overflow: hidden;
 }
 
 * {
@@ -44,8 +39,6 @@ html {
 body {
   font-family: "UntitledSans";
   font-weight: 300;
-  background-color: #151515;
-  color: white;
   letter-spacing: -0.5px;
   line-height: 1.2;
   -webkit-font-smoothing: antialiased;
