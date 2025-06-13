@@ -83,7 +83,7 @@ let loadedCount = 0;
 const totalModels = 2;
 // 중복 호출 방지
 let isAnimationStarted = false;
-// 로드만 체크
+// 모델 로드 체크
 function checkAllLoaded() {
   loadedCount++;
   console.log(`✅ 모델 로드됨 (${loadedCount}/${totalModels})`);
@@ -187,32 +187,11 @@ function animate(models) {
     });
 
     renderer.render(scene, camera);
-    requestAnimationFrame(render); // model 안 잃어버림
+    requestAnimationFrame(render);
   }
 
   render(); // 루프 시작
 }
-
-// function animate(models) {
-//   function render() {
-//     const floatOffset = Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
-//     const scrollProgress = Math.min(currentScroll / Destination, 1);
-
-//     models.forEach((model) => {
-//       model.position.y = floatOffset;
-
-//       if (scrollProgress < 1) {
-//         model.rotation.x = scrollProgress * Math.PI * 2;
-//         model.rotation.y += 0.001 * rotationSpeed;
-//       }
-//     });
-
-//     renderer.render(scene, camera);
-//     requestAnimationFrame(render);
-//   }
-
-//   render();
-// }
 
 // 반응형
 window.addEventListener("resize", () => {

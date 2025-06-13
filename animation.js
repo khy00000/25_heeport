@@ -112,7 +112,7 @@ document.fonts.ready.then(() => {
     .call(() => {
       if (loadedCount === totalModels && !isAnimationStarted) {
         isAnimationStarted = true;
-        // 모든 모델 로드 완료 후 애니메이션 실행
+        // 모든 모델 로드 완료 후 입장 애니메이션 실행
         introVduAnimation();
         introKeyboardAnimation();
         animate(models);
@@ -266,7 +266,7 @@ document.fonts.ready.then(() => {
     .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
       works1,
-      { scale: 0.7, opacity: 0.5, duration: 3, ease: "power2.out" },
+      { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
     .to([titleSplits[1].chars, descSplits[1].chars, scrollSplits[1].chars], {
@@ -278,7 +278,7 @@ document.fonts.ready.then(() => {
     .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
       works2,
-      { scale: 0.7, opacity: 0.5, duration: 3, ease: "power2.out" },
+      { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
     .to([titleSplits[2].chars, descSplits[2].chars, scrollSplits[2].chars], {
