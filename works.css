@@ -1,13 +1,16 @@
 .works-wrap {
   width: 100%;
   height: 100vh;
+  padding: 10px;
 }
 
 .works {
   width: 100%;
-  height: 50vh;
+  height: calc(50vh - 10px);
   display: flex;
   justify-content: space-between;
+  position: relative;
+  letter-spacing: -2px;
 }
 
 .works h1 {
@@ -20,19 +23,65 @@
   white-space: nowrap;
 }
 
+/* work 화살표 */
+.toproject {
+  position: absolute;
+  height: auto;
+  left: 0;
+  bottom: 40px;
+  animation: moveRight 10s infinite ease;
+}
+
+.toproject span {
+  position: relative;
+  font-size: 17px;
+}
+
+.toproject span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  transform: translateX(-50%);
+  width: 17px;
+  height: 17px;
+  background-image: url(./assets/img/arrow-works.svg);
+  background-size: 17px 17px;
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(calc(100vw - 10vw));
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* 하단 work 링크 컨테이너 */
 .works-item {
   width: 100%;
-  height: 50vh;
+  height: calc(50vh - 10px);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 10px;
+  overflow: hidden;
 }
 
 .works-item .work-container {
   width: 33.333%;
   height: 100%;
+  filter: brightness(0.6);
+  transition: 0.4s ease;
+  position: relative;
+}
+
+.works-item .work-container:hover {
+  filter: brightness(1);
 }
 
 .works-item .work-container a {
@@ -45,4 +94,28 @@
 
 .works-item .work-container a img {
   object-fit: cover;
+  display: block;
+}
+
+.work-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.176);
+}
+
+.work-title h1 {
+  font-size: 40px;
+}
+
+.work-title p {
+  font-size: 20px;
 }
