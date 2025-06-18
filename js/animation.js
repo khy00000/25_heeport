@@ -44,7 +44,14 @@ document.fonts.ready.then(() => {
   });
 
   // 인트로 애니메이션
-  const introtxts = [".split1", ".split2", ".split3", ".split4"];
+  const introtxts = [
+    ".split1",
+    ".split2",
+    ".split3",
+    ".split4",
+    ".split5",
+    ".split6",
+  ];
   const introtxt = introtxts.map(
     (item) =>
       new SplitText(item, {
@@ -53,7 +60,7 @@ document.fonts.ready.then(() => {
         mask: "lines",
       })
   );
-  const [split1, split2, split3, split4] = introtxt;
+  const [split1, split2, split3, split4, split5, split6] = introtxt;
 
   function animateIn(introitem) {
     return gsap.fromTo(
@@ -161,30 +168,33 @@ document.fonts.ready.then(() => {
   });
 
   // howiwork
-  gsap.set(".split5, .split6", { autoAlpha: 0 });
+  gsap.set([split5.lines, split6.lines], { autoAlpha: 0, y: 50 });
 
-  ScrollTrigger.create({
-    trigger: ".howiwork",
-    start: "top center",
-    end: "bottom bottom",
-    once: true,
-
-    onEnter: () => {
-      gsap
-        .timeline()
-        .fromTo(
-          ".split5",
-          { y: 50, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power1.out" }
-        )
-        .fromTo(
-          ".split6",
-          { y: 50, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power1.out" },
-          ">-0.3"
-        );
+  const hiwtl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".howiwork",
+      start: "top center",
+      end: "bottom bottom",
     },
   });
+
+  hiwtl
+    .to(split5.lines, {
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.6,
+      ease: "power1.out",
+    })
+    .to(
+      split6.lines,
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.6,
+        ease: "power1.out",
+      },
+      ">-0.3"
+    );
 
   // works 배경 텍스트 루프 애니메이션
   gsap.to(".works-txt", {
