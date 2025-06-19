@@ -38,6 +38,7 @@ body {
 
 .project-title h1 {
   font-size: 100px;
+  letter-spacing: -1.5px;
 }
 
 /* 이미지 */
@@ -66,11 +67,16 @@ body {
 .project-container {
   width: 100%;
   height: auto;
-  padding: 100px 0 0 0;
+  padding: 120px 0 0 0;
 }
 
+.project-container:last-child{
+  padding-bottom: 120px;
+}
+
+/* 정보 타이틀 */
 .project-container h1 {
-  font-size: 50px;
+  font-size: 40px;
   margin-bottom: 20px;
   letter-spacing: -1.5px;
 }
@@ -80,4 +86,73 @@ body {
   font-size: 23px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 300;
+  letter-spacing: -1px;
+}
+
+/* 툴 */
+.project-container .tool-wrap li {
+  display: inline-block;
+  font-size: 20px;
+  padding: 5px 15px;
+  margin-right: 10px;
+  border-radius: 72px;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+/* 기능 */
+.project-container .function-wrap li {
+  font-size: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+  letter-spacing: -1px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.project-container .function-wrap li:nth-child(1)::before{
+  content: '';
+  position: absolute;
+  background-image: url(../assets/img/icon_a.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+.project-container .function-wrap li:nth-child(2)::before{
+  content: '';
+  position: absolute;
+  background-image: url(../assets/img/icon_b.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+.project-container .function-wrap li:nth-child(3)::before{
+  content: '';
+  position: absolute;
+  background-image: url(../assets/img/icon_c.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+/* 문제 해결 */
+.project-container .ts-wrap li {
+  font-size: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+  letter-spacing: -1px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  position: relative;
 }

@@ -78,64 +78,118 @@ const models = [];
 const loader = new THREE.GLTFLoader();
 let vdu, keyboard;
 
-// 모든 모델 로드 체크
-let loadedCount = 0;
-const totalModels = 2;
-// 중복 호출 방지
-let isAnimationStarted = false;
-// 모델 로드 체크
-function checkAllLoaded() {
-  loadedCount++;
-  console.log(`✅ 모델 로드됨 (${loadedCount}/${totalModels})`);
+function loadGLBModel(url, onLoadSetup) {
+  return new Promise((resolve, reject) => {
+    loader.load(
+      url,
+      (gltf) => {
+        const model = gltf.scene;
+
+        // 공통 처리 (재질/그림자 설정)
+        model.traverse((child) => {
+          if (child.isMesh && child.material) {
+            child.material.metalness = 0.3;
+            child.material.roughness = 0.4;
+            child.material.envMapIntensity = 1.5;
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+
+        // 개별 처리
+        onLoadSetup(model);
+        models.push(model);
+        scene.add(model);
+        resolve(model);
+      },
+      undefined,
+      (error) => reject(error)
+    );
+  });
 }
 
-loader.load("./assets/glb/vdu.glb", (gltf) => {
-  vdu = gltf.scene;
-  vdu.traverse((child) => {
-    if (child.isMesh && child.material) {
-      // 금속 느낌
-      child.material.metalness = 0.3;
-      child.material.roughness = 0.4;
-      child.material.envMapIntensity = 1.5;
+async function loadModelsAndAnimate() {
+  try {
+    // 모델 로드
+    vdu = await loadGLBModel("./assets/glb/vdu.glb", (model) => {
+      model.scale.set(0, 0, 0);
+      model.rotation.set(0, 0, 0);
+      model.position.set(-1.5, 0, 0);
+    });
 
-      // 그림자 설정
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+    keyboard = await loadGLBModel("./assets/glb/keyboard2.glb", (model) => {
+      model.scale.set(0, 0, 0);
+      model.rotation.set(0, 0, 0);
+      model.position.set(0.5, 0, 0);
+    });
 
-  // 초기 크기 설정
-  vdu.scale.set(0, 0, 0);
-  vdu.rotation.set(0, 0, 0);
-  vdu.position.set(-1.5, 0, 0);
-  models.push(vdu);
-  scene.add(vdu);
-  checkAllLoaded();
-});
+    // 모든 모델 로드 완료 후 애니메이션 실행
+    introVduAnimation();
+    introKeyboardAnimation();
+    animate(models);
+  } catch (err) {
+    console.error("모델 로딩 실패", err);
+  }
+}
 
-loader.load("./assets/glb/keyboard2.glb", (gltf) => {
-  keyboard = gltf.scene;
-  keyboard.traverse((child) => {
-    if (child.isMesh && child.material) {
-      // 금속 느낌
-      child.material.metalness = 0.3;
-      child.material.roughness = 0.4;
-      child.material.envMapIntensity = 1.5;
+// // 모든 모델 로드 체크
+// let loadedCount = 0;
+// const totalModels = 2;
+// // 중복 호출 방지
+// let isAnimationStarted = false;
+// // 모델 로드 체크
+// function checkAllLoaded() {
+//   loadedCount++;
+//   // console.log(`✅ 모델 로드됨 (${loadedCount}/${totalModels})`);
+// }
 
-      // 그림자 설정
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+// loader.load("./assets/glb/vdu.glb", (gltf) => {
+//   vdu = gltf.scene;
+//   vdu.traverse((child) => {
+//     if (child.isMesh && child.material) {
+//       // 금속 느낌
+//       child.material.metalness = 0.3;
+//       child.material.roughness = 0.4;
+//       child.material.envMapIntensity = 1.5;
 
-  // 초기 크기 설정
-  keyboard.scale.set(0, 0, 0);
-  keyboard.rotation.set(0, 0, 0);
-  keyboard.position.set(0.5, 0, 0);
-  models.push(keyboard);
-  scene.add(keyboard);
-  checkAllLoaded();
-});
+//       // 그림자 설정
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
+
+//   // 초기 크기 설정
+//   vdu.scale.set(0, 0, 0);
+//   vdu.rotation.set(0, 0, 0);
+//   vdu.position.set(-1.5, 0, 0);
+//   models.push(vdu);
+//   scene.add(vdu);
+//   checkAllLoaded();
+// });
+
+// loader.load("./assets/glb/keyboard2.glb", (gltf) => {
+//   keyboard = gltf.scene;
+//   keyboard.traverse((child) => {
+//     if (child.isMesh && child.material) {
+//       // 금속 느낌
+//       child.material.metalness = 0.3;
+//       child.material.roughness = 0.4;
+//       child.material.envMapIntensity = 1.5;
+
+//       // 그림자 설정
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
+
+//   // 초기 크기 설정
+//   keyboard.scale.set(0, 0, 0);
+//   keyboard.rotation.set(0, 0, 0);
+//   keyboard.position.set(0.5, 0, 0);
+//   models.push(keyboard);
+//   scene.add(keyboard);
+//   checkAllLoaded();
+// });
 
 function introVduAnimation() {
   gsap.to(vdu.scale, {

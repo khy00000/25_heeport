@@ -117,13 +117,7 @@ document.fonts.ready.then(() => {
     .add(animateIn(split1, 0), "-=0.3")
     .add(animateIn(split2, 0.3), ">")
     .call(() => {
-      if (loadedCount === totalModels && !isAnimationStarted) {
-        isAnimationStarted = true;
-        // 모든 모델 로드 완료 후 입장 애니메이션 실행
-        introVduAnimation();
-        introKeyboardAnimation();
-        animate(models);
-      }
+      loadModelsAndAnimate();
     });
 
   // 인트로 하단 애니메이션
