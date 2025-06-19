@@ -43,6 +43,7 @@
             기반의 모션 컨트롤을 디테일하게 구현하였습니다.
           </p>
         </div>
+
         <div class="project-container">
           <h1>Technologies & Tools</h1>
           <ul class="tool-wrap">
@@ -52,6 +53,7 @@
             <li>Responsive Design</li>
           </ul>
         </div>
+
         <div class="project-container">
           <h1>Function Descrilition</h1>
           <ul class="function-wrap">
@@ -66,23 +68,33 @@
             <li>다양한 화면 크기에 대응할 수 있도록 반응형 인터랙션 설계</li>
           </ul>
         </div>
+
         <div class="project-container">
           <h1>Trouble Shootings</h1>
-          <ul class="ts-wrap">
-            <li>
-              인트로 로딩과 3d 모델이 구현되는 순서가 중요했기 때문에
-              (재로딩하면 모델이 안보이는 상황 발생) 콜백 함수를 사용하여 로드
-              순서를 조정하였다.
-            </li>
-            <li>
-              애니메이션을 재사용할수 있도록 함수를 만들어서 재사용하였다. (gsap
-              타이포 애니메이션, three.js)
-            </li>
-            <li>
-              코드가 너무 많아져 복잡해져 비슷한 기능을 하는 자바스크립트 코드
-              끼리 파일을 정리하여 연결하였다.n
-            </li>
-          </ul>
+          <div class="ts-wrap">
+            <div class="ts-title">재로딩 시 3D 모델이 보이지 않는 문제</div>
+            <div class="ts-problem">문제</div>
+            <div class="ts-problem-discrip">
+              새로고침 시 GLTFLoader의 비동기 로딩이 끝나기 전에 3D 모델 인트로
+              애니메이션인 gsap.to(model.scale)이 실행되어 undefined.scale 오류
+              발생
+            </div>
+            <div class="ts-fix">해결 방법</div>
+            <ul class="ts-fix-discrip">
+              <li>
+                GLTFLoader를 Promise로 감싸 await 기반으로 모델 로드 완료 후
+                애니메이션 실행
+              </li>
+              <li>
+                기존 GSAP 타임라인 안에서 .call(() => loadModelsAndAnimate())로
+                정확한 실행 타이밍 제어
+              </li>
+              <li>
+                모델 수가 많아져도 대응 가능하도록 Promise.all()을 통한 병렬
+                로딩 구조로 확장 가능
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

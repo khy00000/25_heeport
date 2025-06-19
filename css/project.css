@@ -70,7 +70,7 @@ body {
   padding: 120px 0 0 0;
 }
 
-.project-container:last-child{
+.project-container:last-child {
   padding-bottom: 120px;
 }
 
@@ -110,8 +110,8 @@ body {
   position: relative;
 }
 
-.project-container .function-wrap li:nth-child(1)::before{
-  content: '';
+.project-container .function-wrap li:nth-child(1)::before {
+  content: "";
   position: absolute;
   background-image: url(../assets/img/icon_a.svg);
   background-size: 17px 17px;
@@ -122,8 +122,8 @@ body {
   transform: translateY(-50%);
 }
 
-.project-container .function-wrap li:nth-child(2)::before{
-  content: '';
+.project-container .function-wrap li:nth-child(2)::before {
+  content: "";
   position: absolute;
   background-image: url(../assets/img/icon_b.svg);
   background-size: 17px 17px;
@@ -134,8 +134,8 @@ body {
   transform: translateY(-50%);
 }
 
-.project-container .function-wrap li:nth-child(3)::before{
-  content: '';
+.project-container .function-wrap li:nth-child(3)::before {
+  content: "";
   position: absolute;
   background-image: url(../assets/img/icon_c.svg);
   background-size: 17px 17px;
@@ -147,12 +147,106 @@ body {
 }
 
 /* 문제 해결 */
-.project-container .ts-wrap li {
+.project-container .ts-wrap {
   font-size: 20px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 300;
   letter-spacing: -1px;
+  margin-bottom: 10px;
+}
+
+.project-container .ts-wrap div {
+  margin-bottom: 10px;
+}
+
+.project-container .ts-wrap .ts-title {
   margin-left: 30px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.project-container .ts-wrap .ts-title:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  background-image: url(../assets/img/icon_a.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+.project-container .ts-wrap .ts-title:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  background-image: url(../assets/img/icon_b.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+.project-container .ts-wrap .ts-title:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  background-image: url(../assets/img/icon_c.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+/* 문제 해결 타이틀 */
+.ts-problem,
+.ts-fix {
+  margin-left: 50px;
+  position: relative;
+  font-weight: 400;
+}
+
+.ts-problem::before,
+.ts-fix::before {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+  color: rgb(0, 0, 0);
+  font-size: 1em;
+  display: inline-block;
+  width: 1em;
+}
+
+.ts-problem-discrip {
+  width: 60%;
+  margin-left: 20px;
+  padding-bottom: 20px;
+  font-size: 18px;
+}
+
+.ts-fix-discrip {
+  font-size: 18px;
+}
+
+.ts-fix-discrip li {
   margin-bottom: 10px;
   position: relative;
+    margin-left: 50px;
+}
+
+.ts-fix-discrip li::before {
+  content: "✔";
+  position: absolute;
+  color: rgb(0, 0, 0);
+  top: 50%;
+  left: -25px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  display: inline-block;
+  width: 1em;
 }
