@@ -25,20 +25,74 @@ body {
 }
 
 #project .intro .intro-wrap {
+  width: fit-content;
   font-size: 15px;
 }
 
+.project-date {
+  width: fit-content;
+}
+
 #project .intro .intro-wrap .project-tool-wrap {
+  width: fit-content;
   padding-top: 5px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
 }
 
-.project-title h1 {
+/* background-size: 너비 높이;
+background-position: X 0 (left) Y 100% (bottom);
+ */
+
+.project-tool-wrap p {
+  white-space: nowrap;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: 100% 1px;
+  transition: background-size 0.15s linear;
+}
+
+.project-tool-wrap p:hover {
+  background-size: 0 1px;
+}
+
+.project-title {
+  width: 70%;
+}
+
+.project-title .pt-mask {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  height: 110px;
+}
+
+.project-title .pt-mask div {
+  position: absolute;
+  right: 0;
+  height: 110px;
+  white-space: nowrap;
   font-size: 100px;
+  line-height: 1;
   letter-spacing: -1.5px;
+  transition: transform 0.5s ease;
+}
+
+.old {
+  transform: translateY(0%);
+}
+
+.new {
+  transform: translateY(100%);
+}
+
+.pt-mask:hover .old {
+  transform: translateY(-100%);
+}
+
+.pt-mask:hover .new {
+  transform: translateY(0%);
 }
 
 /* 이미지 */
@@ -85,7 +139,7 @@ body {
   width: 60%;
   font-size: 23px;
   font-family: "Noto Sans KR", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -1px;
 }
 
@@ -103,7 +157,7 @@ body {
 .project-container .function-wrap li {
   font-size: 20px;
   font-family: "Noto Sans KR", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -1px;
   margin-left: 30px;
   margin-bottom: 10px;
@@ -155,14 +209,11 @@ body {
   margin-bottom: 10px;
 }
 
-.project-container .ts-wrap div {
-  margin-bottom: 10px;
-}
-
 .project-container .ts-wrap .ts-title {
   margin-left: 30px;
   margin-bottom: 20px;
   position: relative;
+  font-weight: 400;
 }
 
 .project-container .ts-wrap .ts-title:nth-child(1)::before {
@@ -205,6 +256,7 @@ body {
 .ts-problem,
 .ts-fix {
   margin-left: 50px;
+  margin-bottom: 20px;
   position: relative;
   font-weight: 400;
 }
@@ -236,7 +288,7 @@ body {
 .ts-fix-discrip li {
   margin-bottom: 10px;
   position: relative;
-    margin-left: 50px;
+  margin-left: 50px;
 }
 
 .ts-fix-discrip li::before {
