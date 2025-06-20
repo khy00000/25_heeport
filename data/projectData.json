@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "title": "Interactive 3D Portfolio",
+    "subtitle": "Heeyon Kim Portfolio",
+    "date": "June 15, 2025",
+    "stack": ["GSAP", "Three.js", "API"],
+    "technologies": [
+      "GSAP",
+      "Three.js",
+      "CSS Transition",
+      "Responsive Design",
+      "API"
+    ],
+    "description": "바닐라 자바스크립트를 기반으로 Three.js를 활용해 3D 모델을 로드하여 애니메이션을 구현, 각 섹션 별 GSAP 타임라인, ScrollTrigger 애니메이션을 디테일하게 구현한 인터랙티브 사이트 이며 각 프로트젝트의 데이터 JSON을 직접 서버에 올려 클라이언트에 구현 및 배포한 포트폴리오 사이트입니다.",
+    "functions": [
+      "GLB 형식의 3D 모델을 Three.js로 렌더링 후 스크롤에 따른 인터랙티브 애니메이션 구현",
+      "각 섹션 맞춤 GSAP 타임라인 애니메이션과 ScrollTrigger를 연동하여 자연스러운 애니메이션 흐름 연출",
+      "하나의 HTML 템플릿에서 여러 프로젝트 페이지를 데이터 기반으로 동적 구성",
+      "프로젝트 JSON API로 구현"
+    ],
+    "troubleshooting": [
+      {
+        "title": "재로딩 시 3D 모델이 보이지 않는 문제",
+        "problem": "GLTFLoader의 비동기 로딩이 끝나기 전에 GSAP 애니메이션이 실행되어 undefined.scale 오류 발생",
+        "solution": [
+          "GLTFLoader를 Promise로 감싸 await 기반으로 모델 로드 완료 후 애니메이션 실행",
+          "GSAP 타임라인 안에서 .call(() => loadModelsAndAnimate())로 정확한 실행 타이밍 제어",
+          "Promise.all()을 통한 병렬 로딩 구조로 확장 가능"
+        ]
+      },
+      {
+        "title": "SplitText + ScrollTrigger 등장/퇴장 순서 컨트롤",
+        "problem": "인트로 영역의 4가지 타입 intro-text를 순차 등장을 구현하면서 타이밍이 꼬이거나 겹치는 문제 발생",
+        "solution": [
+          "등장 퇴장 흐름을 각 animateIn/animateOut 함수로 분리",
+          "const loadtl = gsap.timeline();으로 타이밍을 명확히 조절",
+          "add(..., '>-0.3')과 같은 상대 위치 제어로 타임라인 간 간섭 방지"
+        ]
+      },
+      {
+        "title": "Works 섹션에서 순차적 이미지/텍스트 전환",
+        "problem": "3개의 works-list가 각각 이미지와 텍스트가 전환되며 나타나야 하고 각 요소의 등장 순서와 이전 요소의 scale, opacity 변화가 서로 겹치거나 꼬이는 문제",
+        "solution": [
+          "타임라인을 명확히 분리하기 위해 첫번째 이미지와 텍스트를 set()으로 초기 상태를 지정한 후 개별 .to()로 컨트롤",
+          "이전 요소의 scale 축소와 다음 요소의 등장 타이밍을 <, >-0.3 등으로 상대 위치를 조정"
+        ]
+      }
+    ]
+  }
+]
