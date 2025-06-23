@@ -5,7 +5,9 @@ fetch("./data/projectData.json")
   .then((res) => res.json())
   .then((data) => {
     const project = data.find((p) => p.id === projectId);
-    if
+    if (!project){
+      
+    }
 
     const projectEl = document.getElementById("project");
 

@@ -199,15 +199,15 @@ document.fonts.ready.then(() => {
   });
 
   // projects 애니메이션
-  const projects = gsap.utils.toArray(".projects-list-wrap");
-  const projects1 = projects[0];
-  const projects2 = projects[1];
-  const projects3 = projects[2];
-  const imgWrap1 = projects1.querySelector(".projects-img");
-  const imgWrap2 = projects2.querySelector(".projects-img");
-  const imgWrap3 = projects3.querySelector(".projects-img");
+  const projects = gsap.utils.toArray(".project-list-wrap");
+  const project1 = projects[0];
+  const project2 = projects[1];
+  const project3 = projects[2];
+  const imgWrap1 = project1.querySelector(".project-img");
+  const imgWrap2 = project2.querySelector(".project-img");
+  const imgWrap3 = project3.querySelector(".project-img");
 
-  const titles = gsap.utils.toArray(".projects-item-title");
+  const titles = gsap.utils.toArray(".project-item-title");
   const titleSplits = titles.map(
     (title) =>
       new SplitText(title, {
@@ -269,7 +269,7 @@ document.fonts.ready.then(() => {
     .to({}, { duration: 4 })
     .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
-      projects1,
+      project1,
       { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
@@ -281,7 +281,7 @@ document.fonts.ready.then(() => {
     .to({}, { duration: 4 })
     .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
-      projects2,
+      project2,
       { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
