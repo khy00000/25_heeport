@@ -190,29 +190,29 @@ document.fonts.ready.then(() => {
       ">-0.3"
     );
 
-  // works 배경 텍스트 루프 애니메이션
-  gsap.to(".works-txt", {
+  // projects 배경 텍스트 루프 애니메이션
+  gsap.to(".projects-txt", {
     xPercent: -50,
     ease: "none",
     duration: 15,
     repeat: -1,
   });
 
-  // works 애니메이션
-  const works = gsap.utils.toArray(".works-list-wrap");
-  const works1 = works[0];
-  const works2 = works[1];
-  const works3 = works[2];
-  const imgWrap1 = works1.querySelector(".works-img");
-  const imgWrap2 = works2.querySelector(".works-img");
-  const imgWrap3 = works3.querySelector(".works-img");
+  // projects 애니메이션
+  const projects = gsap.utils.toArray(".projects-list-wrap");
+  const projects1 = projects[0];
+  const projects2 = projects[1];
+  const projects3 = projects[2];
+  const imgWrap1 = projects1.querySelector(".projects-img");
+  const imgWrap2 = projects2.querySelector(".projects-img");
+  const imgWrap3 = projects3.querySelector(".projects-img");
 
-  const titles = gsap.utils.toArray(".works-item-title");
+  const titles = gsap.utils.toArray(".projects-item-title");
   const titleSplits = titles.map(
     (title) =>
       new SplitText(title, {
         types: "chars",
-        lineClass: "work-chars",
+        lineClass: "project-chars",
         mask: "chars",
       })
   );
@@ -222,7 +222,7 @@ document.fonts.ready.then(() => {
     (desc) =>
       new SplitText(desc, {
         types: "chars",
-        lineClass: "work-chars",
+        lineClass: "project-chars",
         mask: "chars",
       })
   );
@@ -232,7 +232,7 @@ document.fonts.ready.then(() => {
     (scroll) =>
       new SplitText(scroll, {
         types: "chars",
-        lineClass: "work-chars",
+        lineClass: "project-chars",
         mask: "chars",
       })
   );
@@ -244,9 +244,9 @@ document.fonts.ready.then(() => {
   gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: 900 });
   gsap.set(flatChars, { opacity: 0, x: 100 });
 
-  const workTl = gsap.timeline({
+  const projectTl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".works",
+      trigger: ".projects",
       start: "top top",
       end: "+=3000",
       scrub: 2,
@@ -254,8 +254,8 @@ document.fonts.ready.then(() => {
     },
   });
 
-  workTl
-    .to(".works-txt", { opacity: 0 })
+  projectTl
+    .to(".projects-txt", { opacity: 0 })
     .to(
       imgWrap1,
       { scale: 1, borderRadius: "40px", duration: 3, ease: "power2.out" },
@@ -269,7 +269,7 @@ document.fonts.ready.then(() => {
     .to({}, { duration: 4 })
     .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
-      works1,
+      projects1,
       { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
@@ -281,7 +281,7 @@ document.fonts.ready.then(() => {
     .to({}, { duration: 4 })
     .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
     .to(
-      works2,
+      projects2,
       { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )

@@ -1,7 +1,11 @@
+const urlParams = new URLSearchParams(window.location.search);
+const projectId = parseInt(urlParams.get("id"));
+
 fetch("./data/projectData.json")
   .then((res) => res.json())
   .then((data) => {
-    const project = data[0]; // 첫 번째 프로젝트만 예시로 사용
+    const project = data.find((p) => p.id === projectId);
+    if
 
     const projectEl = document.getElementById("project");
 

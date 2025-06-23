@@ -74,7 +74,7 @@ canvas {
   z-index: 9;
 }
 
-/* works */
+/* projects */
 .intro .intro-row1 nav a {
   display: block;
   border: 1px solid white;
@@ -244,8 +244,8 @@ canvas {
   margin-bottom: 50px;
 }
 
-/* works */
-.works {
+/* projects */
+.projects {
   height: 100vh;
   position: relative;
   display: flex;
@@ -254,7 +254,7 @@ canvas {
 }
 
 /* 워크 백그라운드 글자 */
-.works .works-txt-wrap {
+.projects .projects-txt-wrap {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -263,12 +263,12 @@ canvas {
   overflow: hidden;
 }
 
-.works-txt {
+.projects-txt {
   display: flex;
   position: relative;
 }
 
-.works-txt h1 {
+.projects-txt h1 {
   white-space: nowrap;
   font-size: 200px;
   font-weight: 400;
@@ -276,7 +276,7 @@ canvas {
 }
 
 /* 워크 박스 */
-.works-list {
+.projects-list {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -284,7 +284,7 @@ canvas {
   left: 0;
 }
 
-.works-list .works-list-wrap {
+.projects-list .projects-list-wrap {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -294,19 +294,19 @@ canvas {
   padding: 0.5em;
 }
 
-.works-list-wrap:first-child {
+.projects-list-wrap:first-child {
   z-index: 999;
 }
 
-.works-list-wrap:nth-child(2) {
+.projects-list-wrap:nth-child(2) {
   z-index: 9999;
 }
 
-.works-list-wrap:last-child {
+.projects-list-wrap:last-child {
   z-index: 99999;
 }
 
-.works-list-wrap .works-img {
+.projects-list-wrap .projects-img {
   width: 100%;
   height: 100%;
   border-radius: 100px;
@@ -314,11 +314,11 @@ canvas {
   will-change: transform;
 }
 
-.works-list-wrap .works-img img {
+.projects-list-wrap .projects-img img {
   object-fit: cover;
 }
 
-.works-item {
+.projects-item {
   position: absolute;
   top: 0;
   left: 0;
@@ -328,7 +328,7 @@ canvas {
   text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.331);
 }
 
-.works-item-title {
+.projects-item-title {
   font-weight: 300;
   font-size: 70px;
   margin-bottom: 15px;
@@ -361,14 +361,14 @@ canvas {
   transform: translateY(-50%);
 }
 
-/* works 텍스트 스프릿 애니메이션 */
-.work-chars {
+/* projects 텍스트 스프릿 애니메이션 */
+.project-chars {
   position: relative;
   overflow: hidden;
   display: inline-block;
 }
 
-.work-chars > * {
+.project-chars > * {
   transform: translateX(100%);
   display: inline-block;
   will-change: transform;
