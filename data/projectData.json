@@ -1,10 +1,11 @@
 [
   {
     "id": 1,
-    "title": "Interactive 3D Portfolio",
-    "subtitle": "Heeyon Kim Portfolio",
+    "title": "Heeyon Kim Portfolio",
+    "subtitle": "Interactive 3D",
     "date": "June 15, 2025",
     "stack": ["GSAP", "Three.js", "API"],
+    "image": "./assets/img/works1.jpeg",
     "technologies": [
       "GSAP",
       "Three.js",
@@ -44,6 +45,101 @@
         "solution": [
           "타임라인을 명확히 분리하기 위해 첫번째 이미지와 텍스트를 set()으로 초기 상태를 지정한 후 개별 .to()로 컨트롤",
           "이전 요소의 scale 축소와 다음 요소의 등장 타이밍을 <, >-0.3 등으로 상대 위치를 조정"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "COEX Clone Site",
+    "subtitle": "React + SCSS + Swiper",
+    "date": "April 10, 2025",
+    "stack": ["React", "SCSS", "Swiper.js"],
+    "image": "./assets/img/works2.jpeg",
+    "technologies": [
+      "React",
+      "SCSS",
+      "Swiper.js",
+      "CSS Transition"
+    ],
+    "description": "React를 기반으로 COEX 공식 사이트를 클론한 프로젝트입니다. 웹 접근성을 고려한 설계와 1px 단위까지 디테일한 UI를 구현하였으며 css만으로 가벼운 애니메이션을 연출하였습니다.",
+    "functions": [
+      "Hero 영역은 Swiper.js를 활용해 자연스러운 슬라이드 UI 구현",
+      "CSS Transition만으로도 동적이고 가벼운 UI 애니메이션 연출",
+      "SCSS 및 JS 컴포넌트를 기능 단위로 분리하여 유지보수가 쉬운 구조 구현"
+    ],
+    "troubleshooting": [
+      {
+        "title": "Swiper 슬라이드 반응 방향 오류",
+        "problem": "데스크탑에선 horizontal로 잘 작동했지만, 모바일 뷰포트에서 vertical로 인식되며 버그 발생",
+        "solution": [
+          "breakpoints 설정을 활용해 Swiper 인스턴스를 반응형으로 조건부 초기화",
+          "React useEffect에서 뷰포트 감지하여 Swiper 옵션을 동적으로 적용"
+        ]
+      },
+      {
+        "title": "티켓 디자인이 모바일에서 깨지는 현상",
+        "problem": "이미지/텍스트 배치가 모바일 화면에서 겹쳐짐",
+        "solution": [
+          "object-fit, aspect-ratio, vw/vh 단위를 활용해 콘텐츠가 비율에 맞게 리사이징되도록 조정",
+          "SCSS에서 mixin을 활용해 공통 레이아웃 스타일 재사용"
+        ]
+      },
+      {
+        "title": "폰트 크기와 위치가 반응형에서 일관되지 않음",
+        "problem": "태블릿, 모바일에서 폰트가 너무 작거나 큰 문제가 발생",
+        "solution": [
+          "CSS clamp() 함수와 SCSS 변수 조합으로 최적 폰트 스케일링 적용",
+          "디자인 시스템 기반으로 폰트 크기를 관리하여 consistency 유지"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "COS Brand Site Redesign",
+    "subtitle": "Kakao Login + Geolocation",
+    "date": "March 25, 2025",
+    "stack": ["HTML", "JavaScript", "OAuth"],
+    "image": "./assets/img/works3.jpeg",
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Kakao OAuth",
+      "Geolocation API",
+      "CSS Transition",
+      "Responsive Design"
+    ],
+    "description": "COS 브랜드 웹사이트를 리디자인한 프로젝트로, 로그인 기능과 웹 접근성을 기반으로 섬세한 CSS UI 구현을 목표로 했습니다. 반응형으로 완성도를 높였으며, 외부 API와 연동하여 기능성을 강화했습니다.",
+    "functions": [
+      "카카오 OAuth API를 활용한 소셜 로그인 기능 구현",
+      "브라우저 Geolocation API로 사용자 위치를 탐지하고 인터페이스에 반영",
+      "모바일 대응을 위한 메뉴 인터랙션 및 세부 레이아웃 구현"
+    ],
+    "troubleshooting": [
+      {
+        "title": "카카오 로그인 실패 (로컬에선 되는데 배포 후 안됨)",
+        "problem": "로컬 환경에서는 정상 작동하지만, 실제 배포 URL과 카카오 개발자 콘솔의 URI가 달라 로그인 실패",
+        "solution": [
+          ".env를 이용해 환경별 Redirect URI를 분리",
+          "카카오 개발자 페이지에서 프로덕션 URL을 정확히 등록하여 해결"
+        ]
+      },
+      {
+        "title": "모바일 메뉴 인터랙션 오류",
+        "problem": "모바일 메뉴를 열었을 때 스크롤 이벤트와 충돌해 메뉴가 예기치 않게 닫히는 현상 발생",
+        "solution": [
+          "메뉴 열림 상태에 따라 scroll-lock 클래스를 <body>에 적용",
+          "메뉴가 열린 상태에서는 스크롤 이벤트를 강제로 막는 처리 추가 (pointer-events 및 overflow 제어)"
+        ]
+      },
+      {
+        "title": "Geolocation API가 iOS에서 무반응",
+        "problem": "모바일 Safari 브라우저에서 위치 정보를 받아오지 못하는 문제",
+        "solution": [
+          "HTTPS 환경에서만 동작하므로, 로컬은 localhost, 실서버는 HTTPS 기반 도메인으로 통일",
+          "getCurrentPosition() 호출 시 오류 처리 콜백도 추가하여 실패 시 대체 메시지를 UI에 제공"
         ]
       }
     ]

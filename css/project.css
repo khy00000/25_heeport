@@ -142,6 +142,7 @@ background-position: X 0 (left) Y 100% (bottom);
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 400;
   letter-spacing: -1px;
+  line-height: 1.7;
 }
 
 /* 툴 */
@@ -217,7 +218,7 @@ background-position: X 0 (left) Y 100% (bottom);
   font-weight: 400;
 }
 
-.project-container .ts-wrap .ts-title:nth-child(1)::before {
+.ts-title.icon-a::before {
   content: "";
   position: absolute;
   background-image: url(../assets/img/icon_a.svg);
@@ -229,7 +230,7 @@ background-position: X 0 (left) Y 100% (bottom);
   transform: translateY(-50%);
 }
 
-.project-container .ts-wrap .ts-title:nth-child(2)::before {
+.ts-title.icon-b::before {
   content: "";
   position: absolute;
   background-image: url(../assets/img/icon_b.svg);
@@ -241,7 +242,7 @@ background-position: X 0 (left) Y 100% (bottom);
   transform: translateY(-50%);
 }
 
-.project-container .ts-wrap .ts-title:nth-child(3)::before {
+.ts-title.icon-c::before {
   content: "";
   position: absolute;
   background-image: url(../assets/img/icon_c.svg);
@@ -252,6 +253,7 @@ background-position: X 0 (left) Y 100% (bottom);
   left: -27px;
   transform: translateY(-50%);
 }
+
 
 /* 문제 해결 타이틀 */
 .ts-problem,
@@ -280,10 +282,12 @@ background-position: X 0 (left) Y 100% (bottom);
   margin-left: 20px;
   padding-bottom: 20px;
   font-size: 18px;
+  line-height: 1.7;
 }
 
 .ts-fix-discrip {
   font-size: 18px;
+  padding-bottom: 30px;
 }
 
 .ts-fix-discrip li {
