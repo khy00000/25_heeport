@@ -217,15 +217,33 @@ document.fonts.ready.then(() => {
       })
   );
 
-  const descriptionLists = gsap.utils.toArray(".description-list");
-  const descSplits = descriptionLists.map(
-    (desc) =>
-      new SplitText(desc, {
-        types: "chars",
-        lineClass: "project-chars",
+  const descriptionItems = gsap.utils.toArray(".description-item");
+  const descSplits = descriptionItems.map(
+    (item) =>
+      new SplitText(item, {
+        type: "chars",
+        charsClass: "project-chars",
         mask: "chars",
       })
   );
+
+  const descSplits1 = [
+    descSplits[0].chars,
+    descSplits[1].chars,
+    descSplits[2].chars,
+  ];
+
+  const descSplits2 = [
+    descSplits[3].chars,
+    descSplits[4].chars,
+    descSplits[5].chars,
+  ];
+
+  const descSplits3 = [
+    descSplits[6].chars,
+    descSplits[7].chars,
+    descSplits[8].chars,
+  ];
 
   const scrolls = gsap.utils.toArray(".scroll");
   const scrollSplits = scrolls.map(
@@ -243,6 +261,8 @@ document.fonts.ready.then(() => {
   gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
   gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: 900 });
   gsap.set(flatChars, { opacity: 0, x: 100 });
+  gsap.set(project1, { pointerEvents: "auto" });
+  gsap.set([project2, project3], { pointerEvents: "none" });
 
   const projectTl = gsap.timeline({
     scrollTrigger: {
@@ -261,34 +281,38 @@ document.fonts.ready.then(() => {
       { scale: 1, borderRadius: "40px", duration: 3, ease: "power2.out" },
       "<"
     )
-    .to([titleSplits[0].chars, descSplits[0].chars, scrollSplits[0].chars], {
+    .to([titleSplits[0].chars, descSplits1, scrollSplits[0].chars], {
       x: 0,
       opacity: 1,
-      duration: 2,
+      duration: 3,
     })
     .to({}, { duration: 4 })
     .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
+    .to(project1, { pointerEvents: "none" }, "<")
+    .to(project2, { pointerEvents: "auto" }, "<")
     .to(
       project1,
       { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
-    .to([titleSplits[1].chars, descSplits[1].chars, scrollSplits[1].chars], {
+    .to([titleSplits[1].chars, descSplits2, scrollSplits[1].chars], {
       x: 0,
       opacity: 1,
-      duration: 2,
+      duration: 3,
     })
     .to({}, { duration: 4 })
     .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
+    .to(project2, { pointerEvents: "none" }, "<")
+    .to(project3, { pointerEvents: "auto" }, "<")
     .to(
       project2,
       { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
-    .to([titleSplits[2].chars, descSplits[2].chars, scrollSplits[2].chars], {
+    .to([titleSplits[2].chars, descSplits3, scrollSplits[2].chars], {
       x: 0,
       opacity: 1,
-      duration: 2,
+      duration: 3,
     })
     .to({}, { duration: 4 });
 

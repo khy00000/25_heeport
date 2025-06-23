@@ -294,6 +294,7 @@ canvas {
   padding: 0.5em;
 }
 
+/* 
 .project-list-wrap:first-child {
   z-index: 999;
 }
@@ -304,7 +305,7 @@ canvas {
 
 .project-list-wrap:last-child {
   z-index: 99999;
-}
+} */
 
 .project-list-wrap .project-img {
   width: 100%;
@@ -331,7 +332,7 @@ canvas {
 .project-item-title {
   font-weight: 300;
   font-size: 70px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   letter-spacing: -2px;
   position: absolute;
   top: 50%;
@@ -341,10 +342,10 @@ canvas {
 
 .description-list {
   position: absolute;
-  top: 58%;
+  top: 56%;
   left: 1.5%;
   display: flex;
-  /* gap: 25px; */
+  gap: 10px;
 }
 
 .description-item {
@@ -365,7 +366,6 @@ canvas {
 .project-chars {
   position: relative;
   overflow: hidden;
-  display: inline-block;
 }
 
 .project-chars > * {

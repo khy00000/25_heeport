@@ -21,7 +21,7 @@ const camera = new THREE.PerspectiveCamera(
   1000 //far
 );
 // 초기 카메라 위치
-camera.position.set(0, 1, 5);
+camera.position.set(0, 0, 0);
 scene.add(camera);
 
 // 캔버스 생성
@@ -111,20 +111,19 @@ function loadGLBModel(url, onLoadSetup) {
 async function loadModelsAndAnimate() {
   try {
     // 모델 로드
-    vdu = await loadGLBModel("./assets/glb/vdu.glb", (model) => {
-      model.scale.set(0, 0, 0);
-      model.rotation.set(0, 0, 0);
-      model.position.set(-1.5, 0, 0);
-    });
+    // vdu = await loadGLBModel("./assets/glb/vdu.glb", (model) => {
+    //   model.scale.set(0, 0, 0);
+    //   model.rotation.set(0, 0, 0);
+    //   model.position.set(-1.5, 0, 0);
+    // });
 
     keyboard = await loadGLBModel("./assets/glb/keyboard2.glb", (model) => {
       model.scale.set(0, 0, 0);
       model.rotation.set(0, 0, 0);
-      model.position.set(0.5, 0, 0);
+      model.position.set(0, 0, -5);
     });
 
     // 모든 모델 로드 완료 후 애니메이션 실행
-    introVduAnimation();
     introKeyboardAnimation();
     animate(models);
   } catch (err) {
@@ -191,15 +190,15 @@ async function loadModelsAndAnimate() {
 //   checkAllLoaded();
 // });
 
-function introVduAnimation() {
-  gsap.to(vdu.scale, {
-    x: 1,
-    y: 1,
-    z: 1,
-    duration: 3,
-    ease: "power2.out",
-  });
-}
+// function introVduAnimation() {
+//   gsap.to(vdu.scale, {
+//     x: 1,
+//     y: 1,
+//     z: 1,
+//     duration: 3,
+//     ease: "power2.out",
+//   });
+// }
 
 function introKeyboardAnimation() {
   gsap.to(keyboard.scale, {

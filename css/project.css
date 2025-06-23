@@ -58,24 +58,24 @@ background-position: X 0 (left) Y 100% (bottom);
 }
 
 .project-title {
-  width: 70%;
+  width: 75%;
 }
 
 .project-title .pt-mask {
   position: relative;
   overflow: hidden;
   display: block;
-  height: 110px;
+  height: 100px;
 }
 
 .project-title .pt-mask div {
   position: absolute;
   right: 0;
-  height: 110px;
+  height: 100px;
   white-space: nowrap;
-  font-size: 100px;
+  font-size: 90px;
   line-height: 1;
-  letter-spacing: -1.5px;
+  letter-spacing: -1.7px;
   transition: transform 0.5s ease;
 }
 
@@ -194,6 +194,18 @@ background-position: X 0 (left) Y 100% (bottom);
   content: "";
   position: absolute;
   background-image: url(../assets/img/icon_c.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+.project-container .function-wrap li:nth-child(4)::before {
+  content: "";
+  position: absolute;
+  background-image: url(../assets/img/icon_d.png);
   background-size: 17px 17px;
   width: 17px;
   height: 17px;

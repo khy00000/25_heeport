@@ -45,7 +45,7 @@
   transform: translateX(-50%);
   width: 17px;
   height: 17px;
-  background-image: url(../assets/img/arrow-projects.svg);
+  background-image: url(../assets/img/arrow-project.svg);
   background-size: 17px 17px;
 }
 
@@ -72,13 +72,13 @@
   overflow: hidden;
 }
 
-.projects-item .projects-container {
+.projects-item .project-container {
   width: 33.333%;
   height: 100%;
   position: relative;
 }
 
-.projects-item .projects-container a {
+.projects-item .project-container a {
   width: 100%;
   height: 100%;
   border-radius: 50px;
@@ -86,7 +86,7 @@
   overflow: hidden;
 }
 
-.projects-item .projects-container a img {
+.projects-item .project-container a img {
   object-fit: cover;
   display: block;
   transform: scale(1.3);
@@ -94,13 +94,13 @@
   transition: transform 0.5s ease, filter 0.5s ease;
 }
 
-.projects-item .projects-container:hover a img {
+.projects-item .project-container:hover a img {
   transform: scale(1);
   filter: blur(0);
 }
 
-.projects-item .projects-container:hover .project-title h1,
-.projects-item .projects-container:hover .project-title p {
+.projects-item .project-container:hover .project-title h1,
+.projects-item .project-container:hover .project-title p {
   opacity: 1;
 }
 
