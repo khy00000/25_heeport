@@ -22,15 +22,6 @@
     ],
     "troubleshooting": [
       {
-        "title": "재로딩 시 3D 모델이 보이지 않는 문제",
-        "problem": "GLTFLoader의 비동기 로딩이 끝나기 전에 GSAP 애니메이션이 실행되어 undefined.scale 오류 발생",
-        "solution": [
-          "GLTFLoader를 Promise로 감싸 await 기반으로 모델 로드 완료 후 애니메이션 실행",
-          "GSAP 타임라인 안에서 .call(() => loadModelsAndAnimate())로 정확한 실행 타이밍 제어",
-          "Promise.all()을 통한 병렬 로딩 구조로 확장 가능"
-        ]
-      },
-      {
         "title": "SplitText + ScrollTrigger 등장/퇴장 순서 컨트롤",
         "problem": "인트로 영역의 4가지 타입 intro-text를 순차 등장을 구현하면서 타이밍이 꼬이거나 겹치는 문제 발생",
         "solution": [
@@ -40,12 +31,27 @@
         ]
       },
       {
-        "title": "Projects 섹션에서 순차적 이미지/텍스트 전환 이슈",
+        "title": "Projects 섹션 순차적 이미지/텍스트 전환, z-index 이슈",
         "problem": "3개의 .project-list-wrap이 이미지 및 텍스트 애니메이션과 함께 순차적으로 등장해야 하는데 이전 요소의 scale, opacity, z-index, <a> 링크 영역이 겹치며 클릭 대상이 꼬이는 문제 발생",
         "solution": [
           "set()으로 각각 프로젝트, 이미지, 텍스트의 초기 상태를 개별 지정한 후 개별 .to()로 컨트롤",
           "이전 요소의 scale 축소와 다음 요소의 등장 타이밍을 <, >-0.3 등으로 상대 위치를 조정",
           "보이는 프로젝트 요소만 클릭되어 링크되도록 각 애니메이션 마다 pointerEvents를 명시"
+        ]
+      },
+      {
+        "title": "로딩시 3D 모델의 인트로 애니메이션 타이밍 조절",
+        "problem": "load GSAP 애니메이션과 동시에 실행되어 3D 모델 인트로 애니메이션이 보이지 않음",
+        "solution": [
+          "GSAP 타임라인 안에서 .call(() => introAnimation())로 정확한 실행 타이밍 제어"
+        ]
+      },
+      {
+        "title": "3D 모델 크기 조정 시 중앙에 고정되지 않는 문제",
+        "problem": "GLB 모델을 gsap.to(model.scale) 확대하면 화면 중앙에 고정되지 않고 오른쪽으로 치우쳐 보이는 현상 발생",
+        "solution": [
+          "모델 로딩 후 THREE.Box3().getCenter()를 사용해 중심을 계산하고 model.position.sub(center)로 위치 보정",
+          "모델을 그룹으로 감싸고 그룹에 scale 적용"
         ]
       }
     ]

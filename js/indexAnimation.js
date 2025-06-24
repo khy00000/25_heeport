@@ -117,7 +117,7 @@ document.fonts.ready.then(() => {
     .add(animateIn(split1, 0), "-=0.3")
     .add(animateIn(split2, 0.3), ">")
     .call(() => {
-      loadModelsAndAnimate();
+      introAnimation();
     });
 
   // 인트로 하단 애니메이션
@@ -347,6 +347,9 @@ document.fonts.ready.then(() => {
   });
 
   footerTl
+    .call(() => {
+      outAnimation();
+    })
     .to(footertopSplits[0].chars, {
       x: 0,
     })

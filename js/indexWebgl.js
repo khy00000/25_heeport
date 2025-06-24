@@ -20,9 +20,6 @@ const camera = new THREE.PerspectiveCamera(
   0.1, //near
   1000 //far
 );
-// 초기 카메라 위치
-camera.position.set(0, 0, 0);
-scene.add(camera);
 
 // 캔버스 생성
 const renderer = new THREE.WebGLRenderer({
@@ -67,183 +64,122 @@ hemiLight.position.set(0, 0, 0);
 scene.add(hemiLight);
 
 // 임시 루프
-// function basicAnimate() {
-//   renderer.render(scene, camera);
-//   requestAnimationFrame(basicAnimate);
-// }
-// basicAnimate();
+function basicAnimate() {
+  renderer.render(scene, camera);
+  requestAnimationFrame(basicAnimate);
+}
+basicAnimate();
 
 // GLB 모델 로드
-const models = [];
+let model,
+  modelGroup = new THREE.Group();
 const loader = new THREE.GLTFLoader();
-let vdu, keyboard;
+loader.load("./assets/glb/keyboard2.glb", function (gltf) {
+  model = gltf.scene;
 
-function loadGLBModel(url, onLoadSetup) {
-  return new Promise((resolve, reject) => {
-    loader.load(
-      url,
-      (gltf) => {
-        const model = gltf.scene;
-
-        // 공통 처리 (재질/그림자 설정)
-        model.traverse((child) => {
-          if (child.isMesh && child.material) {
-            child.material.metalness = 0.3;
-            child.material.roughness = 0.4;
-            child.material.envMapIntensity = 1.5;
-            child.castShadow = true;
-            child.receiveShadow = true;
-          }
-        });
-
-        // 개별 처리
-        onLoadSetup(model);
-        models.push(model);
-        scene.add(model);
-        resolve(model);
-      },
-      undefined,
-      (error) => reject(error)
-    );
+  model.traverse((node) => {
+    if (node.isMesh) {
+      if (node.material) {
+        node.material.metalness = 0.3;
+        node.material.roughness = 0.4;
+        node.material.envMapIntensity = 1.5;
+      }
+      node.castShadow = true;
+      node.receiveShadow = true;
+    }
   });
-}
+  // 재질, 거칠기, 그림자 설정
 
-async function loadModelsAndAnimate() {
-  try {
-    // 모델 로드
-    // vdu = await loadGLBModel("./assets/glb/vdu.glb", (model) => {
-    //   model.scale.set(0, 0, 0);
-    //   model.rotation.set(0, 0, 0);
-    //   model.position.set(-1.5, 0, 0);
-    // });
+  // 중심 맞추기 (바운딩 박스 계산)
+  const box = new THREE.Box3().setFromObject(model);
+  const center = box.getCenter(new THREE.Vector3());
+  model.position.sub(center);
 
-    keyboard = await loadGLBModel("./assets/glb/keyboard2.glb", (model) => {
-      model.scale.set(0, 0, 0);
-      model.rotation.set(0, 0, 0);
-      model.position.set(0, 0, -5);
-    });
+  // 그룹에 모델 넣기
+  modelGroup.add(model);
+  modelGroup.scale.set(0, 0, 0); // 그룹에 scale 애니메이션 적용
+  //  90/Math.PI / 2, 45/Math.PI / 4, 30/Math.PI / 6
+  modelGroup.rotation.set(Math.PI / 3, Math.PI / 6, 0);
+  scene.add(modelGroup);
 
-    // 모든 모델 로드 완료 후 애니메이션 실행
-    introKeyboardAnimation();
-    animate(models);
-  } catch (err) {
-    console.error("모델 로딩 실패", err);
-  }
-}
+  // 모델 크기를 기반으로 카메라 z축 거리 자동 조절
+  const size = box.getSize(new THREE.Vector3());
+  const maxDim = Math.max(size.x, size.y, size.z);
+  camera.position.set(0, 0, maxDim * 2);
+  camera.lookAt(0, 0, 0);
 
-// // 모든 모델 로드 체크
-// let loadedCount = 0;
-// const totalModels = 2;
-// // 중복 호출 방지
-// let isAnimationStarted = false;
-// // 모델 로드 체크
-// function checkAllLoaded() {
-//   loadedCount++;
-//   // console.log(`✅ 모델 로드됨 (${loadedCount}/${totalModels})`);
-// }
-
-// loader.load("./assets/glb/vdu.glb", (gltf) => {
-//   vdu = gltf.scene;
-//   vdu.traverse((child) => {
-//     if (child.isMesh && child.material) {
-//       // 금속 느낌
-//       child.material.metalness = 0.3;
-//       child.material.roughness = 0.4;
-//       child.material.envMapIntensity = 1.5;
-
-//       // 그림자 설정
-//       child.castShadow = true;
-//       child.receiveShadow = true;
-//     }
-//   });
-
-//   // 초기 크기 설정
-//   vdu.scale.set(0, 0, 0);
-//   vdu.rotation.set(0, 0, 0);
-//   vdu.position.set(-1.5, 0, 0);
-//   models.push(vdu);
-//   scene.add(vdu);
-//   checkAllLoaded();
-// });
-
-// loader.load("./assets/glb/keyboard2.glb", (gltf) => {
-//   keyboard = gltf.scene;
-//   keyboard.traverse((child) => {
-//     if (child.isMesh && child.material) {
-//       // 금속 느낌
-//       child.material.metalness = 0.3;
-//       child.material.roughness = 0.4;
-//       child.material.envMapIntensity = 1.5;
-
-//       // 그림자 설정
-//       child.castShadow = true;
-//       child.receiveShadow = true;
-//     }
-//   });
-
-//   // 초기 크기 설정
-//   keyboard.scale.set(0, 0, 0);
-//   keyboard.rotation.set(0, 0, 0);
-//   keyboard.position.set(0.5, 0, 0);
-//   models.push(keyboard);
-//   scene.add(keyboard);
-//   checkAllLoaded();
-// });
-
-// function introVduAnimation() {
-//   gsap.to(vdu.scale, {
-//     x: 1,
-//     y: 1,
-//     z: 1,
-//     duration: 3,
-//     ease: "power2.out",
-//   });
-// }
-
-function introKeyboardAnimation() {
-  gsap.to(keyboard.scale, {
-    x: 8,
-    y: 8,
-    z: 8,
-    duration: 3,
-    ease: "power2.out",
-  });
-}
+  // basicAnimate종료 메인 루프 전환
+  cancelAnimationFrame(basicAnimate);
+  animate();
+});
 
 // 현재 스코롤 위치 업데이트
 lenis.on("scroll", (e) => {
   currentScroll = e.scroll;
 });
 
-const floatAmplitude = 0.2;
-const floatSpeed = 1.5;
-const rotationSpeed = 0.3;
+// 둥둥 떠다니는 최대 높이(진폭)
+const floatAmplitude = 0.1;
+const floatSpeed = 1;
+let isEasedOut = false;
 let currentScroll = 0;
-
-const stickyHeight = window.innerHeight;
+let isFloating = true;
+// 고정 섹션
 const footer = document.querySelector(".footer");
-const Destination = footer.offsetTop;
+// 스코롤 기준점
+const destination = footer.offsetTop;
+
+function introAnimation() {
+  gsap.to(modelGroup.scale, {
+    x: 2,
+    y: 2,
+    z: 2,
+    duration: 3,
+    ease: "power2.out",
+  });
+}
+
+// 왼 트리거 오 뷰포트
+function outAnimation() {
+  gsap.to(modelGroup.scale, {
+    x: 0,
+    y: 0,
+    z: 0,
+    duration: 1,
+    ease: "power2.out",
+  });
+}
 
 // 위아래 둥둥 애니메이션 루프
-function animate(models) {
-  function render() {
-    const floatOffset =
-      Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
-    const scrollProgress = Math.min(currentScroll / Destination, 1);
+function animate() {
+  if (modelGroup) {
+    if (isFloating) {
+      const floatOffset =
+        // 부드러운 곡선 형태 값 -0.1 ~ +0.1
+        Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
+      // 포지션 계속 바꾸며 y축 위아래로
+      modelGroup.position.y = floatOffset;
+    }
 
-    models.forEach((model) => {
-      model.position.y = floatOffset;
-      if (scrollProgress < 1) {
-        model.rotation.x = scrollProgress * Math.PI * 2;
-        model.rotation.y += 0.001 * rotationSpeed;
-      }
-    });
-
-    renderer.render(scene, camera);
-    requestAnimationFrame(render);
+    // 스코롤 진행도(현재 스코롤 위치 기준으로 바닥 위치까지 스코롤 진행률 0~1(%) 계산)
+    const scrollProgress = Math.min(currentScroll / destination, 1);
+    // 스코롤 진행도 100%이하 x축 1바퀴
+    if (scrollProgress < 1) {
+      // 초기 회전값을 리셋
+      modelGroup.setRotationFromEuler(
+        new THREE.Euler(Math.PI / 3, Math.PI / 6, 0)
+      );
+      // 화면상 X축 기준으로 회전 (상하)
+      modelGroup.rotateOnWorldAxis(
+        new THREE.Vector3(1, 0, 0),
+        scrollProgress * Math.PI * 8
+      );
+    }
   }
-
-  render(); // 루프 시작
+  // 장면 렌더링 업데이트 매끄러운 실시간 애니메이션
+  renderer.render(scene, camera);
+  // 다음 프레임 예약
+  requestAnimationFrame(animate);
 }
 
 // 반응형
