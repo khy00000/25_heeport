@@ -117,6 +117,7 @@ document.fonts.ready.then(() => {
     .add(animateIn(split1, 0), "-=0.3")
     .add(animateIn(split2, 0.3), ">")
     .call(() => {
+      //3d 인트로 애니메이션
       introAnimation();
     });
 
@@ -347,6 +348,7 @@ document.fonts.ready.then(() => {
   });
 
   footerTl
+    //3d 아웃 애니메이션
     .call(() => {
       outAnimation();
     })

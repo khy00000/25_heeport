@@ -97,7 +97,7 @@ loader.load("./assets/glb/keyboard2.glb", function (gltf) {
 
   // 그룹에 모델 넣기
   modelGroup.add(model);
-  modelGroup.scale.set(0, 0, 0); // 그룹에 scale 애니메이션 적용
+  modelGroup.scale.set(0, 0, 0);
   //  90/Math.PI / 2, 45/Math.PI / 4, 30/Math.PI / 6
   modelGroup.rotation.set(Math.PI / 3, Math.PI / 6, 0);
   scene.add(modelGroup);
@@ -113,22 +113,7 @@ loader.load("./assets/glb/keyboard2.glb", function (gltf) {
   animate();
 });
 
-// 현재 스코롤 위치 업데이트
-lenis.on("scroll", (e) => {
-  currentScroll = e.scroll;
-});
-
-// 둥둥 떠다니는 최대 높이(진폭)
-const floatAmplitude = 0.1;
-const floatSpeed = 1;
-let isEasedOut = false;
-let currentScroll = 0;
-let isFloating = true;
-// 고정 섹션
-const footer = document.querySelector(".footer");
-// 스코롤 기준점
-const destination = footer.offsetTop;
-
+// 등장 애니메이션
 function introAnimation() {
   gsap.to(modelGroup.scale, {
     x: 2,
@@ -139,7 +124,23 @@ function introAnimation() {
   });
 }
 
-// 왼 트리거 오 뷰포트
+// 브라우저 맨 위로 올라왔을 때 모델 다시 등장
+ScrollTrigger.create({
+  trigger: "body",
+  start: "top top",
+  end: "top -10", // 아주 짧은 구간
+  onEnterBack: () => {
+    gsap.to(modelGroup.scale, {
+      x: 2,
+      y: 2,
+      z: 2,
+      duration: 3,
+      ease: "power2.out",
+    });
+  },
+});
+
+// 아웃 애니메이션 왼 트리거 오 뷰포트
 function outAnimation() {
   gsap.to(modelGroup.scale, {
     x: 0,
@@ -150,22 +151,36 @@ function outAnimation() {
   });
 }
 
+// 현재 스코롤 위치 업데이트
+lenis.on("scroll", (e) => {
+  currentScroll = e.scroll;
+});
+
+// 둥둥 떠다니는 최대 높이(진폭)
+const floatAmplitude = 0.1;
+const floatSpeed = 1;
+let isEasedOut = false;
+let currentScroll = 0;
+// 고정 섹션
+const footer = document.querySelector(".footer");
+// 스코롤 기준점
+const destination = footer.offsetTop;
+
 // 위아래 둥둥 애니메이션 루프
 function animate() {
   if (modelGroup) {
-    if (isFloating) {
-      const floatOffset =
-        // 부드러운 곡선 형태 값 -0.1 ~ +0.1
-        Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
-      // 포지션 계속 바꾸며 y축 위아래로
-      modelGroup.position.y = floatOffset;
-    }
+    const floatOffset =
+      // 부드러운 곡선 형태 값 -0.1 ~ +0.1
+      Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
+    // 포지션 계속 바꾸며 y축 위아래로
+    modelGroup.position.y = floatOffset;
 
     // 스코롤 진행도(현재 스코롤 위치 기준으로 바닥 위치까지 스코롤 진행률 0~1(%) 계산)
     const scrollProgress = Math.min(currentScroll / destination, 1);
-    // 스코롤 진행도 100%이하 x축 1바퀴
+
+    // 스코롤 진행도 100%이하 x축 3바퀴
     if (scrollProgress < 1) {
-      // 초기 회전값을 리셋
+      // 초기 셋팅 회전 값을 리셋 고정
       modelGroup.setRotationFromEuler(
         new THREE.Euler(Math.PI / 3, Math.PI / 6, 0)
       );

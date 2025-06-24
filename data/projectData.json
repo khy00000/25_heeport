@@ -22,36 +22,40 @@
     ],
     "troubleshooting": [
       {
-        "title": "SplitText + ScrollTrigger 등장/퇴장 순서 컨트롤",
-        "problem": "인트로 영역의 4가지 타입 intro-text를 순차 등장을 구현하면서 타이밍이 꼬이거나 겹치는 문제 발생",
+        "title": "인트로 SplitText + ScrollTrigger 애니메이션 인/아웃 컨트롤",
+        "problem": "인트로 영역의 4가지 타입 intro-text를 순차 인/아웃을 구현하면서 타이밍이 꼬이거나 겹치는 문제 발생",
         "solution": [
-          "등장 퇴장 흐름을 각 animateIn/animateOut 함수로 분리",
+          "intro-text 인/아웃 애니메이션을 각 animateIn/animateOut 함수로 분리",
           "const loadtl = gsap.timeline();으로 타이밍을 명확히 조절",
-          "add(..., '>-0.3')과 같은 상대 위치 제어로 타임라인 간 간섭 방지"
+          "add(..., '>-0.3')과 같은 상대 위치 제어로 타임라인 간 간섭 방지 적용"
         ]
       },
       {
-        "title": "Projects 섹션 순차적 이미지/텍스트 전환, z-index 이슈",
-        "problem": "3개의 .project-list-wrap이 이미지 및 텍스트 애니메이션과 함께 순차적으로 등장해야 하는데 이전 요소의 scale, opacity, z-index, <a> 링크 영역이 겹치며 클릭 대상이 꼬이는 문제 발생",
+        "title": "Projects 섹션 GSAP 애니메이션 충돌/오작동 문제",
+        "problem": "이전 섹션이 사라지기 전에 다음 섹션이 등장하여 충돌하고 <a> 링크 영역이 겹쳐 클릭 대상이 꼬이는 문제 발생",
         "solution": [
-          "set()으로 각각 프로젝트, 이미지, 텍스트의 초기 상태를 개별 지정한 후 개별 .to()로 컨트롤",
-          "이전 요소의 scale 축소와 다음 요소의 등장 타이밍을 <, >-0.3 등으로 상대 위치를 조정",
-          "보이는 프로젝트 요소만 클릭되어 링크되도록 각 애니메이션 마다 pointerEvents를 명시"
+          "텍스트 애니메이션은 SplitText 배열로 미리 분리하여 각 섹션의 텍스트를 순차 제어",
+          "이전 프로젝트의 scale 축소와 다음 요소의 등장 타이밍을 <, >-0.3 등으로 상대 위치를 조정",
+          ".to({}, { duration: 4 }) 비어있는 애니메이션을 의도하여 사용자에게 정보를 충분히 노출 후 다음 프로젝트 전환",
+          "보이는 프로젝트만 클릭되어 링크되도록 각 애니메이션 마다 pointerEvents를 명시하여 화면 전환 중 의도치 않은 클릭을 방지"
         ]
       },
       {
-        "title": "로딩시 3D 모델의 인트로 애니메이션 타이밍 조절",
-        "problem": "load GSAP 애니메이션과 동시에 실행되어 3D 모델 인트로 애니메이션이 보이지 않음",
+        "title": "로딩시 3D 모델의 인/아웃 애니메이션 타이밍 조절",
+        "problem": "GSAP 타임라인 애니메이션과 동시에 실행되어 의도한 인/아웃 애니메이션이 보이지 않음",
         "solution": [
-          "GSAP 타임라인 안에서 .call(() => introAnimation())로 정확한 실행 타이밍 제어"
+          "GSAP 타임라인 안에서 .call(() => introAnimation())로 정확한 인트로 실행 타이밍 제어",
+          "푸터에 도착했을 때 키보드가 사라지도록 .call(() => outAnimation()) 정확한 타이밍 제어"
         ]
       },
       {
-        "title": "3D 모델 크기 조정 시 중앙에 고정되지 않는 문제",
-        "problem": "GLB 모델을 gsap.to(model.scale) 확대하면 화면 중앙에 고정되지 않고 오른쪽으로 치우쳐 보이는 현상 발생",
+        "title": "3D 모델 크기, 회전값 설정시 중심이 어긋나는 문제",
+        "problem": "GLB 모델애 gsap.to(model.scale)로 확대하거나 회전 애니메이션을 적용하면 모델이 화면 중심에서 벗어나 오른쪽으로 치우치고 회전 축도 기대한 방향과 달라짐",
         "solution": [
-          "모델 로딩 후 THREE.Box3().getCenter()를 사용해 중심을 계산하고 model.position.sub(center)로 위치 보정",
-          "모델을 그룹으로 감싸고 그룹에 scale 적용"
+          "THREE.Box3().getCenter()로 중심 좌표를 계산한 뒤 model.position.sub(center)로 원점 기준 정렬",
+          "모델을 .Group()으로 감싸고 그룹 단위로 애니메이션 처리",
+          "매 프레임 modelGroup.setRotationFromEuler()로 초기 회전값을 고정",
+          "rotateOnWorldAxis()로 화면 기준 가로축 회전 적용"
         ]
       }
     ]
