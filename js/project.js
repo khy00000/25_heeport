@@ -87,7 +87,20 @@ fetch("./data/projectData.json")
     `;
     projectEl.appendChild(info);
 
-    // 하단 progress
+    // 페이드인 애니메이션 실행
+    gsap.fromTo(
+      [".home", ".intro", ".project-img"],
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.3,
+      }
+    );
+
+    // 하단 next-project progress
     const totalProjects = data.length;
 
     // 다음 id 계산
@@ -105,6 +118,7 @@ fetch("./data/projectData.json")
         bar.style.width = `${progress * 100}%`;
 
         if (progress >= 1 && !bar.dataset.completed) {
+          // 중복 실행 체크
           bar.dataset.completed = "true";
           setTimeout(() => {
             window.location.href = nextUrl;
@@ -118,6 +132,10 @@ fetch("./data/projectData.json")
     txt.textContent = nextId ? "Next Project" : "Back to Home";
 
     initProjectAnimation();
+
+    // 데이터 모두 로딩되고 보여진 후 보이기
+    const nextProjectEl = document.querySelector(".next-project");
+    nextProjectEl.style.display = "block";
   });
 
 // 프로젝트 인트로 고정 애니메이션
