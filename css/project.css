@@ -12,6 +12,7 @@ body {
   background-color: white;
   color: black;
   width: 100%;
+  padding-bottom: 50px;
 }
 
 /* 인트로 */
@@ -258,6 +259,18 @@ background-position: X 0 (left) Y 100% (bottom);
   content: "";
   position: absolute;
   background-image: url(../assets/img/icon_c.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+.ts-title.icon-d::before {
+  content: "";
+  position: absolute;
+  background-image: url(../assets/img/icon_d.png);
   background-size: 17px 17px;
   width: 17px;
   height: 17px;

@@ -68,7 +68,7 @@ fetch("./data/projectData.json")
         <div class="ts-wrap">
           ${project.troubleshooting
             .map((ts, index) => {
-              const icons = ["a", "b", "c"];
+              const icons = ["a", "b", "c", "d"];
               return `
               <div class="ts-title icon-${icons[index]}">${ts.title}</div>
               <div class="ts-problem">문제</div>

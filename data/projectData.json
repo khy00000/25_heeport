@@ -50,7 +50,7 @@
       },
       {
         "title": "3D 모델 크기, 회전값 설정시 중심이 어긋나는 문제",
-        "problem": "GLB 모델애 gsap.to(model.scale)로 확대하거나 회전 애니메이션을 적용하면 모델이 화면 중심에서 벗어나 오른쪽으로 치우치고 회전 축도 기대한 방향과 달라짐",
+        "problem": "GLB 모델에 gsap.to(model.scale)로 확대하거나 회전 애니메이션을 적용하면 모델이 화면 중심에서 벗어나 오른쪽으로 치우치고 회전 축도 기대한 방향과 달라지는 문제",
         "solution": [
           "THREE.Box3().getCenter()로 중심 좌표를 계산한 뒤 model.position.sub(center)로 원점 기준 정렬",
           "모델을 .Group()으로 감싸고 그룹 단위로 애니메이션 처리",
