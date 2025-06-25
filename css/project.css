@@ -12,17 +12,17 @@ body {
   background-color: white;
   color: black;
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 }
 
 /* 인트로 */
 #project .intro {
   width: 100%;
-  height: 500px;
+  height: 400px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 30px;
+  padding: 30px 30px 40px 30px;
 }
 
 #project .intro .intro-wrap {
@@ -333,8 +333,36 @@ background-position: X 0 (left) Y 100% (bottom);
 }
 
 /* 다음 프로젝트 */
-.next-project{
+.next-project {
   width: 100%;
   height: 500px;
-  background-color: aqua;
+  padding: 30px;
+  font-size: 30px;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding-bottom: 20px;
+}
+
+.progress {
+  width: 300px;
+  height: 10px;
+  border: 1px black solid;
+  border-radius: 10px;
+}
+
+.bar {
+  width: 0%;
+  height: 100%;
+  background-color: black;
+  transition: width 0.1s ease;
+}
+
+.bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

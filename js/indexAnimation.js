@@ -313,42 +313,40 @@ document.fonts.ready.then(() => {
     .to(".projects-txt", { opacity: 0 })
     .to(
       imgWrap1,
-      { scale: 1, borderRadius: "40px", duration: 3, ease: "power2.out" },
+      { scale: 1, borderRadius: "40px", duration: 2, ease: "power2.out" },
       "<"
     )
     .to([titleSplits[0].chars, descSplits1, scrollSplits[0].chars], {
       x: 0,
       opacity: 1,
-      duration: 3,
-    })
+      duration: 4,
+    }, ">-0.3")
     .to({}, { duration: 4 })
     .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
-    .to(project1, { pointerEvents: "none" }, "<")
-    .to(project2, { pointerEvents: "auto" }, "<")
     .to(
       project1,
-      { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
+      { pointerEvents: "none", scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
+    .to(project2, { pointerEvents: "auto" }, "<")
     .to([titleSplits[1].chars, descSplits2, scrollSplits[1].chars], {
       x: 0,
       opacity: 1,
-      duration: 3,
-    })
+      duration: 4,
+    }, ">-0.3")
     .to({}, { duration: 4 })
     .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
-    .to(project2, { pointerEvents: "none" }, "<")
-    .to(project3, { pointerEvents: "auto" }, "<")
     .to(
       project2,
-      { scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
+      { pointerEvents: "none", scale: 0.7, opacity: 0, duration: 3, ease: "power2.out" },
       "<"
     )
+    .to(project3, { pointerEvents: "auto" }, "<")
     .to([titleSplits[2].chars, descSplits3, scrollSplits[2].chars], {
       x: 0,
       opacity: 1,
-      duration: 3,
-    })
+      duration: 4,
+    }, ">-0.3")
     .to({}, { duration: 4 });
 
   // footer 애니메이션

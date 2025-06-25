@@ -1,3 +1,5 @@
+gsap.registerPlugin(ScrollTrigger);
+
 const urlParams = new URLSearchParams(window.location.search);
 const projectId = parseInt(urlParams.get("id"));
 
@@ -24,7 +26,7 @@ fetch("./data/projectData.json")
         </div>
       </div>
       <div class="project-title">
-        <a href="#" class="pt-mask">
+        <a href="${project.url}" class="pt-mask">
           <div class="old">${project.title}</div>
           <div class="new">${project.subtitle}</div>
         </a>
@@ -36,7 +38,7 @@ fetch("./data/projectData.json")
     const imgSection = document.createElement("div");
     imgSection.className = "project-img";
     imgSection.innerHTML = `
-  <a href="#"><img src="${project.image}" alt="${project.title}" /></a>
+  <a href="${project.url}"><img src="${project.image}" alt="${project.title}" /></a>
 `;
     projectEl.appendChild(imgSection);
 
@@ -85,11 +87,40 @@ fetch("./data/projectData.json")
     `;
     projectEl.appendChild(info);
 
+    // 하단 progress
+    const totalProjects = data.length;
+
+    // 다음 id 계산
+    const nextId = projectId < totalProjects ? projectId + 1 : null;
+    const nextUrl = nextId ? `project.html?id=${nextId}` : "index.html";
+    const bar = document.querySelector(".bar");
+
+    ScrollTrigger.create({
+      trigger: ".next-project",
+      start: "top bottom",
+      end: "bottom bottom",
+      scrub: true,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        bar.style.width = `${progress * 100}%`;
+
+        if (progress >= 1 && !bar.dataset.completed) {
+          bar.dataset.completed = "true";
+          setTimeout(() => {
+            window.location.href = nextUrl;
+          }, 400);
+        }
+      },
+    });
+
+    //
+    const txt = document.querySelector(".left");
+    txt.textContent = nextId ? "Next Project" : "Back to Home";
+
     initProjectAnimation();
   });
 
-gsap.registerPlugin(ScrollTrigger);
-
+// 프로젝트 인트로 고정 애니메이션
 function initProjectAnimation() {
   ScrollTrigger.create({
     trigger: ".intro",

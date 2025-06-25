@@ -5,6 +5,7 @@
     "subtitle": "Interactive 3D Design",
     "date": "June 15, 2025",
     "stack": ["GSAP", "Three.js", "API"],
+    "url": "/",
     "image": "./assets/img/project1.jpeg",
     "technologies": [
       "GSAP",
@@ -22,26 +23,17 @@
     ],
     "troubleshooting": [
       {
-        "title": "인트로 SplitText + ScrollTrigger 애니메이션 인/아웃 컨트롤",
-        "problem": "인트로 영역의 4가지 타입 intro-text를 순차 인/아웃을 구현하면서 타이밍이 꼬이거나 겹치는 문제 발생",
-        "solution": [
-          "intro-text 인/아웃 애니메이션을 각 animateIn/animateOut 함수로 분리",
-          "const loadtl = gsap.timeline();으로 타이밍을 명확히 조절",
-          "add(..., '>-0.3')과 같은 상대 위치 제어로 타임라인 간 간섭 방지 적용"
-        ]
-      },
-      {
         "title": "Projects 섹션 GSAP 애니메이션 충돌/오작동 문제",
-        "problem": "이전 섹션이 사라지기 전에 다음 섹션이 등장하여 충돌하고 <a> 링크 영역이 겹쳐 클릭 대상이 꼬이는 문제 발생",
+        "problem": "현재 프로젝트 박스가 사라지기 전 다음 프로젝트가 등장하고 <a> 링크 영역이 겹쳐 클릭 대상이 충돌하는 문제 발생",
         "solution": [
-          "텍스트 애니메이션은 SplitText 배열로 미리 분리하여 각 섹션의 텍스트를 순차 제어",
-          "이전 프로젝트의 scale 축소와 다음 요소의 등장 타이밍을 <, >-0.3 등으로 상대 위치를 조정",
+          "프로젝트의 scale 축소와 다음 프로젝트의 등장 타이밍을 세밀하게 이미지, 텍스트로 나누어 제어하고 <, >-0.3 등으로 상대 위치를 조정",
           ".to({}, { duration: 4 }) 비어있는 애니메이션을 의도하여 사용자에게 정보를 충분히 노출 후 다음 프로젝트 전환",
+          "텍스트 애니메이션은 SplitText 배열로 미리 분리하여 각 섹션의 텍스트를 순차 제어",
           "보이는 프로젝트만 클릭되어 링크되도록 각 애니메이션 마다 pointerEvents를 명시하여 화면 전환 중 의도치 않은 클릭을 방지"
         ]
       },
       {
-        "title": "로딩시 3D 모델의 인/아웃 애니메이션 타이밍 조절",
+        "title": "로딩 시 3D 모델의 인/아웃 애니메이션 타이밍 조절",
         "problem": "GSAP 타임라인 애니메이션과 동시에 실행되어 의도한 인/아웃 애니메이션이 보이지 않음",
         "solution": [
           "GSAP 타임라인 안에서 .call(() => introAnimation())로 정확한 인트로 실행 타이밍 제어",
@@ -57,6 +49,15 @@
           "매 프레임 modelGroup.setRotationFromEuler()로 초기 회전값을 고정",
           "rotateOnWorldAxis()로 화면 기준 가로축 회전 적용"
         ]
+      },
+      {
+        "title": "로딩 GSAP 애니메이션을 첫 방문 시에만 실행되도록 sessionStorage 제어",
+        "problem": "Projects 페이지 이동 후 다시 메인 페이지로 돌아왔을 때 로딩 애니메이션이 반복 실행되어 UX가 저하되고, 불필요한 리소스 낭비 발생",
+        "solution": [
+          "sessionStorage.getItem('hasVisited')로 첫 방문 여부를 판단",
+          "최초 방문 시에만 로딩 애니메이션 타임라인 실행 및 sessionStorage.setItem('hasVisited', 'true') 저장",
+          "두 번째 이후 방문 시에는 로딩 애니메이션을 건너뛰고 실행하도록 const loadtl = gsap.timeline();으로 타이밍을 명확히 조절"
+        ]
       }
     ]
   },
@@ -66,6 +67,7 @@
     "subtitle": "React + SCSS + Swiper",
     "date": "April 10, 2025",
     "stack": ["React", "SCSS", "Swiper.js"],
+    "url": "/",
     "image": "./assets/img/project2.jpeg",
     "technologies": ["React", "SCSS", "Swiper.js", "CSS Transition"],
     "description": "React를 기반으로 COEX 공식 사이트를 클론한 프로젝트입니다. 웹 접근성을 고려한 설계와 1px 단위까지 디테일한 UI를 구현하였으며 CSS만으로 가볍지만 디테일하게 애니메이션을 연출하였습니다.",
@@ -107,6 +109,7 @@
     "subtitle": "Kakao OAuth + Geo API",
     "date": "March 25, 2025",
     "stack": ["HTML", "JavaScript", "KakaoOAuth"],
+    "url": "/",
     "image": "./assets/img/project3.jpeg",
     "technologies": [
       "JavaScript",
