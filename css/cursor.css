@@ -1,0 +1,21 @@
+body {
+  cursor: none;
+}
+
+/* 마우스 커서 */
+.cursor {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  background-color: transparent;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  z-index: 999;
+  mix-blend-mode: difference;
+}

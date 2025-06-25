@@ -86,51 +86,74 @@ document.fonts.ready.then(() => {
 
   const loadtl = gsap.timeline();
 
-  // 로딩 페이지 초기 상태
-  loadtl
-    .set(".cursor", { opacity: 0, scale: 0 })
-    .set(".loading", { y: 0 })
-    .set(".introwrap-2", { autoAlpha: 0 })
+  const hasVisited = sessionStorage.getItem("hasVisited");
 
-    // 1. 로고 마스크 애니메이션
-    .from(loadingSplit.chars, {
-      y: "-100%",
-      stagger: 0.05,
-      duration: 1.3,
-      ease: "back.out(1.7)",
-    })
+  // 첫 로딩 시에만 애니메이션
+  if (!hasVisited) {
+    sessionStorage.setItem("hasVisited", "true");
 
-    // 2. 로딩 섹션 위로 사라지기
-    .to(
-      ".loading",
-      {
-        clipPath: "inset(0% 0% 100% 0%)",
-        duration: 1,
-        ease: "power3.inOut",
-      },
-      "+=0.3"
-    )
+    // 로딩 페이지 초기 상태
+    loadtl
+      .set(".cursor", { opacity: 0, scale: 0 })
+      .set(".loading", { y: 0 })
+      .set(".introwrap-2", { autoAlpha: 0 })
 
-    // 3. 로딩 페이지 제거
-    .set([".loading", ".loading-logo"], { display: "none" })
+      // 1. 로고 마스크 애니메이션
+      .from(loadingSplit.chars, {
+        y: "-100%",
+        stagger: 0.05,
+        duration: 1.3,
+        ease: "back.out(1.7)",
+      })
 
-    // 4. 로딩 후 intro1 등장
-    .add(animateIn(split1, 0), "-=0.3")
-    .add(animateIn(split2, 0.3), ">")
-    // 5. 3d 인트로 애니메이션
-    .call(() => {
-      introAnimation();
-    })
-    // 6. 로딩 후 커서 등장
-    .to(
-      ".cursor",
-      {
+      // 2. 로딩 섹션 위로 사라지기
+      .to(
+        ".loading",
+        {
+          clipPath: "inset(0% 0% 100% 0%)",
+          duration: 1,
+          ease: "power3.inOut",
+        },
+        "+=0.3"
+      )
+      // 3. 로딩 페이지 제거
+      .set([".loading", ".loading-logo"], { display: "none" })
+
+      // 4. 로딩 후 intro1 등장 / "-=0.3" 이전 타임라인 블록이 끝나기 0.3초 전에 이 애니메이션을 시작 / ">" 애니메이션이 끝난 직후
+      .add(animateIn(split1, 0), "-=0.3")
+      .add(animateIn(split2, 0.3), ">")
+      // 5. 3d 인트로 애니메이션
+      .call(() => {
+        introAnimation();
+      })
+      // 6. 로딩 후 커서 등장
+      .to(".cursor", {
         opacity: 1,
         scale: 1,
         duration: 3,
         ease: "power2.out",
-      }
-    );
+      });
+  } else {
+    loadtl
+      // 로딩 애니메이션 건너뛰기
+      .set([".loading", ".loading-logo"], { display: "none" })
+      .set(".cursor", { opacity: 0, scale: 0 })
+      .set(".introwrap-2", { autoAlpha: 0 })
+
+      .to({}, { duration: 1 })
+
+      .add(animateIn(split1, 0), "-=0.3")
+      .add(animateIn(split2, 0.3), ">")
+      .call(() => {
+        introAnimation();
+      })
+      .to(".cursor", {
+        opacity: 1,
+        scale: 1,
+        duration: 3,
+        ease: "power2.out",
+      });
+  }
 
   // 인트로 하단 애니메이션
   // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에 / 왼 트리거 오 뷰포트
