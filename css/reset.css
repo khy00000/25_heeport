@@ -98,6 +98,7 @@ section {
 
 /* 마우스 커서 */
 .cursor {
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
@@ -109,6 +110,7 @@ section {
   transform: translate(-50%, -50%) scale(1);
   background-color: transparent;
   transition: background-color 0.2s ease, transform 0.2s ease;
-  z-index: 999999;
+  z-index: 999;
   mix-blend-mode: difference;
+  opacity: 0;
 }

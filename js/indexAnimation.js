@@ -88,6 +88,7 @@ document.fonts.ready.then(() => {
 
   // 로딩 페이지 초기 상태
   loadtl
+    .set(".cursor", { opacity: 0, scale: 0 })
     .set(".loading", { y: 0 })
     .set(".introwrap-2", { autoAlpha: 0 })
 
@@ -116,10 +117,20 @@ document.fonts.ready.then(() => {
     // 4. 로딩 후 intro1 등장
     .add(animateIn(split1, 0), "-=0.3")
     .add(animateIn(split2, 0.3), ">")
+    // 5. 3d 인트로 애니메이션
     .call(() => {
-      //3d 인트로 애니메이션
       introAnimation();
-    });
+    })
+    // 6. 로딩 후 커서 등장
+    .to(
+      ".cursor",
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 3,
+        ease: "power2.out",
+      }
+    );
 
   // 인트로 하단 애니메이션
   // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에 / 왼 트리거 오 뷰포트

@@ -1,6 +1,5 @@
 // 마우스 커서
 const cursor = document.querySelector(".cursor");
-const ripple = document.querySelector(".cursor-ripple");
 
 let mouseX = 0;
 let mouseY = 0;
