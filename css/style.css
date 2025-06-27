@@ -206,8 +206,8 @@ canvas {
 .about .about-item span {
   font-size: 20px;
   position: absolute;
-  bottom: 50px;
-  left: -60px;
+  top: 37%;
+  left: -7%;
 }
 
 .about .about-item p {
@@ -215,6 +215,7 @@ canvas {
   font-size: 100px;
   letter-spacing: -0.8px;
   line-height: 1;
+  white-space: nowrap;
 }
 
 /* how i work */

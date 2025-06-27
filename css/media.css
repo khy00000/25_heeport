@@ -1,0 +1,85 @@
+/* 태블릿용 */
+@media (max-width: 1024px) {
+  /* main */
+  .loading-logo {
+    font-size: 130px;
+  }
+
+  .intro .intro-row2 .intro-text-wrap div {
+    font-size: 40px;
+  }
+
+  .about .about-item {
+    height: 13vh;
+  }
+
+  .about .about-item p {
+    font-size: 70px;
+  }
+
+  .about .about-item span {
+    top: 30%;
+    left: -5%;
+  }
+
+  .split5,
+  .split6 {
+    font-size: 30px;
+  }
+
+  .project-item-title,
+  .description-list {
+    left: 3%;
+  }
+
+  .scroll {
+    right: 3%;
+  }
+
+  .footer_top {
+    font-size: 50px;
+  }
+
+  /* projects page */
+
+  #projects {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .projects .projects-title {
+    font-size: 80px;
+  }
+
+  .projects {
+    height: calc(65vh - 10px);
+  }
+
+  .projects-item {
+    height: calc(35vh - 10px);
+  }
+
+  /* project page */
+  .project-title .pt-mask {
+    height: 70px;
+  }
+
+  .project-title .pt-mask div {
+    height: 70px;
+    font-size: 60px;
+  }
+
+  .project-container p {
+    width: 100%;
+  }
+
+  .ts-problem-discrip {
+    width: 100%;
+    padding-right: 20px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 576px) {
+}
