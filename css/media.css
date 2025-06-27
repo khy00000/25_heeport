@@ -41,22 +41,21 @@
   }
 
   /* projects page */
-
-  #projects {
+  #projects-p {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .projects .projects-title {
+  .projects-p .projects-p-title {
     font-size: 80px;
   }
 
-  .projects {
+  .projects-p {
     height: calc(65vh - 10px);
   }
 
-  .projects-item {
+  .projects-p-item {
     height: calc(35vh - 10px);
   }
 
@@ -82,4 +81,12 @@
 
 /* 모바일 */
 @media (max-width: 576px) {
+  /* main */
+
+
+  /* projects page */
+
+
+  /* project page */
+  
 }
