@@ -446,7 +446,7 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 30vh;
+  width: 20vh;
   height: 1.5vw;
   overflow: hidden;
   display: flex;
@@ -468,6 +468,7 @@ canvas {
 .lateral2{
   opacity: 0;
 }
+
 .lateral2 div {
   padding-top: 0.7vw;
   font-size: 30px;
