@@ -8,10 +8,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+#project {
+  background-color: white;
+  color: black;
+  width: 100%;
+  padding-bottom: 100px;
+}
+
+/* 인트로 */
+#project .intro {
+  width: 100vw;
+  height: 400px;
+  padding: 30px 30px 40px 30px;
+}
+
 .home {
   display: block;
+  width: 100%;
   height: 100px;
-  padding: 30px;
 }
 
 .home .project-logo {
@@ -30,24 +44,15 @@ body {
   background-size: 0 1px;
 }
 
-#project {
-  background-color: white;
-  color: black;
+.intro-bottom {
   width: 100%;
-  padding-bottom: 100px;
-}
-
-/* 인트로 */
-#project .intro {
-  width: 100%;
-  height: 400px;
+  height: 240px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 30px 30px 40px 30px;
 }
 
-#project .intro .intro-wrap {
+.intro-bottom-wrap {
   width: fit-content;
   font-size: 15px;
 }
@@ -56,7 +61,7 @@ body {
   width: fit-content;
 }
 
-#project .intro .intro-wrap .project-tool-wrap {
+.project-tool-wrap {
   width: fit-content;
   padding-top: 5px;
   display: flex;

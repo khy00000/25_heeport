@@ -19,18 +19,23 @@ fetch("./data/projectData.json")
     const intro = document.createElement("div");
     intro.className = "intro";
     intro.innerHTML = `
-      <div class="intro-wrap">
-        <div class="project-date">${project.date}</div>
-        <div class="project-tool-wrap">
-          ${project.stack.map((tool) => `<p>${tool}</p>`).join("")}
-        </div>
-      </div>
-      <div class="project-title">
-        <a href="${project.url}" class="pt-mask">
-          <div class="old">${project.title}</div>
-          <div class="new">${project.subtitle}</div>
+        <a href="/" class="home">
+          <div class="project-logo">Heeyon Kim</div>
         </a>
-      </div>
+        <div class="intro-bottom">
+          <div class="intro-bottom-wrap">
+            <div class="project-date">${project.date}</div>
+            <div class="project-tool-wrap">
+              ${project.stack.map((tool) => `<p>${tool}</p>`).join("")}
+            </div>
+          </div>
+          <div class="project-title">
+            <a href="${project.url}" class="pt-mask">
+              <div class="old">${project.title}</div>
+              <div class="new">${project.subtitle}</div>
+            </a>
+          </div>
+        </div>
     `;
     projectEl.appendChild(intro);
 
