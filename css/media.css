@@ -1,3 +1,14 @@
+/*  데스크탑 */
+@media (min-width: 1471px) {
+  /* main */
+  .intro .intro-row1 {
+    height: 50vh;
+  }
+  .intro .intro-row2 {
+    height: 50vh;
+  }
+}
+
 /* 태블릿용 */
 @media (max-width: 1024px) {
   /* main */
@@ -83,10 +94,7 @@
 @media (max-width: 576px) {
   /* main */
 
-
   /* projects page */
 
-
   /* project page */
-  
 }

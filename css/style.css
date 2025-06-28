@@ -25,6 +25,8 @@ canvas {
 
 /* 로딩 페이지 */
 .loading {
+  opacity: 0;
+  visibility: hidden;
   background-color: #1d1d1d;
   position: fixed;
   top: 0;
@@ -418,4 +420,55 @@ canvas {
   display: inline-block;
   transform: translateY(100%);
   overflow: hidden;
+}
+
+/* 측면 박스 */
+.lateral {
+  position: fixed;
+  bottom: 0;
+  left: 4%;
+  width: 100vh;
+  height: 4vw;
+  text-transform: uppercase;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+  white-space: nowrap;
+  transform: rotate(-90deg);
+  transform-origin: bottom left;
+}
+
+.lateral-inner {
+  display: flex;
+}
+
+.lateral1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30vh;
+  height: 1.5vw;
+  overflow: hidden;
+  display: flex;
+}
+
+.lateral1 div {
+  font-size: 15px;
+  animation: scroll-vertical 10s linear infinite;
+}
+
+@keyframes scroll-vertical {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.lateral2{
+  opacity: 0;
+}
+.lateral2 div {
+  padding-top: 0.7vw;
+  font-size: 30px;
 }

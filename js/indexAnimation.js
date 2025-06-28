@@ -33,7 +33,35 @@ logo.addEventListener("mouseenter", () => {
   }, 600);
 });
 
-// from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값
+gsap.registerPlugin(ScrollTrigger);
+
+// 측면 텍스트 애니메이션
+gsap.set(".lateral2", { x: window.innerHeight, opacity: 1 });
+
+const lateraltl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".about",
+    start: "top bottom",
+    end: "+=5000",
+    scrub: true,
+  },
+});
+
+lateraltl
+  .to(".lateral2", {
+    x: -3000,
+    duration: 1,
+  })
+  .to(
+    ".lateral1",
+    {
+      x: -4000,
+      duration: 1,
+    },
+    "<"
+  );
+
+// from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값 왼 트리거 오 뷰포트
 
 document.fonts.ready.then(() => {
   // 로딩 페이지 애니메이션
@@ -84,18 +112,17 @@ document.fonts.ready.then(() => {
     });
   }
 
+  // 첫 로딩 시에만 애니메이션
   const loadtl = gsap.timeline();
-
   const hasVisited = sessionStorage.getItem("hasVisited");
 
-  // 첫 로딩 시에만 애니메이션
   if (!hasVisited) {
     sessionStorage.setItem("hasVisited", "true");
 
     // 로딩 페이지 초기 상태
     loadtl
       .set(".cursor", { opacity: 0, scale: 0 })
-      .set(".loading", { y: 0 })
+      .set(".loading", {  autoAlpha: 1, y: 0 })
       .set(".introwrap-2", { autoAlpha: 0 })
 
       // 1. 로고 마스크 애니메이션
@@ -136,7 +163,7 @@ document.fonts.ready.then(() => {
   } else {
     loadtl
       // 로딩 애니메이션 건너뛰기
-      .set([".loading", ".loading-logo"], { display: "none" })
+      .set([".loading", ".loading-logo"], { autoAlpha: 0 })
       .set(".cursor", { opacity: 0, scale: 0 })
       .set(".introwrap-2", { autoAlpha: 0 })
 
