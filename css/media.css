@@ -30,12 +30,26 @@
     font-size: 130px;
   }
 
+  .intro .intro-row1 .logo{
+    font-size: 50px;
+  }
+
+  .intro .intro-row1,
+  .intro .intro-row2 {
+    height: 50vh;
+  }
+
+  .intro .intro-row2 .intro-text-wrap {
+    top: 70%;
+    transform: translate(-50%, -30%);
+  }
+
   .intro .intro-row2 .intro-text-wrap div {
     font-size: 40px;
   }
 
   .about .about-item {
-    height: 13vh;
+    height: 10vh;
   }
 
   .about .about-item p {
@@ -105,7 +119,15 @@
 }
 
 /* 모바일 */
-@media (max-width: 576px) {
+@media (max-width: 768px) {
+  /* main */
+
+  /* projects page */
+
+  /* project page */
+}
+
+@media (min-width: 393px) {
   /* main */
 
   /* projects page */

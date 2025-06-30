@@ -35,6 +35,32 @@ logo.addEventListener("mouseenter", () => {
 
 gsap.registerPlugin(ScrollTrigger);
 
+// 탑버튼 효과
+const topButton = document.querySelector(".top-button");
+const footerOpen = document.querySelector(".footer");
+
+window.addEventListener("scroll", () => {
+  // footer 요소의 Viewport 안에서의 위치 정보
+  const footerTop = footerOpen.getBoundingClientRect().top;
+  const windowHeight = window.innerHeight;
+
+  if (footerTop <= windowHeight) {
+    topButton.classList.add("show");
+  } else {
+    topButton.classList.remove("show");
+  }
+
+  // console.log(footerTop);
+  // console.log(windowHeight);
+});
+
+topButton.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
+
 // 측면 텍스트 애니메이션
 gsap.set(".lateral2", { x: window.innerHeight, opacity: 1 });
 
@@ -122,7 +148,7 @@ document.fonts.ready.then(() => {
     // 로딩 페이지 초기 상태
     loadtl
       .set(".cursor", { opacity: 0, scale: 0 })
-      .set(".loading", {  autoAlpha: 1, y: 0 })
+      .set(".loading", { autoAlpha: 1, y: 0 })
       .set(".introwrap-2", { autoAlpha: 0 })
 
       // 1. 로고 마스크 애니메이션

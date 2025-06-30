@@ -169,7 +169,7 @@ canvas {
   overflow: hidden;
 }
 
-.introwrap-2{
+.introwrap-2 {
   opacity: 0;
 }
 
@@ -426,6 +426,37 @@ canvas {
   overflow: hidden;
 }
 
+/* 탑버튼 */
+.top-button {
+  position: fixed;
+  bottom: 5%;
+  right: 2.5%;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.top-button.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.top-button button {
+  all: unset;
+  cursor: pointer;
+  border: 1px solid white;
+  padding: 0.2em 0.2em;
+  border-radius: 100px 100px;
+  font-size: 30px;
+}
+
+.top-button button:hover {
+  border: 1px solid aqua;
+  background-color: aqua;
+  color: black;
+}
+
 /* 측면 박스 */
 .lateral {
   position: fixed;
@@ -469,7 +500,7 @@ canvas {
     transform: translateX(-50%);
   }
 }
-.lateral2{
+.lateral2 {
   opacity: 0;
 }
 
