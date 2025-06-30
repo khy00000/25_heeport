@@ -97,6 +97,7 @@ loader.load("./assets/glb/keyboard2.glb", function (gltf) {
 
   // 그룹에 모델 넣기
   modelGroup.add(model);
+  // 초기 크기 셋팅
   modelGroup.scale.set(0, 0, 0);
   //  90/Math.PI / 2, 45/Math.PI / 4, 30/Math.PI / 6
   modelGroup.rotation.set(Math.PI / 3, Math.PI / 6, 0);
@@ -115,10 +116,12 @@ loader.load("./assets/glb/keyboard2.glb", function (gltf) {
 
 // 등장 애니메이션
 function introAnimation() {
+  const scale = getResponsiveScale();
+
   gsap.to(modelGroup.scale, {
-    x: 2,
-    y: 2,
-    z: 2,
+    x: scale,
+    y: scale,
+    z: scale,
     duration: 3,
     ease: "power2.out",
   });
@@ -130,10 +133,11 @@ ScrollTrigger.create({
   start: "top top",
   end: "top -10", // 아주 짧은 구간
   onEnterBack: () => {
+    const scale = getResponsiveScale();
     gsap.to(modelGroup.scale, {
-      x: 2,
-      y: 2,
-      z: 2,
+      x: scale,
+      y: scale,
+      z: scale,
       duration: 3,
       ease: "power2.out",
     });
@@ -198,8 +202,16 @@ function animate() {
 }
 
 // 반응형
-window.addEventListener("resize", () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+function getResponsiveScale() {
+  const width = window.innerWidth;
+
+  if (width <= 768) {
+    return 1;
+  } else if (width <= 1024) {
+    return 1.5;
+  } else if (width <= 1512) {
+    return 2;
+  } else {
+    return 2.5;
+  }
+}

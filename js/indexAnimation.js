@@ -8,8 +8,20 @@ logo.addEventListener("mouseenter", () => {
 
   const isOdd = hoverCount % 2 === 1;
 
-  const mTransform = isOdd ? "translateX(-20px)" : "translateX(20px)";
-  const kTransform = isOdd ? "translateX(20px)" : "translateX(-20px)";
+  const screenWidth = window.innerWidth;
+  let moveDistance = 25; //기본값
+
+  // 반응형
+  if (screenWidth <= 768) {
+    moveDistance = 30;
+  }
+
+  const mTransform = isOdd
+    ? `translateX(-${moveDistance}px)`
+    : `translateX(${moveDistance}px)`;
+  const kTransform = isOdd
+    ? `translateX(${moveDistance}px)`
+    : `translateX(-${moveDistance}px)`;
 
   letters.forEach((el) => el.classList.add("moving"));
 
@@ -27,7 +39,6 @@ logo.addEventListener("mouseenter", () => {
     });
   }, 300);
 
-  // 이동 중에는 다시 트리거되지 않도록 잠깐 막기
   setTimeout(() => {
     letters.forEach((el) => el.classList.remove("moving"));
   }, 600);
@@ -62,7 +73,7 @@ topButton.addEventListener("click", () => {
 });
 
 // 측면 텍스트 애니메이션
-gsap.set(".lateral2", { x: window.innerHeight, opacity: 1 });
+gsap.set(".lateral2", { x: window.innerHeight, opacity: 0.5 });
 
 const lateraltl = gsap.timeline({
   scrollTrigger: {

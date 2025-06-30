@@ -23,15 +23,26 @@
   }
 }
 
-/* 태블릿용 */
+/* 태블릿용 height 768 */
 @media (max-width: 1024px) {
   /* main */
   .loading-logo {
     font-size: 130px;
   }
 
-  .intro .intro-row1 .logo{
-    font-size: 50px;
+  .lateral1 div {
+    font-size: 20px;
+  }
+
+  .intro .intro-row1 nav a {
+    font-size: 20px;
+  }
+
+  .intro .intro-row1 nav a::after {
+    background-size: 16px 16px;
+    width: 16px;
+    height: 16px;
+    right: 16px;
   }
 
   .intro .intro-row1,
@@ -40,43 +51,72 @@
   }
 
   .intro .intro-row2 .intro-text-wrap {
-    top: 70%;
-    transform: translate(-50%, -30%);
+    top: 60%;
+    transform: translate(-50%, -50%);
   }
 
   .intro .intro-row2 .intro-text-wrap div {
     font-size: 40px;
   }
 
+  .about h1 {
+    font-size: 30px;
+    padding-bottom: 7em;
+  }
+
   .about .about-item {
-    height: 10vh;
+    height: 13vh;
   }
 
   .about .about-item p {
-    font-size: 70px;
+    font-size: 65px;
   }
 
   .about .about-item span {
-    top: 30%;
+    top: 25%;
     left: -5%;
   }
 
   .split5,
   .split6 {
+    font-size: 35px;
+  }
+
+  .split5 {
+    margin-bottom: 70px;
+  }
+
+  .project-item-title {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .description-list {
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .description-item {
     font-size: 30px;
   }
 
-  .project-item-title,
-  .description-list {
-    left: 3%;
-  }
-
   .scroll {
-    right: 3%;
+    top: unset;
+    right: unset;
+    bottom: 3%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 35px;
   }
 
   .footer_top {
     font-size: 50px;
+  }
+
+  .top-button button {
+    font-size: 40px;
   }
 
   /* projects page */
@@ -96,6 +136,14 @@
 
   .projects-p-item {
     height: calc(35vh - 10px);
+  }
+
+  .project-p-title h1 {
+    font-size: 27px;
+  }
+
+  .project-p-title p{
+    font-size: 17px;
   }
 
   /* project page */
