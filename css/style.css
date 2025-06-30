@@ -169,6 +169,10 @@ canvas {
   overflow: hidden;
 }
 
+.introwrap-2{
+  opacity: 0;
+}
+
 /* 애니메이션 마스크 효과 */
 .line {
   display: block;

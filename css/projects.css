@@ -1,9 +1,15 @@
+body.projects {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
 #projects-p {
   width: 100%;
   height: 100vh;
   padding: 10px;
-  scroll-behavior: auto !important;
-  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
   background-color: #151515;
   color: white;
 }

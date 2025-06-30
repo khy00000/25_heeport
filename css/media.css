@@ -7,6 +7,20 @@
   .intro .intro-row2 {
     height: 50vh;
   }
+
+  .howiwork .howiworktx {
+    max-width: 43vw;
+  }
+
+  /* projects page */
+  .projects-p .projects-p-title {
+    font-size: 150px;
+  }
+
+  /* project page */
+  .project-container p {
+    width: 50%;
+  }
 }
 
 /* 태블릿용 */
