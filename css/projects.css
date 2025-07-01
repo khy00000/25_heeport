@@ -67,6 +67,10 @@ body.projects {
   }
 }
 
+.projects-p-responsive{
+  display: none;
+}
+
 /* 하단 project 링크 컨테이너 */
 .projects-p-item {
   width: 100%;

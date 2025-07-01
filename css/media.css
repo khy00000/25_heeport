@@ -23,6 +23,8 @@
   }
 }
 
+/* 1025 ~ 1470 노트북 기본 */
+
 /* 태블릿용 height 768 */
 @media (max-width: 1024px) {
   /* main */
@@ -31,18 +33,11 @@
   }
 
   .lateral1 div {
-    font-size: 20px;
+    font-size: 17px;
   }
 
-  .intro .intro-row1 nav a {
-    font-size: 20px;
-  }
-
-  .intro .intro-row1 nav a::after {
-    background-size: 16px 16px;
-    width: 16px;
-    height: 16px;
-    right: 16px;
+  .lateral2 div {
+    font-size: 27px;
   }
 
   .intro .intro-row1,
@@ -60,7 +55,7 @@
   }
 
   .about h1 {
-    font-size: 30px;
+    font-size: 17px;
     padding-bottom: 7em;
   }
 
@@ -75,11 +70,16 @@
   .about .about-item span {
     top: 25%;
     left: -5%;
+    font-size: 15px;
+  }
+
+  .howiwork h1 {
+    font-size: 23px;
   }
 
   .split5,
   .split6 {
-    font-size: 35px;
+    font-size: 30px;
   }
 
   .split5 {
@@ -120,30 +120,28 @@
   }
 
   /* projects page */
-  #projects-p {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
   .projects-p .projects-p-title {
     font-size: 80px;
   }
-
-  .projects-p {
-    height: calc(65vh - 10px);
-  }
-
-  .projects-p-item {
-    height: calc(35vh - 10px);
-  }
-
   .project-p-title h1 {
     font-size: 27px;
   }
 
-  .project-p-title p{
+  .project-p-title p {
     font-size: 17px;
+  }
+
+  .toproject-p {
+    bottom: -7%;
+  }
+
+  .projects-p-item {
+    align-items: end;
+  }
+
+  .projects-p-item .project-p-container {
+    height: unset;
+    aspect-ratio: 1 / 1;
   }
 
   /* project page */
@@ -166,16 +164,145 @@
   }
 }
 
-/* 모바일 */
+/* 모바일 대 */
 @media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+
   /* main */
+  .intro .intro-row2 .intro-text-wrap div {
+    font-size: 30px;
+  }
+
+  .about h1 {
+    padding-bottom: 5em;
+  }
+
+  .about .about-item {
+    height: 10vh;
+  }
+
+  .about .about-item p {
+    font-size: 45px;
+  }
+
+  .about .about-item span {
+    left: -7%;
+  }
+
+  .howiwork {
+    flex-direction: column;
+    gap: 10vh;
+  }
+
+  .howiwork h1 {
+    width: 100%;
+  }
+
+  .howiwork .howiworktx {
+    width: 100%;
+    max-width: unset;
+  }
+
+  .split5,
+  .split6 {
+    font-size: 35px;
+  }
+
+  .project-item-title {
+    font-size: 60px;
+  }
+
+  .description-list {
+    top: 58%;
+  }
+
+  .description-item {
+    font-size: 25px;
+  }
+
+  .scroll {
+    font-size: 30px;
+  }
+
+  .footer_top {
+    font-size: 40px;
+  }
+
+  .footer_bottom {
+    font-size: 40px;
+  }
+
+  .cursor {
+    display: none;
+  }
 
   /* projects page */
+  body.projects {
+    width: unset;
+    height: unset;
+    overflow: unset;
+  }
+
+  .toproject-p {
+    display: none;
+  }
+
+  #projects-p {
+    height: auto;
+    touch-action: auto;
+    overscroll-behavior: auto;
+  }
+
+  .projects-p {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+  }
+
+  .projects-p .projects-p-title {
+    font-size: 120px;
+    line-height: 1;
+    letter-spacing: -5px;
+  }
+
+  .projects-p .projects-p-title:nth-child(2) {
+    padding-bottom: 15vh;
+  }
+
+  .projects-p-responsive {
+    display: block;
+    font-size: 25px;
+    text-transform: uppercase;
+  }
+
+  .projects-p-item {
+    height: auto;
+    flex-direction: column;
+    align-items: unset;
+    justify-content: unset;
+  }
+
+  .projects-p-item .project-p-container {
+    width: 100%;
+    height: 60vh;
+  }
+
+  .project-p-title h1{
+    font-size: 30px;
+  }
+
+   .project-p-title p{
+    font-size: 20px;
+   }
 
   /* project page */
 }
 
-@media (min-width: 393px) {
+/* 모바일 */
+@media (max-width: 393px) {
   /* main */
 
   /* projects page */
