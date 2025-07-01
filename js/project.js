@@ -92,9 +92,11 @@ fetch("./data/projectData.json")
     `;
     projectEl.appendChild(info);
 
+    ScrollTrigger.refresh();
+
     // 페이드인 애니메이션 실행
     gsap.fromTo(
-      [".home", ".intro", ".project-img"],
+      [".home", ".intro-bottom-wrap", ".pt-mask", ".project-img a"],
       { opacity: 0, y: 30 },
       {
         opacity: 1,
@@ -117,12 +119,13 @@ fetch("./data/projectData.json")
       trigger: ".next-project",
       start: "top bottom",
       end: "bottom bottom",
+      markers: true,
       scrub: true,
       onUpdate: (self) => {
         const progress = self.progress;
         bar.style.width = `${progress * 100}%`;
 
-        if (progress >= 1 && !bar.dataset.completed) {
+        if (progress >= 0.999 && !bar.dataset.completed) {
           // 중복 실행 체크
           bar.dataset.completed = "true";
           setTimeout(() => {
@@ -136,11 +139,11 @@ fetch("./data/projectData.json")
     const txt = document.querySelector(".left");
     txt.textContent = nextId ? "Next Project" : "Back to Home";
 
-    initProjectAnimation();
-
     // 데이터 모두 로딩되고 보여진 후 보이기
     const nextProjectEl = document.querySelector(".next-project");
     nextProjectEl.style.display = "block";
+
+    initProjectAnimation();
   });
 
 // 프로젝트 인트로 고정 애니메이션
@@ -153,3 +156,7 @@ function initProjectAnimation() {
     pinSpacing: false,
   });
 }
+
+window.addEventListener("resize", () => {
+  ScrollTrigger.refresh();
+});

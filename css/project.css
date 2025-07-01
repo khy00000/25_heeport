@@ -364,7 +364,7 @@ background-position: X 0 (left) Y 100% (bottom);
 .next-project {
   display: none;
   width: 100%;
-  height: 500px;
+  min-height: 50vh;
   padding: 30px;
   font-size: 30px;
 }

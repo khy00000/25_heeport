@@ -8,11 +8,10 @@ logo.addEventListener("mouseenter", () => {
 
   const isOdd = hoverCount % 2 === 1;
 
-  const screenWidth = window.innerWidth;
   let moveDistance = 25; //기본값
 
   // 반응형
-  if (screenWidth <= 768) {
+  if (window.innerWidth <= 768) {
     moveDistance = 30;
   }
 
@@ -101,6 +100,15 @@ lateraltl
 // from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값 왼 트리거 오 뷰포트
 
 document.fonts.ready.then(() => {
+
+  // 반응형
+  const loadingLogo = document.querySelector(".loading-logo");
+  if (window.innerWidth <= 768) {
+    loadingLogo.innerHTML = `Heeyon <br/> Kim`
+  } else {
+    loadingLogo.textContent = "Heeyon Kim";
+  }
+
   // 로딩 페이지 애니메이션
   const loadingSplit = new SplitText(".loading-logo", {
     type: "chars",
@@ -151,10 +159,10 @@ document.fonts.ready.then(() => {
 
   // 첫 로딩 시에만 애니메이션
   const loadtl = gsap.timeline();
-  const hasVisited = sessionStorage.getItem("hasVisited");
+  // const hasVisited = sessionStorage.getItem("hasVisited");
 
-  if (!hasVisited) {
-    sessionStorage.setItem("hasVisited", "true");
+  // if (!hasVisited) {
+  //   sessionStorage.setItem("hasVisited", "true");
 
     // 로딩 페이지 초기 상태
     loadtl
@@ -197,27 +205,27 @@ document.fonts.ready.then(() => {
         duration: 3,
         ease: "power2.out",
       });
-  } else {
-    loadtl
-      // 로딩 애니메이션 건너뛰기
-      .set([".loading", ".loading-logo"], { autoAlpha: 0 })
-      .set(".cursor", { opacity: 0, scale: 0 })
-      .set(".introwrap-2", { autoAlpha: 0 })
+  // } else {
+  //   loadtl
+  //     // 로딩 애니메이션 건너뛰기
+  //     .set([".loading", ".loading-logo"], { autoAlpha: 0 })
+  //     .set(".cursor", { opacity: 0, scale: 0 })
+  //     .set(".introwrap-2", { autoAlpha: 0 })
 
-      .to({}, { duration: 1 })
+  //     .to({}, { duration: 1 })
 
-      .add(animateIn(split1, 0), "-=0.3")
-      .add(animateIn(split2, 0.3), ">")
-      .call(() => {
-        introAnimation();
-      })
-      .to(".cursor", {
-        opacity: 1,
-        scale: 1,
-        duration: 3,
-        ease: "power2.out",
-      });
-  }
+  //     .add(animateIn(split1, 0), "-=0.3")
+  //     .add(animateIn(split2, 0.3), ">")
+  //     .call(() => {
+  //       introAnimation();
+  //     })
+  //     .to(".cursor", {
+  //       opacity: 1,
+  //       scale: 1,
+  //       duration: 3,
+  //       ease: "power2.out",
+  //     });
+  // }
 
   // 인트로 하단 애니메이션
   // ">" 앞애니 끝난뒤 (기본값) / ">-0.3" 앞당겨 몇초 / "<" 앞애니와 동시에 / 왼 트리거 오 뷰포트

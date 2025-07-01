@@ -62,7 +62,6 @@ canvas {
   overflow: hidden;
 }
 
-
 /* 측면 박스 */
 .lateral {
   position: fixed;
@@ -309,7 +308,7 @@ canvas {
   padding: 0;
 }
 
-/* 워크 백그라운드 글자 */
+/* 프로젝트 백그라운드 글자 */
 .projects .projects-txt-wrap {
   width: 100%;
   position: absolute;
@@ -331,7 +330,7 @@ canvas {
   margin-right: 30px;
 }
 
-/* 워크 박스 */
+/* 메인 프로젝트 박스 */
 .projects-list {
   width: 100vw;
   height: 100vh;
@@ -475,7 +474,7 @@ canvas {
   pointer-events: none;
 }
 
-.top-button.show{
+.top-button.show {
   opacity: 1;
   pointer-events: auto;
 }
