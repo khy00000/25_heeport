@@ -126,6 +126,13 @@ canvas {
   top: 1em;
   right: 1em;
   z-index: 9;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.hide {
+  opacity: 0 !important;
+  pointer-events: none;
 }
 
 /* projects */

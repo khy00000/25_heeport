@@ -171,8 +171,24 @@
   }
 
   /* main */
+  .lateral2 {
+    display: none;
+  }
+
+  .intro .intro-row1 nav {
+    top: unset;
+    right: unset;
+    left: 50%;
+    bottom: 2em;
+    transform: translateX(-50%);
+  }
+
   .intro .intro-row2 .intro-text-wrap div {
     font-size: 30px;
+  }
+
+  .about {
+    height: 100vh;
   }
 
   .about h1 {
@@ -180,18 +196,26 @@
   }
 
   .about .about-item {
-    height: 10vh;
+    height: 13vh;
+    position: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about .about-item span {
+    font-size: 13px;
+    position: unset;
+    padding-bottom: 10px;
   }
 
   .about .about-item p {
     font-size: 45px;
   }
 
-  .about .about-item span {
-    left: -7%;
-  }
-
   .howiwork {
+    padding: 1em;
     flex-direction: column;
     gap: 10vh;
   }
@@ -397,6 +421,45 @@
   .loading-logo {
     font-size: 90px;
     letter-spacing: -2px;
+  }
+
+  .intro .intro-row2 .intro-text-wrap {
+    top: 50%;
+  }
+
+  .intro .intro-row2 .intro-text-wrap div {
+    font-size: 27px;
+  }
+
+  .about {
+    height: 100vh;
+  }
+
+  .about .about-item {
+    position: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about .about-item span {
+    font-size: 13px;
+    position: unset;
+    padding-bottom: 10px;
+  }
+
+  .about .about-item p {
+    font-size: 30px;
+  }
+
+  .howiwork {
+    padding: 1em;
+  }
+
+  .split5,
+  .split6 {
+    font-size: 20px;
   }
 
   /* projects page */

@@ -1,3 +1,8 @@
+// 반응형
+window.addEventListener("resize", () => {
+  location.reload();
+});
+
 // 인트로 탑 로고 마우스엔터 효과
 const logo = document.querySelector(".logo");
 const letters = document.querySelectorAll(".hover-k, .hover-m");
@@ -45,13 +50,16 @@ logo.addEventListener("mouseenter", () => {
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 탑버튼 효과
+// 탑버튼, 내비 효과
 const topButton = document.querySelector(".top-button");
+const navi = document.querySelector(".navi")
 const footerOpen = document.querySelector(".footer");
+const projects = document.querySelector(".projects");
 
 window.addEventListener("scroll", () => {
   // footer 요소의 Viewport 안에서의 위치 정보
   const footerTop = footerOpen.getBoundingClientRect().top;
+  const projectsTop = projects.getBoundingClientRect().top;
   const windowHeight = window.innerHeight;
 
   if (footerTop <= windowHeight) {
@@ -60,6 +68,11 @@ window.addEventListener("scroll", () => {
     topButton.classList.remove("show");
   }
 
+  if (projectsTop <= windowHeight) {
+    navi.classList.add("hide");
+  } else {
+    navi.classList.remove("hide");
+  }
   // console.log(footerTop);
   // console.log(windowHeight);
 });
@@ -100,11 +113,20 @@ lateraltl
 // from 등장 전의 값 / to 퇴장 후의 값 / fromto 등장 전의 값 현재 값 왼 트리거 오 뷰포트
 
 document.fonts.ready.then(() => {
-
   // 반응형
   const loadingLogo = document.querySelector(".loading-logo");
-  if (window.innerWidth <= 768) {
-    loadingLogo.innerHTML = `Heeyon <br/> Kim`
+  const isMobile = window.innerWidth <= 768
+
+  if (isMobile) {
+    loadingLogo.innerHTML = `Heeyon<br> Kim`;
+    document.querySelector(".split1").innerHTML =
+      "I Create Interactive,<br>Creative Web Experiences";
+    document.querySelector(".split2").innerHTML =
+      "Tailored<br>To Our Brand Identity.";
+    document.querySelector(".split3").innerHTML =
+      "I Pay Close Attention<br>to Detail";
+    document.querySelector(".split4").innerHTML =
+      "And Communicate Clearly<br>to Deliver the Best Results.";
   } else {
     loadingLogo.textContent = "Heeyon Kim";
   }
@@ -125,6 +147,7 @@ document.fonts.ready.then(() => {
     ".split5",
     ".split6",
   ];
+
   const introtxt = introtxts.map(
     (item) =>
       new SplitText(item, {
@@ -143,7 +166,7 @@ document.fonts.ready.then(() => {
         yPercent: 0,
         duration: 0.4,
         ease: "power1.out",
-        stagger: 0.3,
+        stagger: isMobile ? 0 : 0.3,
       }
     );
   }
@@ -153,7 +176,7 @@ document.fonts.ready.then(() => {
       yPercent: -100,
       duration: 0.4,
       ease: "power1.out",
-      stagger: 0.3,
+      stagger: isMobile ? 0 : 0.3,
     });
   }
 
@@ -164,47 +187,47 @@ document.fonts.ready.then(() => {
   // if (!hasVisited) {
   //   sessionStorage.setItem("hasVisited", "true");
 
-    // 로딩 페이지 초기 상태
-    loadtl
-      .set(".cursor", { opacity: 0, scale: 0 })
-      .set(".loading", { autoAlpha: 1, y: 0 })
-      .set(".introwrap-2", { autoAlpha: 0 })
+  // 로딩 페이지 초기 상태
+  loadtl
+    .set(".cursor", { opacity: 0, scale: 0 })
+    .set(".loading", { autoAlpha: 1, y: 0 })
+    .set(".introwrap-2", { autoAlpha: 0 })
 
-      // 1. 로고 마스크 애니메이션
-      .from(loadingSplit.chars, {
-        y: "-100%",
-        stagger: 0.05,
-        duration: 1.3,
-        ease: "back.out(1.7)",
-      })
+    // 1. 로고 마스크 애니메이션
+    .from(loadingSplit.chars, {
+      y: "-100%",
+      stagger: 0.05,
+      duration: 1.3,
+      ease: "back.out(1.7)",
+    })
 
-      // 2. 로딩 섹션 위로 사라지기
-      .to(
-        ".loading",
-        {
-          clipPath: "inset(0% 0% 100% 0%)",
-          duration: 1,
-          ease: "power3.inOut",
-        },
-        "+=0.3"
-      )
-      // 3. 로딩 페이지 제거
-      .set([".loading", ".loading-logo"], { display: "none" })
+    // 2. 로딩 섹션 위로 사라지기
+    .to(
+      ".loading",
+      {
+        clipPath: "inset(0% 0% 100% 0%)",
+        duration: 1,
+        ease: "power3.inOut",
+      },
+      "+=0.3"
+    )
+    // 3. 로딩 페이지 제거
+    .set([".loading", ".loading-logo"], { display: "none" })
 
-      // 4. 로딩 후 intro1 등장 / "-=0.3" 이전 타임라인 블록이 끝나기 0.3초 전에 이 애니메이션을 시작 / ">" 애니메이션이 끝난 직후
-      .add(animateIn(split1, 0), "-=0.3")
-      .add(animateIn(split2, 0.3), ">")
-      // 5. 3d 인트로 애니메이션
-      .call(() => {
-        introAnimation();
-      })
-      // 6. 로딩 후 커서 등장
-      .to(".cursor", {
-        opacity: 1,
-        scale: 1,
-        duration: 3,
-        ease: "power2.out",
-      });
+    // 4. 로딩 후 intro1 등장 / "-=0.3" 이전 타임라인 블록이 끝나기 0.3초 전에 이 애니메이션을 시작 / ">" 애니메이션이 끝난 직후
+    .add(animateIn(split1), "-=0.3")
+    .add(animateIn(split2), ">")
+    // 5. 3d 인트로 애니메이션
+    .call(() => {
+      introAnimation();
+    })
+    // 6. 로딩 후 커서 등장
+    .to(".cursor", {
+      opacity: 1,
+      scale: 1,
+      duration: 3,
+      ease: "power2.out",
+    });
   // } else {
   //   loadtl
   //     // 로딩 애니메이션 건너뛰기
@@ -214,8 +237,8 @@ document.fonts.ready.then(() => {
 
   //     .to({}, { duration: 1 })
 
-  //     .add(animateIn(split1, 0), "-=0.3")
-  //     .add(animateIn(split2, 0.3), ">")
+  //     .add(animateIn(split1), "-=0.3")
+  //     .add(animateIn(split2), ">")
   //     .call(() => {
   //       introAnimation();
   //     })
