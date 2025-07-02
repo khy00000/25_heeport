@@ -92,8 +92,6 @@ fetch("./data/projectData.json")
     `;
     projectEl.appendChild(info);
 
-    ScrollTrigger.refresh();
-
     // 페이드인 애니메이션 실행
     gsap.fromTo(
       [".home", ".intro-bottom-wrap", ".pt-mask", ".project-img a"],
@@ -119,13 +117,12 @@ fetch("./data/projectData.json")
       trigger: ".next-project",
       start: "top bottom",
       end: "bottom bottom",
-      markers: true,
       scrub: true,
       onUpdate: (self) => {
         const progress = self.progress;
         bar.style.width = `${progress * 100}%`;
 
-        if (progress >= 0.999 && !bar.dataset.completed) {
+        if (progress >= 0.997 && !bar.dataset.completed) {
           // 중복 실행 체크
           bar.dataset.completed = "true";
           setTimeout(() => {
@@ -156,7 +153,3 @@ function initProjectAnimation() {
     pinSpacing: false,
   });
 }
-
-window.addEventListener("resize", () => {
-  ScrollTrigger.refresh();
-});

@@ -15,11 +15,6 @@
     <!-- 3d 모델 -->
     <div class="model"></div>
 
-    <!-- 탑버튼 -->
-    <div class="top-button">
-      <button>↑</button>
-    </div>
-
     <!-- 좌 측면 텍스트 박스 -->
     <div class="lateral">
       <div class="lateral-inner">
@@ -43,10 +38,6 @@
     </div>
 
     <div id="main">
-      <section class="loading">
-        <div class="loading-logo">Heeyon Kim</div>
-      </section>
-
       <section class="intro">
         <div class="intro-row1">
           <nav class="navi">
@@ -199,8 +190,18 @@
       </section>
     </div>
 
+    <!-- 탑버튼 -->
+    <div class="top-button">
+      <button>↑</button>
+    </div>
+
     <!-- 커서 디자인 -->
     <div class="cursor"></div>
+
+    <!-- 로딩페이지 -->
+    <div class="loading">
+      <div class="loading-logo">Heeyon Kim</div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -210,7 +211,9 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="./js/indexWebgl.js"></script>
-    <script src="./js/indexAnimation.js"></script>
+    <script src="./js/indexGsap.js"></script>
+    <script src="./js/media.js"></script>
+    <script src="./js/topbuttonNavi.js"></script>
     <script src="./js/cursor.js"></script>
   </body>
 </html>
