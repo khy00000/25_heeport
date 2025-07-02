@@ -205,6 +205,7 @@
   }
 
   .intro .intro-row1 .logo {
+    white-space: nowrap;
     top: 22%;
   }
 
@@ -461,7 +462,6 @@
   }
 
   .intro .intro-row1 .logo {
-    white-space: nowrap;
     top: 19%;
   }
 
