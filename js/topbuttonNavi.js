@@ -63,3 +63,9 @@ topButton.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 10); // layout이 안정된 뒤 위치 이동
+});

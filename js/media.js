@@ -8,9 +8,10 @@ const introLogo = document.querySelector(".intro .intro-row1 .logo");
 const lateral1Text = document.querySelector(".lateral1 div");
 
 if (window.innerWidth <= 768) {
-  loadingLogo.innerHTML = `Heeyon<br>Kim`;
-  introLogo.innerHTML = `Heeyon Kim`;
-lateral1Text.innerHTML = `Welcome to © Interactive 3D Portfolio © Welcome to © Interactive 3D Portfolio`;
+  loadingLogo.innerHTML = "Heeyon<br>Kim";
+  introLogo.innerHTML = "Heeyon Kim";
+  lateral1Text.innerHTML =
+    "Welcome to © Interactive 3D Portfolio © Welcome to © Interactive 3D Portfolio";
   document.querySelector(".split1").innerHTML =
     "I Create Interactive,<br>Creative Web Experiences";
   document.querySelector(".split2").innerHTML =
@@ -20,3 +21,9 @@ lateral1Text.innerHTML = `Welcome to © Interactive 3D Portfolio © Welcome to �
   document.querySelector(".split4").innerHTML =
     "And Communicate Clearly<br>to Deliver the Best Results.";
 }
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 10); // layout이 안정된 뒤 위치 이동
+});

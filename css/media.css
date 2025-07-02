@@ -168,28 +168,28 @@
 @media (max-width: 768px) {
   body {
     cursor: auto;
+    position: relative;
   }
 
   /* main */
   .lateral {
-    /* overflow: hidden; */
     position: absolute;
-    bottom: unset;
     top: 0;
     left: 0;
+    bottom: unset;
     transform: unset;
     transform-origin: unset;
     height: 15vh;
     text-transform: unset;
+    overflow: hidden;
   }
 
   .lateral1 {
     position: unset;
     transform: unset;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
   }
 
   .lateral1 div {
@@ -460,6 +460,11 @@
     letter-spacing: -2px;
   }
 
+  .intro .intro-row1 .logo {
+    white-space: nowrap;
+    top: 19%;
+  }
+
   .intro .intro-row2 .intro-text-wrap {
     top: 50%;
   }
@@ -478,6 +483,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 10vh;
   }
 
   .about .about-item span {
@@ -498,6 +504,34 @@
   .split5,
   .split6 {
     font-size: 20px;
+  }
+
+  .project-item-title {
+    font-size: 35px;
+  }
+
+  .description-list {
+    top: 55%;
+  }
+
+  .description-item {
+    font-size: 15px;
+  }
+
+  .scroll {
+    font-size: 25px;
+  }
+
+  .footer_top {
+    justify-content: flex-end;
+    height: 50vh;
+    font-size: 20px;
+  }
+
+  .footer_bottom {
+    padding-top: 10vh;
+    align-items: unset;
+    font-size: 30px;
   }
 
   /* projects page */
