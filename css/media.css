@@ -481,12 +481,17 @@
   }
 
   .footer_top {
-    font-size: 30px;
+    justify-content: flex-end;
+    font-size: 23px;
     height: 50vh;
+    padding-bottom: 3vh;
   }
 
   .footer_bottom {
+    padding-top: 5vh;
+    align-items: unset;
     font-size: 30px;
+    gap: 0.5rem;
   }
 
   /* projects page */
@@ -519,8 +524,6 @@
   .top {
     justify-content: center;
   }
-
-  
 }
 
 /* 모바일 */
@@ -556,6 +559,10 @@
     height: 10vh;
   }
 
+  .about .about-item p {
+    font-size: 27px;
+  }
+
   .about .about-item span {
     font-size: 13px;
     position: unset;
@@ -582,10 +589,11 @@
 
   .description-list {
     top: 55%;
+    gap: 6px;
   }
 
   .description-item {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .scroll {
@@ -593,15 +601,7 @@
   }
 
   .footer_top {
-    justify-content: flex-end;
-    height: 50vh;
-    font-size: 20px;
-  }
-
-  .footer_bottom {
-    padding-top: 10vh;
-    align-items: unset;
-    font-size: 30px;
+    font-size: 19.5px;
   }
 
   /* projects page */
