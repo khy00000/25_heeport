@@ -4,7 +4,7 @@
     "title": "Heeyon Kim Portfolio",
     "subtitle": "Interactive 3D Design",
     "date": "June 15, 2025",
-    "stack": ["GSAP", "Three.js", "API"],
+    "stack": ["GSAP", "Three.js", "통신"],
     "url": "/",
     "image": "./assets/img/project1.jpeg",
     "technologies": [
@@ -12,10 +12,11 @@
       "Three.js",
       "CSS Transition",
       "Responsive Design",
-      "API"
+      "통신"
     ],
-    "description": "Three.js로 3D 모델을 렌더링하고 GSAP 타임라인 및 ScrollTrigger로 인터랙티브한 애니메이션을 구현한 김희연 포트폴리오 사이트입니다. projectData.json을 비동기 로드하여 데이터를 바인딩하고, 정적 환경에서도 여러 프로젝트 페이지를 재사용하는 SPA 유사 구조로 설계했습니다.",
+    "description": "3D 모델을 렌더링하여 인터렉티브 애니메이션을 설계하고 GSAP 타임라인, ScrollTrigger로 인터랙티브한 애니메이션을 구현한 김희연 포트폴리오입니다. projectData.json을 비동기 로드하여 데이터를 바인딩하고 정적 환경에서도 여러 프로젝트 페이지를 재사용하는 SPA 유사 구조로 설계했습니다.",
     "functions": [
+      "6가지 Breakpoint마다 디테일하게 CSS, JS로 반응형으로 디자인하였으며 모든 인터렉션 애니메이션까지 반응형으로 제어",
       "GLB 형식의 3D 모델을 Three.js로 렌더링 후 스크롤에 따른 인터랙티브 애니메이션 구현",
       "각 섹션 맞춤 GSAP 타임라인 애니메이션과 ScrollTrigger를 연동하여 자연스러운 애니메이션 흐름 연출",
       "정적 project.html 템플릿에 projectData.json을 비동기 로드해 데이터 기반으로 렌더링 처리",
@@ -69,12 +70,13 @@
     "stack": ["React", "SCSS", "Swiper.js"],
     "url": "/",
     "image": "./assets/img/project2.jpeg",
-    "technologies": ["React", "SCSS", "Swiper.js", "CSS Transition"],
-    "description": "React를 기반으로 COEX 공식 사이트를 클론한 프로젝트입니다. 웹 접근성을 고려한 설계와 1px 단위까지 디테일한 UI를 구현하였으며 CSS만으로 가볍지만 디테일하게 애니메이션을 연출하였습니다.",
+    "technologies": ["React", "SCSS", "Swiper.js", "CSS Transition", "Responsive Design"],
+    "description": "React로 제작한 디테일한 CSS 구현 실력이 돋보이는 COEX 공식 사이트의 클론 코딩 프로젝트입니다. 웹 접근성을 고려한 설계와 1px 단위까지 디테일한 반응형 UI를 구현하여 CSS만으로 가볍지만 효과적으로 애니메이션을 연출하였습니다.",
     "functions": [
       "Hero 영역은 Swiper.js를 활용해 자연스러운 슬라이드 UI 구현",
       "CSS Transition만으로도 동적이고 가벼운 UI 애니메이션 연출",
-      "SCSS 및 JS 컴포넌트를 페이지 단위로 분리하여 유지보수가 쉬운 구조 구현"
+      "SCSS 및 JS 컴포넌트를 페이지 단위로 분리하여 유지보수가 쉬운 구조 구현",
+      "4가지 Breakpoint마다 디테일하게 반응형으로 디자인"
     ],
     "troubleshooting": [
       {
@@ -118,7 +120,7 @@
       "Geolocation API",
       "Responsive Design"
     ],
-    "description": "COS 브랜드 웹사이트를 리디자인한 프로젝트로, 로그인 기능과 웹 접근성을 기반으로 섬세한 CSS UI 구현을 목표로 했습니다. 반응형으로 완성도를 높였으며, 외부 API와 연동하여 기능성을 강화했습니다.",
+    "description": "COS 브랜드 웹사이트를 리디자인한 프로젝트로 웹 접근성을 기반으로 섬세한 CSS UI 구현을 목표로 했습니다. 외부 API와 연동하여 기능성을 강화하였으며 반응형 디자인으로 완성도를 높인 프로젝트입니다.",
     "functions": [
       "카카오 OAuth API를 활용한 소셜 로그인 기능 구현",
       "브라우저 Geolocation API로 사용자 위치를 탐지하고 인터페이스에 반영",

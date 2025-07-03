@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
 window.addEventListener("load", () => {
-  // 인트로 쪽 측면 텍스트 애니메이션
+  // 인트로 측면 텍스트 애니메이션
   const lateraltl = gsap.timeline({
     scrollTrigger: {
       trigger: ".about",
@@ -11,19 +11,10 @@ window.addEventListener("load", () => {
     },
   });
 
+  // 모바일에서 애니메이션 해제
   const isMo = window.innerWidth <= 768;
 
   if (!isMo) {
-    // 데스크탑에서만 ScrollTrigger 생성
-    const lateraltl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".about",
-        start: "top bottom",
-        end: "+=5000",
-        scrub: true,
-      },
-    });
-
     gsap.set(".lateral2", { x: window.innerHeight, opacity: 0.5 });
 
     lateraltl
@@ -51,7 +42,7 @@ window.addEventListener("load", () => {
     });
   });
 
-  // 스프릿 텍스트 포함 애니메이션 모음
+  // 스프릿 텍스트 애니메이션 모음
   document.fonts.ready.then(() => {
     // 로딩 페이지 애니메이션
     const loadingSplit = new SplitText(".loading-logo", {
