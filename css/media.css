@@ -453,6 +453,76 @@
   }
 }
 
+@media (max-width: 430px) {
+  /* main */
+  .about .about-item p {
+    font-size: 30px;
+  }
+
+  .split5,
+  .split6 {
+    font-size: 30px;
+  }
+
+  .project-item-title {
+    font-size: 35px;
+  }
+
+  .description-list {
+    top: 56%;
+  }
+
+  .description-item {
+    font-size: 17px;
+  }
+
+  .scroll {
+    font-size: 28px;
+  }
+
+  .footer_top {
+    font-size: 30px;
+    height: 50vh;
+  }
+
+  .footer_bottom {
+    font-size: 30px;
+  }
+
+  /* projects page */
+  .projects-p .projects-p-title {
+    font-size: 70px;
+    letter-spacing: -2px;
+  }
+
+  .projects-p-responsive {
+    font-size: 23px;
+  }
+
+  .projects-p-item .project-p-container {
+    height: 45vh;
+  }
+
+  /* project page */
+  #project .intro .home .project-logo {
+    font-size: 20px;
+  }
+
+  .project-title .pt-mask div {
+    font-size: 35px;
+  }
+
+  .next-project {
+    font-size: 20px;
+  }
+
+  .top {
+    justify-content: center;
+  }
+
+  
+}
+
 /* 모바일 */
 @media (max-width: 393px) {
   /* main */
