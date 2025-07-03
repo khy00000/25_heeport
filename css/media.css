@@ -605,6 +605,21 @@
   }
 
   /* projects page */
+  .projects-p .projects-p-title {
+    font-size: 60px;
+  }
+
+  .projects-p-responsive {
+    font-size: 20px;
+  }
+
+  .projects-p-item .project-p-container {
+    height: 35vh;
+  }
+
+  .project-p-title p {
+    font-size: 15px;
+  }
 
   /* project page */
 }
