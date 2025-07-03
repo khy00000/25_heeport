@@ -513,8 +513,13 @@
     font-size: 20px;
   }
 
+  .project-title .pt-mask {
+    height: 40px;
+  }
+
   .project-title .pt-mask div {
     font-size: 35px;
+    height: 40px;
   }
 
   .next-project {
@@ -622,4 +627,20 @@
   }
 
   /* project page */
+  .project-title .pt-mask {
+    height: 35px;
+  }
+
+  .project-title .pt-mask div {
+    height: 35px;
+    font-size: 30px;
+  }
+  
+  .project-container h1 {
+    font-size: 25px;
+  }
+
+  .project-info .project-container .tool-wrap li {
+    font-size: 14px;
+  }
 }
