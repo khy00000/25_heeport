@@ -17,13 +17,16 @@ body.projects {
 .projects-p {
   width: 100%;
   height: calc(50vh - 10px);
-  display: flex;
-  justify-content: space-between;
   position: relative;
   letter-spacing: -2px;
 }
 
-.projects-p .projects-p-title {
+.projects-p .pp-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.projects-p .pp-wrap .projects-p-title {
   font-size: 100px;
   white-space: nowrap;
   line-height: 0.9;
@@ -36,6 +39,8 @@ body.projects {
   left: 0;
   bottom: 40px;
   animation: moveRight 10s infinite ease;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .toproject-p span {
@@ -67,8 +72,9 @@ body.projects {
   }
 }
 
-.projects-p-responsive{
+.projects-p-responsive {
   display: none;
+  overflow: hidden;
 }
 
 /* 하단 project 링크 컨테이너 */
@@ -79,13 +85,13 @@ body.projects {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  overflow: hidden;
 }
 
 .projects-p-item .project-p-container {
   width: 33.333%;
   height: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 .projects-p-item .project-p-container a {

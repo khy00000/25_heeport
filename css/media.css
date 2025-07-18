@@ -13,7 +13,7 @@
   }
 
   /* projects page */
-  .projects-p .projects-p-title {
+  .projects-p .pp-wrap .projects-p-title {
     font-size: 150px;
   }
 
@@ -120,9 +120,10 @@
   }
 
   /* projects page */
-  .projects-p .projects-p-title {
+  .projects-p .pp-wrap .projects-p-title {
     font-size: 80px;
   }
+
   .project-p-title h1 {
     font-size: 27px;
   }
@@ -319,19 +320,18 @@
 
   .projects-p {
     height: 80vh;
-    display: flex;
+  }
+
+  .projects-p .pp-wrap{
     flex-direction: column;
     justify-content: unset;
+    padding-bottom: 15vh;
   }
 
-  .projects-p .projects-p-title {
-    font-size: 120px;
+  .projects-p .pp-wrap .projects-p-title {
+    font-size: 90px;
     line-height: 1;
     letter-spacing: -5px;
-  }
-
-  .projects-p .projects-p-title:nth-child(2) {
-    padding-bottom: 15vh;
   }
 
   .projects-p-responsive {
@@ -495,7 +495,7 @@
   }
 
   /* projects page */
-  .projects-p .projects-p-title {
+  .projects-p .pp-wrap .projects-p-title {
     font-size: 70px;
     letter-spacing: -2px;
   }
@@ -610,7 +610,7 @@
   }
 
   /* projects page */
-  .projects-p .projects-p-title {
+  .projects-p .pp-wrap .projects-p-title {
     font-size: 60px;
   }
 

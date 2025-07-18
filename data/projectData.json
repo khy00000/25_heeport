@@ -70,37 +70,122 @@
     "stack": ["React", "SCSS", "Swiper.js"],
     "url": "/",
     "image": "./assets/img/project2.jpeg",
-    "technologies": ["React", "SCSS", "Swiper.js", "CSS Transition", "Responsive Design"],
-    "description": "React로 제작한 디테일한 CSS 구현 실력이 돋보이는 COEX 공식 사이트의 클론 코딩 프로젝트입니다. 웹 접근성을 고려한 설계와 1px 단위까지 디테일한 반응형 UI를 구현하여 CSS만으로 가볍지만 효과적으로 애니메이션을 연출하였습니다.",
+    "technologies": [
+      "React",
+      "SCSS",
+      "Swiper.js",
+      "CSS Transition",
+      "Responsive Design"
+    ],
+    "description": "React로 제작한 디테일한 CSS 구현 실력이 돋보이는 COEX 공식 사이트의 클론 코딩 프로젝트입니다. 웹 접근성을 고려한 설계와 1px 단위까지 디테일한 반응형 UI를 구현하여 CSS Transition 위주로 가볍지만 효과적으로 애니메이션을 연출하였습니다.",
     "functions": [
-      "Hero 영역은 Swiper.js를 활용해 자연스러운 슬라이드 UI 구현",
-      "CSS Transition만으로도 동적이고 가벼운 UI 애니메이션 연출",
-      "SCSS 및 JS 컴포넌트를 페이지 단위로 분리하여 유지보수가 쉬운 구조 구현",
-      "4가지 Breakpoint마다 디테일하게 반응형으로 디자인"
+      "CSS Transition 위주로 동적이고 가벼운 UI 애니메이션 연출",
+      "JSX 컴포넌트를 페이지 단위로 분리하여 유지보수가 쉬운 구조 구현",
+      "SCSS에서 mixin을 활용해 공통 레이아웃 스타일 재사용 및 반응형 처리",
+      "반응형에 따른 조건부 디자인 처리를 위한 UseResponsive Hook을 만들어 사용"
     ],
     "troubleshooting": [
       {
-        "title": "Swiper 슬라이드 반응 방향 오류",
-        "problem": "데스크탑에선 horizontal로 잘 작동했지만, 모바일 뷰포트에서 vertical로 인식되며 버그 발생",
+        "title": "뉴스 json 데이터 최신 순 정렬",
+        "problem": "뉴스 데이터를 UI에 맞게 dateday, datemonth로 분리하여 날짜 정보가 가공되어 있어 정렬 불가능",
         "solution": [
-          "breakpoints 설정을 활용해 Swiper 인스턴스를 반응형으로 조건부 초기화",
-          "React useEffect에서 뷰포트 감지하여 Swiper 옵션을 동적으로 적용"
+          "원본 뉴스 데이터의 date 값을 기준으로 Date 객체를 생성해 최신순으로 정렬",
+          "정렬 후, map을 사용해 날짜 데이터를 'YYYY.MM' 형식의 datemonth와 일(day)만 추출한 dateday로 가공",
+          "기존 데이터 구조를 유지하면서 UI 출력용 날짜 형식을 추가로 생성하여 정렬 문제와 UI 표시를 모두 해결"
+        ],
+        "aftercode": [
+          "// 날짜 최신순으로 정렬 및 날짜 가공",
+          "const sortedContents = activeTab?.contents",
+          "  ?.slice()",
+          "  .sort((a, b) => new Date(b.date) - new Date(a.date))",
+          "  .map((item) => {",
+          "    const date = new Date(item.date);",
+          "    return {",
+          "      ...item,",
+          "      datemonth: `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}` ,",
+          "      dateday: date.getDate(),",
+          "    };",
+          "  });"
         ]
       },
       {
-        "title": "티켓 디자인이 모바일에서 깨지는 현상",
-        "problem": "이미지/텍스트 배치가 모바일 화면에서 겹쳐짐",
+        "title": "섹션 등장 GSAP fadein 애니메이션 구현 시 wrapper 태그로인한 레이아웃 깨짐 문제",
+        "problem": "GSAP용 React 컴포넌트 생성 후 ref를 연결하기 위해 wrapper div 추가 시 기존 CSS 구조가 깨지는 상황 발생",
         "solution": [
-          "object-fit, aspect-ratio, vw/vh 단위를 활용해 콘텐츠가 비율에 맞게 리사이징되도록 조정",
-          "SCSS에서 mixin을 활용해 공통 레이아웃 스타일 재사용"
+          "React의 cloneElement를 사용하여 자식 엘리먼트에 직접 ref를 주입해 추가 wrapper 없이 애니메이션 처리",
+          "isValidElement를 사용해 단일 엘리먼트만 허용하여 구조 안정성과 오류 방지 확보",
+          "useRef를 통한 DOM 직접 제어로 GSAP과 React가 충돌하지 않도록 설계"
+        ],
+        "beforecode": [
+          "// 불필요한 <div>가 렌더링되어 기존 레이아웃과 충돌",
+          "return <div ref={sectionRef}>{children}</div>;"
+        ],
+        "aftercode": [
+          "// 자식 엘리먼트에 ref를 직접 전달해 구조를 그대로 유지",
+          "if (isValidElement(children)) {",
+          "  return cloneElement(children, { ref: sectionRef });",
+          "}"
         ]
       },
       {
-        "title": "폰트 크기와 위치가 반응형에서 일관되지 않음",
-        "problem": "태블릿, 모바일에서 폰트가 너무 작거나 큰 문제가 발생",
+        "title": "Event 섹션 내 테이블의 Breakpoint에 따른 조건부 디자인제",
+        "problem": "1024px 이상 해상도에서는 4행 3열 레이아웃 & 1024px 이하에서는 3행 4열로 레이아웃을 바꿔야하고 모바일에서는 완전히 다른 스타일과 구성(Swiper 기반)을 사용해야하는 문제",
         "solution": [
-          "CSS clamp() 함수와 SCSS 변수 조합으로 최적 폰트 스케일링 적용",
-          "디자인 시스템 기반으로 폰트 크기를 관리하여 consistency 유지"
+          "반응형 상태를 세분화할 수 있도록 useResponsive 커스텀 훅을 개선하여 모바일(≤747), 태블릿(748~1024), 데스크탑(>1024) 구간으로 구분",
+          "Event 컴포넌트 내부에서 isMobile, isTablet, isDesktop 상태에 따라 조건부 렌더링 및 클래스명을 명확하게 분기",
+          "태블릿 및 데스크탑 각각에서 ‘item_3_7’, ‘bottom_item’ 등 테이블 레이아웃 관련 클래스를 다르게 적용",
+          "useResponsive 훅은 추후 더 많은 디바이스 대응이 가능하도록 유연하게 확장 가능한 구조로 작성 가능"
+        ],
+        "beforecode": [
+          "// 기존 useIsMobile 훅 (단일 breakpoint만 감지)",
+          "const useIsMobile = (breakpoint = 1024) => {",
+          "  const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);",
+          "",
+          "  useEffect(() => {",
+          "    const handleResize = () => {",
+          "      setIsMobile(window.innerWidth <= breakpoint);",
+          "    };",
+          "    window.addEventListener('resize', handleResize);",
+          "    return () => window.removeEventListener('resize', handleResize);",
+          "  }, [breakpoint]);",
+          "",
+          "  return isMobile;",
+          "};"
+        ],
+        "aftercode": [
+          "// 개선된 useResponsive 커스텀 훅",
+          "const useResponsive = () => {",
+          "  const getStatus = () => {",
+          "    const width = window.innerWidth;",
+          "    return {",
+          "      isMobile: width <= 747,",
+          "      isTablet: width > 747 && width <= 1024,",
+          "      isDesktop: width > 1024",
+          "    };",
+          "  };",
+          "",
+          "  const [status, setStatus] = useState(getStatus());",
+          "",
+          "  useEffect(() => {",
+          "    const handleResize = () => setStatus(getStatus());",
+          "    window.addEventListener('resize', handleResize);",
+          "    return () => window.removeEventListener('resize', handleResize);",
+          "  }, []);",
+          "",
+          "  return status;",
+          "};",
+          "",
+          "// Event 컴포넌트 내부 사용 예시",
+          "const { isMobile, isTablet, isDesktop } = useResponsive();",
+          "",
+          "// 클래스 조건 분기 예시",
+          "className={`event_list_item",
+          "  ${index === 0 ? 'first_item' : ''}",
+          "  ${item.ad ? 'has-ad' : ''}",
+          "  ${isDesktop && index > 5 ? 'bottom_item' : ''}",
+          "  ${isDesktop && [2, 6].includes(index) ? 'item_3_7' : ''}",
+          "  ${isTablet && [1, 4, 7].includes(index) ? 'item_3_7' : ''}",
+          "  ${isTablet && index > 6 ? 'bottom_item' : ''}`"
         ]
       }
     ]
@@ -120,7 +205,7 @@
       "Geolocation API",
       "Responsive Design"
     ],
-    "description": "COS 브랜드 웹사이트를 리디자인한 프로젝트로 웹 접근성을 기반으로 섬세한 CSS UI 구현을 목표로 했습니다. 외부 API와 연동하여 기능성을 강화하였으며 반응형 디자인으로 완성도를 높인 프로젝트입니다.",
+    "description": "COS 브랜드 웹사이트를 리디자인한 프로젝트로 웹 접근성을 기반으로 섬세한 UI를 구현하였습니다. 외부 API와 연동하여 기능성을 강화하였으며 반응형 디자인으로 완성도를 높인 프로젝트입니다.",
     "functions": [
       "카카오 OAuth API를 활용한 소셜 로그인 기능 구현",
       "브라우저 Geolocation API로 사용자 위치를 탐지하고 인터페이스에 반영",
@@ -128,11 +213,19 @@
     ],
     "troubleshooting": [
       {
-        "title": "카카오 로그인 실패 (로컬에선 되는데 배포 후 안됨)",
+        "title": "로컬에선 카카오 로그인 기능이 잘 되지만 배포 후 오류",
         "problem": "로컬 환경에서는 정상 작동하지만, 실제 배포 URL과 카카오 개발자 콘솔의 URI가 달라 로그인 실패",
         "solution": [
           ".env를 이용해 환경별 Redirect URI를 분리",
           "카카오 개발자 페이지에서 프로덕션 URL을 정확히 등록하여 해결"
+        ]
+      },
+      {
+        "title": "Geolocation API가 안드로이드 디바이스에서 잘 작동하지만 iOS에서 반응하지 않는 문제",
+        "problem": "모바일 Safari 브라우저에서 위치 정보를 받아오지 못하는 문제",
+        "solution": [
+          "HTTPS 환경에서만 동작하므로, 로컬은 localhost, 실서버는 HTTPS 기반 도메인으로 통일",
+          "getCurrentPosition() 호출 시 오류 처리 콜백도 추가하여 실패 시 대체 메시지를 UI에 제공"
         ]
       },
       {
@@ -141,14 +234,6 @@
         "solution": [
           "메뉴 열림 상태에 따라 scroll-lock 클래스를 <body>에 적용",
           "메뉴가 열린 상태에서는 스크롤 이벤트를 강제로 막는 처리 추가 (pointer-events 및 overflow 제어)"
-        ]
-      },
-      {
-        "title": "Geolocation API가 iOS에서 무반응",
-        "problem": "모바일 Safari 브라우저에서 위치 정보를 받아오지 못하는 문제",
-        "solution": [
-          "HTTPS 환경에서만 동작하므로, 로컬은 localhost, 실서버는 HTTPS 기반 도메인으로 통일",
-          "getCurrentPosition() 호출 시 오류 처리 콜백도 추가하여 실패 시 대체 메시지를 UI에 제공"
         ]
       }
     ]
