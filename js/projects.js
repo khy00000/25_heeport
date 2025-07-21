@@ -13,9 +13,10 @@ document.fonts.ready.then(() => {
 
   gsap.fromTo(
     [pptileSplit.chars, responsiveSplit.chars],
-    { x: 100 },
+    { xPercent: 100, opacity: 0},
     {
-      x: 0,
+      xPercent: 0,
+      opacity: 1,
       duration: 1,
       ease: "power1.out",
     }

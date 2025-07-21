@@ -27,22 +27,15 @@ body {
   display: block;
   width: 100%;
   height: 20%;
+  cursor: pointer;
 }
 
 .home .project-logo {
   width: fit-content;
-  font-size: 20px;
-  letter-spacing: -1px;
+  font-size: 25px;
+  letter-spacing: -1.5px;
   white-space: nowrap;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-position: 100% 100%;
-  background-size: 100% 1px;
-  transition: background-size 0.15s linear;
-}
-
-.home .project-logo:hover {
-  background-size: 0 1px;
+  font-weight: 300;
 }
 
 .intro-bottom {
@@ -55,7 +48,7 @@ body {
 
 .intro-bottom-wrap {
   width: fit-content;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .project-date {
@@ -69,21 +62,8 @@ body {
   gap: 10px;
 }
 
-/* background-size: 너비 높이;
-background-position: X 0 (left) Y 100% (bottom);
- */
-
 .project-tool-wrap p {
   white-space: nowrap;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-position: 100% 100%;
-  background-size: 100% 1px;
-  transition: background-size 0.15s linear;
-}
-
-.project-tool-wrap p:hover {
-  background-size: 0 1px;
 }
 
 .project-title {
@@ -94,34 +74,21 @@ background-position: X 0 (left) Y 100% (bottom);
   position: relative;
   overflow: hidden;
   display: block;
-  height: 100px;
+  height: 110px;
 }
 
 .project-title .pt-mask div {
   position: absolute;
   right: 0;
-  height: 100px;
+  height: 110px;
   white-space: nowrap;
   font-size: 90px;
-  line-height: 1;
+  line-height: 1.2;
   letter-spacing: -1.7px;
-  transition: transform 0.5s ease;
-}
-
-.old {
-  transform: translateY(0%);
 }
 
 .new {
-  transform: translateY(100%);
-}
-
-.pt-mask:hover .old {
-  transform: translateY(-100%);
-}
-
-.pt-mask:hover .new {
-  transform: translateY(0%);
+  opacity: 0;
 }
 
 /* 이미지 */
@@ -133,7 +100,9 @@ background-position: X 0 (left) Y 100% (bottom);
 .project-img a {
   width: 100%;
   height: 100%;
+  display: block;
   overflow: hidden;
+  border-radius: 100px;
 }
 
 .project-img a img {
@@ -163,10 +132,11 @@ background-position: X 0 (left) Y 100% (bottom);
   font-size: 30px;
   margin-bottom: 40px;
   letter-spacing: -1.5px;
+  text-decoration: underline solid black 2px;
+  text-underline-offset: 5px;
 }
 
 .project-container p {
-  width: 60%;
   font-size: 20px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 400;
@@ -234,7 +204,19 @@ background-position: X 0 (left) Y 100% (bottom);
 .project-container .function-wrap li:nth-child(4)::before {
   content: "";
   position: absolute;
-  background-image: url(../assets/img/icon_d.png);
+  background-image: url(../assets/img/icon_d.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
+.project-container .function-wrap li:nth-child(5)::before {
+  content: "";
+  position: absolute;
+  background-image: url(../assets/img/icon_e.svg);
   background-size: 17px 17px;
   width: 17px;
   height: 17px;
@@ -330,7 +312,6 @@ background-position: X 0 (left) Y 100% (bottom);
 }
 
 .ts-problem-discrip {
-  width: 60%;
   margin-left: 20px;
   padding-bottom: 20px;
   font-size: 18px;
@@ -339,7 +320,7 @@ background-position: X 0 (left) Y 100% (bottom);
 
 .ts-fix-discrip {
   font-size: 18px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .ts-fix-discrip li {
@@ -358,6 +339,60 @@ background-position: X 0 (left) Y 100% (bottom);
   font-size: 1em;
   display: inline-block;
   width: 1em;
+}
+
+.ts-banda {
+  font-size: 15px;
+  line-height: 1.9;
+  display: flex;
+  gap: 40px;
+  padding: 0 30px 30px 30px;
+}
+
+.ts-before {
+  width: 50%;
+  background-color: rgb(252, 252, 252);
+  color: rgb(95, 95, 95);
+  border-radius: 30px;
+  padding: 30px;
+  box-sizing: border-box;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.ts-before pre code{
+  white-space: normal;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.ts-banda-arrow {
+  position: relative;
+}
+
+.ts-banda-arrow::before {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  font-size: 2em;
+  display: inline-block;
+  width: 1em;
+}
+
+.ts-after {
+  width: 50%;
+  background-color: rgb(249, 249, 249);
+  border-radius: 30px;
+  padding: 30px;
+}
+
+.ts-after pre code{
+  white-space: normal;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 
 /* 다음 프로젝트 */

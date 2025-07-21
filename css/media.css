@@ -322,7 +322,7 @@
     height: 80vh;
   }
 
-  .projects-p .pp-wrap{
+  .projects-p .pp-wrap {
     flex-direction: column;
     justify-content: unset;
     padding-bottom: 15vh;
@@ -400,26 +400,14 @@
     width: 100%;
   }
 
-  .intro-bottom .project-title .pt-mask div {
-    top: 50%;
-    left: 50%;
+  .project-title .pt-mask {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-title .pt-mask div {
     right: unset;
-  }
-
-  .old {
-    transform: translate(-50%, -50%);
-  }
-
-  .new {
-    transform: translate(-50%, 50%);
-  }
-
-  .pt-mask:hover .old {
-    transform: translate(-50%, -150%);
-  }
-
-  .pt-mask:hover .new {
-    transform: translate(-50%, -50%);
   }
 
   .project-info .project-container p {
@@ -635,7 +623,7 @@
     height: 35px;
     font-size: 30px;
   }
-  
+
   .project-container h1 {
     font-size: 25px;
   }

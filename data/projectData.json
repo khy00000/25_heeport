@@ -4,7 +4,7 @@
     "title": "Heeyon Kim Portfolio",
     "subtitle": "Interactive 3D Design",
     "date": "June 15, 2025",
-    "stack": ["GSAP", "Three.js", "통신"],
+    "stack": ["GSAP", "Three.js", "REST API"],
     "url": "/",
     "image": "./assets/img/project1.jpeg",
     "technologies": [
@@ -12,48 +12,48 @@
       "Three.js",
       "CSS Transition",
       "Responsive Design",
-      "통신"
+      "REST API"
     ],
-    "description": "3D 모델을 렌더링하여 인터렉티브 애니메이션을 설계하고 GSAP 타임라인, ScrollTrigger로 인터랙티브한 애니메이션을 구현한 김희연 포트폴리오입니다. projectData.json을 비동기 로드하여 데이터를 바인딩하고 정적 환경에서도 여러 프로젝트 페이지를 재사용하는 SPA 유사 구조로 설계했습니다.",
+    "description": "3D 모델을 렌더링하고 GSAP 타임라인, ScrollTrigger로 인터랙티브 애니메이션을 구현한 김희연 포트폴리오입니다. \n 각 프로젝트 페이지의 데이터를 비동기 로드하여 데이터를 바인딩하고 정적 환경에서도 여러 프로젝트 페이지를 재사용하는 SPA 유사 구조로 설계했습니다.",
     "functions": [
-      "6가지 Breakpoint마다 디테일하게 CSS, JS로 반응형으로 디자인하였으며 모든 인터렉션 애니메이션까지 반응형으로 제어",
       "GLB 형식의 3D 모델을 Three.js로 렌더링 후 스크롤에 따른 인터랙티브 애니메이션 구현",
       "각 섹션 맞춤 GSAP 타임라인 애니메이션과 ScrollTrigger를 연동하여 자연스러운 애니메이션 흐름 연출",
-      "정적 project.html 템플릿에 projectData.json을 비동기 로드해 데이터 기반으로 렌더링 처리",
-      "URL 쿼리 파라미터를 활용해 단일 project 페이지를 동적으로 렌더링하는 SPA 유사 구조 설계"
+      "정적 project.html 템플릿을 만들어 projectData.json을 비동기 로드해 데이터 기반으로 렌더링 처리",
+      "URL 쿼리 파라미터를 활용해 단일 project 페이지를 동적으로 렌더링하는 SPA 유사 구조 설계",
+      "6가지 Breakpoint마다 디테일하게 CSS, JS로 반응형으로 디자인하고 모든 인터렉션 애니메이션까지 반응형으로 제어"
     ],
     "troubleshooting": [
       {
-        "title": "Projects 섹션 GSAP 애니메이션 충돌/오작동 문제",
-        "problem": "현재 프로젝트 박스가 사라지기 전 다음 프로젝트가 등장하고 <a> 링크 영역이 겹쳐 클릭 대상이 충돌하는 문제 발생",
+        "title": "메인페이지 Projects 섹션의 GSAP 애니메이션 충돌/오작동 문제",
+        "problem": "현재의 프로젝트 박스가 사라지기 전 다음 프로젝트가 등장하고 a 링크 영역이 겹쳐 클릭 대상이 충돌하는 문제 발생",
         "solution": [
-          "프로젝트의 scale 축소와 다음 프로젝트의 등장 타이밍을 세밀하게 이미지, 텍스트로 나누어 제어하고 <, >-0.3 등으로 상대 위치를 조정",
-          ".to({}, { duration: 4 }) 비어있는 애니메이션을 의도하여 사용자에게 정보를 충분히 노출 후 다음 프로젝트 전환",
+          "프로젝트의 scale 축소와 다음 프로젝트의 등장 타이밍을 이미지, 텍스트로 나누어 세밀하게 제어하고 <, >-0.3 등으로 상대 위치를 조정",
+          ".to({}, { duration: 4 }) 비어있는 애니메이션을 의도하여 사용자에게 정보를 충분히 노출 후 다음 프로젝트로 전환",
           "텍스트 애니메이션은 SplitText 배열로 미리 분리하여 각 섹션의 텍스트를 순차 제어",
           "보이는 프로젝트만 클릭되어 링크되도록 각 애니메이션 마다 pointerEvents를 명시하여 화면 전환 중 의도치 않은 클릭을 방지"
         ]
       },
       {
-        "title": "로딩 시 3D 모델의 인/아웃 애니메이션 타이밍 조절",
-        "problem": "GSAP 타임라인 애니메이션과 동시에 실행되어 의도한 인/아웃 애니메이션이 보이지 않음",
+        "title": "메인페이지 로딩 시 3D 모델의 인/아웃 애니메이션 타이밍 조절",
+        "problem": "메인페이지의 텍스트 GSAP 타임라인 애니메이션과 3D 모델의 등장 애니메이션이 동시에 실행되어 의도한 인/아웃 애니메이션이 보이지 않음",
         "solution": [
-          "GSAP 타임라인 안에서 .call(() => introAnimation())로 정확한 인트로 실행 타이밍 제어",
-          "푸터에 도착했을 때 키보드가 사라지도록 .call(() => outAnimation()) 정확한 타이밍 제어"
+          "텍스트 GSAP 타임라인 안에서 .call(() => introAnimation())으로 정확한 3D 모델 등장 애니메이션 실행 및 타이밍 제어",
+          "메인페이지의 푸터에 도착했을 때 3D 모델의 아웃 애니메이션이 진행되도록 .call(() => outAnimation())으로 정확한 타이밍 제어"
         ]
       },
       {
-        "title": "3D 모델 크기, 회전값 설정시 중심이 어긋나는 문제",
-        "problem": "GLB 모델에 gsap.to(model.scale)로 확대하거나 회전 애니메이션을 적용하면 모델이 화면 중심에서 벗어나 오른쪽으로 치우치고 회전 축도 기대한 방향과 달라지는 문제",
+        "title": "3D 모델 크기, 회전값 설정 시 브라우저에서 중심이 어긋나는 문제",
+        "problem": "3D GLB 모델에 gsap.to(model.scale)로 확대하거나 회전 애니메이션을 적용하면 모델이 화면 중심에서 벗어나 오른쪽으로 치우치고 기존 회전 축도 달라지는 문제",
         "solution": [
           "THREE.Box3().getCenter()로 중심 좌표를 계산한 뒤 model.position.sub(center)로 원점 기준 정렬",
           "모델을 .Group()으로 감싸고 그룹 단위로 애니메이션 처리",
-          "매 프레임 modelGroup.setRotationFromEuler()로 초기 회전값을 고정",
-          "rotateOnWorldAxis()로 화면 기준 가로축 회전 적용"
+          "매 프레임에 modelGroup.setRotationFromEuler()으로 초기 회전값을 고정",
+          "rotateOnWorldAxis()으로 브라우저 화면 기준 가로축 회전 적용"
         ]
       },
       {
-        "title": "로딩 GSAP 애니메이션을 첫 방문 시에만 실행되도록 sessionStorage 제어",
-        "problem": "Projects 페이지 이동 후 다시 메인 페이지로 돌아왔을 때 로딩 애니메이션이 반복 실행되어 UX가 저하되고, 불필요한 리소스 낭비 발생",
+        "title": "다른 페이지로 이동 후 다시 메인 페이지로 돌아왔을 때 로딩페이지의 애니메이션이 반복 실행",
+        "problem": "로딩페이지의 반복 구현은 UX의 불필요한 요소",
         "solution": [
           "sessionStorage.getItem('hasVisited')로 첫 방문 여부를 판단",
           "최초 방문 시에만 로딩 애니메이션 타임라인 실행 및 sessionStorage.setItem('hasVisited', 'true') 저장",
@@ -77,21 +77,37 @@
       "CSS Transition",
       "Responsive Design"
     ],
-    "description": "React로 제작한 디테일한 CSS 구현 실력이 돋보이는 COEX 공식 사이트의 클론 코딩 프로젝트입니다. 웹 접근성을 고려한 설계와 1px 단위까지 디테일한 반응형 UI를 구현하여 CSS Transition 위주로 가볍지만 효과적으로 애니메이션을 연출하였습니다.",
+    "description": "React로 제작한 디테일한 CSS 구현 실력이 돋보이는 COEX 공식 사이트의 클론 코딩 프로젝트입니다. <br> 웹 접근성을 고려한 설계와 1px 단위까지 놓치지 않고 섬세하게 반응형으로 구현한 사이트입니다.",
     "functions": [
-      "CSS Transition 위주로 동적이고 가벼운 UI 애니메이션 연출",
       "JSX 컴포넌트를 페이지 단위로 분리하여 유지보수가 쉬운 구조 구현",
+      "페이지에 들어가는 Data.json를 비동기 로드하여 데이터 기반으로 렌더링 처리",
+      "CSS Transition 애니메이션 구현으로 디테일하고 동적이지만 가벼운 UI 연출",
       "SCSS에서 mixin을 활용해 공통 레이아웃 스타일 재사용 및 반응형 처리",
       "반응형에 따른 조건부 디자인 처리를 위한 UseResponsive Hook을 만들어 사용"
     ],
     "troubleshooting": [
       {
-        "title": "뉴스 json 데이터 최신 순 정렬",
-        "problem": "뉴스 데이터를 UI에 맞게 dateday, datemonth로 분리하여 날짜 정보가 가공되어 있어 정렬 불가능",
+        "title": "뉴스 섹션의 json 데이터 최신 순 정렬",
+        "problem": "뉴스 데이터가 UI에 맞게 dateday, datemonth로 분리하여 날짜 정보가 가공되어 있어 최신 순으로 정렬 불가능",
         "solution": [
-          "원본 뉴스 데이터의 date 값을 기준으로 Date 객체를 생성해 최신순으로 정렬",
-          "정렬 후, map을 사용해 날짜 데이터를 'YYYY.MM' 형식의 datemonth와 일(day)만 추출한 dateday로 가공",
-          "기존 데이터 구조를 유지하면서 UI 출력용 날짜 형식을 추가로 생성하여 정렬 문제와 UI 표시를 모두 해결"
+          "원본 뉴스 데이터를 date YYYY-MM-DD로 수정",
+          "date 값을 기준으로 Date 객체를 생성해 최신 순으로 정렬",
+          "정렬 후 map을 사용하여 날짜 데이터를 'YYYY.MM' 형식의 datemonth와 day만 추출한 dateday로 가공",
+          "UI 출력용 날짜 형식을 추가로 생성하여 정렬 문제와 UI 표시를 모두 해결"
+        ],
+        "beforecode": [
+          "// 날짜 가공 없이 UI에 그대로 사용",
+          "const activeTab = mainnewsdata.find((news) => news.tabid === activeTabId);",
+          "",
+          "// 렌더링 시 날짜를 직접 분해해 사용",
+          "{activeTab?.contents?.map((contentsItem) => (",
+          "    <div className=\"news_item\" key={contentsItem.contentsid}>",
+          "      <div className=\"news_item_date\">",
+          "        <span className=\"news_item_dateday\">{dateday}</span>",
+          "        <span className=\"news_item_datemonth\">{datemonth}</span>",
+          "      </div>",
+          "      </div>",
+          "))}"
         ],
         "aftercode": [
           "// 날짜 최신순으로 정렬 및 날짜 가공",
@@ -105,11 +121,19 @@
           "      datemonth: `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}` ,",
           "      dateday: date.getDate(),",
           "    };",
-          "  });"
+          "  });",
+          "{sortedContents?.map((contentsItem) => (",
+          "  <div className=\"news_item\" key={contentsItem.contentsid}>",
+          "    <div className=\"news_item_date\">",
+          "      <span className=\"news_item_dateday\">{contentsItem.dateday}</span>",
+          "      <span className=\"news_item_datemonth\">{contentsItem.datemonth}</span>",
+          "    </div>",
+          "  </div>",
+          "))}"
         ]
       },
       {
-        "title": "섹션 등장 GSAP fadein 애니메이션 구현 시 wrapper 태그로인한 레이아웃 깨짐 문제",
+        "title": "섹션 등장 GSAP fadein 애니메이션 구현 시 wrapper 태그로인한 레이아웃이 깨지는 문제",
         "problem": "GSAP용 React 컴포넌트 생성 후 ref를 연결하기 위해 wrapper div 추가 시 기존 CSS 구조가 깨지는 상황 발생",
         "solution": [
           "React의 cloneElement를 사용하여 자식 엘리먼트에 직접 ref를 주입해 추가 wrapper 없이 애니메이션 처리",
@@ -117,10 +141,21 @@
           "useRef를 통한 DOM 직접 제어로 GSAP과 React가 충돌하지 않도록 설계"
         ],
         "beforecode": [
-          "// 불필요한 <div>가 렌더링되어 기존 레이아웃과 충돌",
-          "return <div ref={sectionRef}>{children}</div>;"
+          "// wrapper div 사용 시 기존 스타일이 깨짐",
+          "const FadeInGSAP = ({ children }) => {",
+          "  const sectionRef = useRef();",
+          "  useEffect(() => {",
+          "    gsap.fromTo(sectionRef.current,",
+          "      { opacity: 0, y: 50 },",
+          "      { opacity: 1, y: 0, duration: 0.3 }",
+          "    );",
+          "  }, []);",
+          "  return <div ref={sectionRef}>{children}</div>; // 이 div가 문제!",
+          "};"
         ],
         "aftercode": [
+          "import { useRef, useEffect, isValidElement, cloneElement } from 'react';",
+          "...",
           "// 자식 엘리먼트에 ref를 직접 전달해 구조를 그대로 유지",
           "if (isValidElement(children)) {",
           "  return cloneElement(children, { ref: sectionRef });",
@@ -128,13 +163,13 @@
         ]
       },
       {
-        "title": "Event 섹션 내 테이블의 Breakpoint에 따른 조건부 디자인제",
-        "problem": "1024px 이상 해상도에서는 4행 3열 레이아웃 & 1024px 이하에서는 3행 4열로 레이아웃을 바꿔야하고 모바일에서는 완전히 다른 스타일과 구성(Swiper 기반)을 사용해야하는 문제",
+        "title": "Event 섹션 내 테이블의 Breakpoint에 따른 조건부 디자인 문제",
+        "problem": "1024px 이상의 해상도에서는 4행 3열 레이아웃이 필요, 1024px 이하에서는 3행 4열, 모바일에서는 완전히 새로운 레이아웃과 Swiper 구성을 추가해야하는 문제",
         "solution": [
-          "반응형 상태를 세분화할 수 있도록 useResponsive 커스텀 훅을 개선하여 모바일(≤747), 태블릿(748~1024), 데스크탑(>1024) 구간으로 구분",
-          "Event 컴포넌트 내부에서 isMobile, isTablet, isDesktop 상태에 따라 조건부 렌더링 및 클래스명을 명확하게 분기",
-          "태블릿 및 데스크탑 각각에서 ‘item_3_7’, ‘bottom_item’ 등 테이블 레이아웃 관련 클래스를 다르게 적용",
-          "useResponsive 훅은 추후 더 많은 디바이스 대응이 가능하도록 유연하게 확장 가능한 구조로 작성 가능"
+          "브라우저의 해상도 상태를 세분화할 수 있도록 useResponsive 커스텀 훅을 만들어 모바일(≤747), 태블릿(748~1024), 데스크탑(>1024) 구간으로 구분",
+          "Event 섹션 컴포넌트 내부의 isMobile, isTablet, isDesktop 상태에 따라 조건부 렌더링 및 클래스명을 명확하게 분기",
+          "태블릿 및 데스크탑 각각에 테이블 레이아웃 디자인 관련 클래스를 다르게 적용",
+          "useResponsive 훅은 추후 더 많은 디바이스 대응이 가능하도록 유연하게 설계"
         ],
         "beforecode": [
           "// 기존 useIsMobile 훅 (단일 breakpoint만 감지)",
@@ -178,6 +213,8 @@
           "// Event 컴포넌트 내부 사용 예시",
           "const { isMobile, isTablet, isDesktop } = useResponsive();",
           "",
+          "{isMobile ? ( <Swiper> ... </Swiper> ) :",
+          "( <div className=\"event_table\"> ... </div> )",
           "// 클래스 조건 분기 예시",
           "className={`event_list_item",
           "  ${index === 0 ? 'first_item' : ''}",
@@ -195,7 +232,7 @@
     "title": "COS Brand Site Redesign",
     "subtitle": "Kakao OAuth + Geo API",
     "date": "March 25, 2025",
-    "stack": ["HTML", "JavaScript", "KakaoOAuth"],
+    "stack": ["KakaoOAuth", "Geo API", "Responsive Design"],
     "url": "/",
     "image": "./assets/img/project3.jpeg",
     "technologies": [
@@ -205,7 +242,7 @@
       "Geolocation API",
       "Responsive Design"
     ],
-    "description": "COS 브랜드 웹사이트를 리디자인한 프로젝트로 웹 접근성을 기반으로 섬세한 UI를 구현하였습니다. 외부 API와 연동하여 기능성을 강화하였으며 반응형 디자인으로 완성도를 높인 프로젝트입니다.",
+    "description": "COS 브랜드 웹사이트를 리디자인한 사이트로 웹 접근성을 기반으로 섬세한 UI를 구현하였습니다. 외부 API와 연동하여 기능성을 강화하였고 반응형 디자인으로 완성도를 높인 프로젝트입니다.",
     "functions": [
       "카카오 OAuth API를 활용한 소셜 로그인 기능 구현",
       "브라우저 Geolocation API로 사용자 위치를 탐지하고 인터페이스에 반영",

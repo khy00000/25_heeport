@@ -76,6 +76,16 @@ fetch("./data/projectData.json")
           ${project.troubleshooting
             .map((ts, index) => {
               const icons = ["a", "b", "c", "d"];
+
+              function escapeHTML(str) {
+                return str
+                  .replace(/&/g, "&amp;")
+                  .replace(/</g, "&lt;")
+                  .replace(/>/g, "&gt;")
+                  .replace(/"/g, "&quot;")
+                  .replace(/'/g, "&#039;");
+              }
+
               return `
               <div class="ts-title icon-${icons[index]}">${ts.title}</div>
               <div class="ts-problem">문제</div>
@@ -84,6 +94,19 @@ fetch("./data/projectData.json")
               <ul class="ts-fix-discrip">
                 ${ts.solution.map((s) => `<li>${s}</li>`).join("")}
               </ul>
+              <div class="ts-banda">
+                <div class="ts-before">
+                  ${ts.beforecode
+                    .map((b) => `<pre><code>${escapeHTML(b)}</code></pre>`)
+                    .join("")}
+                </div>
+                <div class="ts-banda-arrow"></div>
+                <div class="ts-after">
+                  ${ts.aftercode
+                    .map((a) => `<pre><code>${escapeHTML(a)}</code></pre>`)
+                    .join("")}
+                </div>
+              </div>
           `;
             })
             .join("")}
@@ -93,17 +116,114 @@ fetch("./data/projectData.json")
     projectEl.appendChild(info);
 
     // 페이드인 애니메이션 실행
-    gsap.fromTo(
-      [".home", ".intro-bottom-wrap", ".pt-mask", ".project-img a"],
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.3,
-      }
-    );
+    document.fonts.ready.then(() => {
+      const plogoSplit = new SplitText(".project-logo", {
+        type: "chars",
+        linesClass: "char",
+        mask: "chars",
+      });
+
+      const pdateSplit = new SplitText(".project-date", {
+        type: "chars",
+        linesClass: "char",
+        mask: "chars",
+      });
+
+      const ptoolSplit = new SplitText(".project-tool-wrap p", {
+        type: "chars",
+        linesClass: "char",
+        mask: "chars",
+      });
+
+      const ptitleSplit = new SplitText(".old", {
+        type: "chars",
+        linesClass: "char",
+        mask: "chars",
+      });
+
+      const mask = document.querySelector(".pt-mask");
+      const maintitle = document.querySelector(".old");
+      const subtitle = document.querySelector(".new");
+
+      gsap.set(subtitle, { y: 110, opacity: 0 });
+
+      gsap.fromTo(
+        [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
+        { xPercent: 100, opacity: 0 },
+        {
+          xPercent: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power1.out",
+        }
+      );
+
+      gsap.fromTo(
+        [ptitleSplit.chars],
+        { xPercent: 100, opacity: 0 },
+        {
+          xPercent: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: "power1.out",
+        }
+      );
+
+      gsap.fromTo(
+        ".project-img a",
+        {
+          borderRadius: "100px",
+        },
+        {
+          borderRadius: 0,
+          duration: 1,
+          ease: "power2.out",
+        }
+      );
+
+      mask.addEventListener("mouseenter", () => {
+        const hoverTl = gsap.timeline();
+        hoverTl
+          .to(
+            maintitle,
+            {
+              y: -110,
+              duration: 0.5,
+            },
+            0
+          )
+          .to(
+            subtitle,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.5,
+            },
+            0
+          );
+      });
+
+      mask.addEventListener("mouseleave", () => {
+        const leaveTl = gsap.timeline();
+        leaveTl
+          .to(
+            maintitle,
+            {
+              y: 0,
+              duration: 0.5,
+            },
+            0
+          )
+          .to(
+            subtitle,
+            {
+              y: 110,
+              duration: 0.5,
+            },
+            0
+          );
+      });
+    });
 
     // 하단 next-project progress
     const totalProjects = data.length;
