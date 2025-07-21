@@ -14,7 +14,7 @@
       "Responsive Design",
       "REST API"
     ],
-    "description": "3D 모델을 렌더링하고 GSAP 타임라인, ScrollTrigger로 인터랙티브 애니메이션을 구현한 김희연 포트폴리오입니다. \n 각 프로젝트 페이지의 데이터를 비동기 로드하여 데이터를 바인딩하고 정적 환경에서도 여러 프로젝트 페이지를 재사용하는 SPA 유사 구조로 설계했습니다.",
+    "description": "3D 모델을 렌더링하고 GSAP 타임라인, ScrollTrigger로 인터랙티브 애니메이션을 구현한 김희연 포트폴리오입니다. <br> 각 프로젝트 페이지의 데이터를 비동기 로드하여 데이터를 바인딩하고 정적 환경에서도 여러 프로젝트 페이지를 재사용하는 SPA 유사 구조로 설계했습니다.",
     "functions": [
       "GLB 형식의 3D 모델을 Three.js로 렌더링 후 스크롤에 따른 인터랙티브 애니메이션 구현",
       "각 섹션 맞춤 GSAP 타임라인 애니메이션과 ScrollTrigger를 연동하여 자연스러운 애니메이션 흐름 연출",
@@ -31,14 +31,76 @@
           ".to({}, { duration: 4 }) 비어있는 애니메이션을 의도하여 사용자에게 정보를 충분히 노출 후 다음 프로젝트로 전환",
           "텍스트 애니메이션은 SplitText 배열로 미리 분리하여 각 섹션의 텍스트를 순차 제어",
           "보이는 프로젝트만 클릭되어 링크되도록 각 애니메이션 마다 pointerEvents를 명시하여 화면 전환 중 의도치 않은 클릭을 방지"
+        ],
+        "beforecode": [
+          "// 이미지, 텍스트, 클릭 이벤트 분리 없이 동시에 등장",
+          "gsap.fromTo('.project-img',",
+          "{ x: 100, opacity: 0 }, ",
+          "{ x: 0, opacity: 1, duration: 1 }),",
+          "gsap.fromTo('.project-item-title',",
+          "{ x: 100, opacity: 0 },",
+          "{ x: 0, opacity: 1, duration: 1 }),",
+          "gsap.fromTo('.description-item',",
+          "{ x: 100, opacity: 0 }, ",
+          " { x: 0, opacity: 1, duration: 1 })"
+        ],
+        "aftercode": [
+          "// 프로젝트별 이미지/텍스트/스크롤을 세분화하여 선언 후 제어",
+          "gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: window.innerHeight });",
+          "gsap.set(flatChars, { opacity: 0, x: 100 });",
+          "gsap.set(project1, { pointerEvents: \"auto\" });",
+          "gsap.set([project2, project3], { pointerEvents: \"none\" });",
+          "",
+          "projectTl",
+          "  .to('.projects-txt', { opacity: 0 })",
+          "  .to(imgWrap1, { scale: 1, borderRadius: '40px', duration: 2 })",
+          "  .to([titleSplits[0].chars, descSplits1, scrollSplits[0].chars], { x: 0, opacity: 1, duration: 4 }, '>-0.3')",
+          "  .to({}, { duration: 4 }) // 유예 시간",
+          "  .to(project1, { pointerEvents: 'none', scale: 0.7, opacity: 0, duration: 3 }, '<')",
+          "  .to(project2, { pointerEvents: 'auto' }, '<')"
         ]
       },
       {
         "title": "메인페이지 로딩 시 3D 모델의 인/아웃 애니메이션 타이밍 조절",
-        "problem": "메인페이지의 텍스트 GSAP 타임라인 애니메이션과 3D 모델의 등장 애니메이션이 동시에 실행되어 의도한 인/아웃 애니메이션이 보이지 않음",
+        "problem": "메인페이지의 텍스트 GSAP 타임라인 애니메이션과 3D 모델의 등장 애니메이션이 동시에 실행되어 의도한 3D 모델 인/아웃 애니메이션이 보이지 않음",
         "solution": [
           "텍스트 GSAP 타임라인 안에서 .call(() => introAnimation())으로 정확한 3D 모델 등장 애니메이션 실행 및 타이밍 제어",
           "메인페이지의 푸터에 도착했을 때 3D 모델의 아웃 애니메이션이 진행되도록 .call(() => outAnimation())으로 정확한 타이밍 제어"
+        ],
+        "beforecode": [
+          "// GLB 모델 로드 세팅 내에서 인/아웃 애니메이션 호출",
+          "loader.load(\"./assets/glb/keyboard2.glb\", function (gltf) {",
+          "  model = gltf.scene;",
+          "  // ...재질, 그림자, 중심 정렬 등 처리",
+          "introAnimation()",
+          "});",
+          "",
+          "// 모델 등장 애니메이션",
+          "function introAnimation() {",
+          "  gsap.to(modelGroup.scale, { x: 1, y: 1, z: 1, duration: 3 });",
+          "}",
+          "// 모델 퇴장 애니메이션",
+          "function outAnimation() {",
+          "  gsap.to(modelGroup.scale, { x: 0, y: 0, z: 0, duration: 1 });",
+          "}"
+        ],
+        "aftercode": [
+          "// 로딩 GSAP 애니메이션 타임라인 내에서 introAnimation 실행 시점 명확히 지정",
+          "loadtl",
+          "  .to(\".loading\", {",
+          "    clipPath: \"inset(0% 0% 100% 0%)\",",
+          "    duration: 1,",
+          "    ease: \"power3.inOut\"",
+          "  }, \"+=0.3\")",
+          "  .call(() => {",
+          "    introAnimation();",
+          "  });",
+          "",
+          "// footer 도착 시점에 맞춰 outAnimation 실행",
+          "footerTl",
+          "  .call(() => {",
+          "    outAnimation();",
+          "  });"
         ]
       },
       {
@@ -49,6 +111,42 @@
           "모델을 .Group()으로 감싸고 그룹 단위로 애니메이션 처리",
           "매 프레임에 modelGroup.setRotationFromEuler()으로 초기 회전값을 고정",
           "rotateOnWorldAxis()으로 브라우저 화면 기준 가로축 회전 적용"
+        ],
+        "beforecode": [
+          "// GLB 모델 로드",
+          "let model;",
+          "const loader = new THREE.GLTFLoader();",
+          "loader.load(\"./assets/glb/keyboard2.glb\", function (gltf) {",
+          "  model = gltf.scene;",
+          "  scene.add(model);",
+          "  model.scale.set(0, 0, 0);",
+          "  model.rotation.set(Math.PI / 3, Math.PI / 6, 0);",
+          "  camera.position.set(0, 0, 10);",
+          "  camera.lookAt(0, 0, 0);",
+          "// basicAnimate종료 메인 루프 전환",
+          "  cancelAnimationFrame(basicAnimate);",
+          "  animate();",
+          "});"
+        ],
+        "aftercode": [
+          "// GLB 모델 로드",
+          "// 중심 맞추기 (바운딩 박스 계산)",
+          "  const box = new THREE.Box3().setFromObject(model);",
+          "  const center = box.getCenter(new THREE.Vector3());",
+          "  model.position.sub(center);",
+          "  modelGroup.add(model);",
+          "  modelGroup.scale.set(0, 0, 0);",
+          "  modelGroup.rotation.set(Math.PI / 3, Math.PI / 6, 0);",
+          "  scene.add(modelGroup);",
+          "// 모델 크기를 기반으로 카메라 z축 거리 자동 조절",
+          "  const size = box.getSize(new THREE.Vector3());",
+          "  const maxDim = Math.max(size.x, size.y, size.z);",
+          "  camera.position.set(0, 0, maxDim * 2);",
+          "  camera.lookAt(0, 0, 0);",
+          "// basicAnimate종료 메인 루프 전환",
+          "  cancelAnimationFrame(basicAnimate);",
+          "  animate();",
+          "});"
         ]
       },
       {
@@ -58,6 +156,36 @@
           "sessionStorage.getItem('hasVisited')로 첫 방문 여부를 판단",
           "최초 방문 시에만 로딩 애니메이션 타임라인 실행 및 sessionStorage.setItem('hasVisited', 'true') 저장",
           "두 번째 이후 방문 시에는 로딩 애니메이션을 건너뛰고 실행하도록 const loadtl = gsap.timeline();으로 타이밍을 명확히 조절"
+        ],
+        "beforecode": [
+          "const loadtl = gsap.timeline();",
+          "// 로딩 애니메이션 항상 실행됨",
+          "loadtl",
+          "  .set(\".cursor\", { opacity: 0, scale: 0 })",
+          "  .to(\".loading-logo\", { scale: 1, duration: 1 })",
+          "  .to(\".loading\", { autoAlpha: 0, duration: 0.5 })",
+          "  .to(\".introwrap-2\", { autoAlpha: 1, duration: 1 })"
+        ],
+        "aftercode": [
+          "const loadtl = gsap.timeline();",
+          "const hasVisited = sessionStorage.getItem(\"hasVisited\");",
+          "",
+          "if (!hasVisited) {",
+          "  sessionStorage.setItem(\"hasVisited\", \"true\");",
+          "",
+          "  loadtl",
+          "    .set(\".cursor\", { opacity: 0, scale: 0 })",
+          "    .to(\".loading-logo\", { scale: 1, duration: 1 })",
+          "    .to(\".loading\", { autoAlpha: 0, duration: 0.5 })",
+          "    .to(\".introwrap-2\", { autoAlpha: 1, duration: 1 });",
+          "",
+          "} else {",
+          "  // 두 번째 방문 이후에는 로딩 페이지 애니메이션 없이 진행",
+          "  loadtl",
+          "    .set([\".loading\", \".loading-logo\"], { autoAlpha: 0 })",
+          "    .set(\".cursor\", { opacity: 0, scale: 0 })",
+          "    .set(\".introwrap-2\", { autoAlpha: 1 });",
+          "}"
         ]
       }
     ]
@@ -210,12 +338,12 @@
           "  return status;",
           "};",
           "",
-          "// Event 컴포넌트 내부 사용 예시",
+          "// Event 컴포넌트 내부",
           "const { isMobile, isTablet, isDesktop } = useResponsive();",
           "",
           "{isMobile ? ( <Swiper> ... </Swiper> ) :",
           "( <div className=\"event_table\"> ... </div> )",
-          "// 클래스 조건 분기 예시",
+          "// 조건부 클래스로 css 반응형 디자인",
           "className={`event_list_item",
           "  ${index === 0 ? 'first_item' : ''}",
           "  ${item.ad ? 'has-ad' : ''}",

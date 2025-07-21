@@ -280,7 +280,7 @@ body {
 .ts-title.icon-d::before {
   content: "";
   position: absolute;
-  background-image: url(../assets/img/icon_d.png);
+  background-image: url(../assets/img/icon_d.svg);
   background-size: 17px 17px;
   width: 17px;
   height: 17px;
