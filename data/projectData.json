@@ -25,18 +25,20 @@
     "troubleshooting": [
       {
         "title": "메인페이지 Projects 섹션의 GSAP 애니메이션 충돌/오작동 문제",
-        "problem": "현재의 프로젝트 박스가 사라지기 전 다음 프로젝트가 등장하고 a 링크 영역이 겹쳐 클릭 대상이 충돌하는 문제 발생",
+        "problem": "프로젝트 박스의 이미지, 텍스트 각각 다른 애니메이션이 필요하며 프로젝트 박스가 겹쳐있는 의도된 디자인에서도 각 프로젝트 페이지 링크로 안전하게 연결 시켜야하는 상황",
         "solution": [
-          "프로젝트의 scale 축소와 다음 프로젝트의 등장 타이밍을 이미지, 텍스트로 나누어 세밀하게 제어하고 <, >-0.3 등으로 상대 위치를 조정",
+          "프로젝트 각각의 이미지/텍스트를 세분화하여 선언 후 세밀하게 제어",
+          "텍스트는 SplitText 배열로 미리 분리하여 각 섹션의 텍스트를 순차 제어",
+          "gsap.set()으로 셋팅 값을 주고 projectTl 타임라인 생성으로 애니메이션의 오작동 해결",
+          "<, >-0.3 등으로 상대 위치를 조정하여 세밀한 타이밍 제어",
           ".to({}, { duration: 4 }) 비어있는 애니메이션을 의도하여 사용자에게 정보를 충분히 노출 후 다음 프로젝트로 전환",
-          "텍스트 애니메이션은 SplitText 배열로 미리 분리하여 각 섹션의 텍스트를 순차 제어",
           "보이는 프로젝트만 클릭되어 링크되도록 각 애니메이션 마다 pointerEvents를 명시하여 화면 전환 중 의도치 않은 클릭을 방지"
         ],
         "beforecode": [
           "// 이미지, 텍스트, 클릭 이벤트 분리 없이 동시에 등장",
           "gsap.fromTo('.project-img',",
-          "{ x: 100, opacity: 0 }, ",
-          "{ x: 0, opacity: 1, duration: 1 }),",
+          "{ y: 100, opacity: 0 }, ",
+          "{ y: 0, opacity: 1, duration: 1 }),",
           "gsap.fromTo('.project-item-title',",
           "{ x: 100, opacity: 0 },",
           "{ x: 0, opacity: 1, duration: 1 }),",
@@ -45,27 +47,33 @@
           " { x: 0, opacity: 1, duration: 1 })"
         ],
         "aftercode": [
-          "// 프로젝트별 이미지/텍스트/스크롤을 세분화하여 선언 후 제어",
+          "// 프로젝트 각각의 이미지/텍스트를 세분화하여 선언 후 제어",
+          "gsap.set(imgWrap1, { scale: 0.5, borderRadius: \"400px\" });",
           "gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: window.innerHeight });",
           "gsap.set(flatChars, { opacity: 0, x: 100 });",
           "gsap.set(project1, { pointerEvents: \"auto\" });",
           "gsap.set([project2, project3], { pointerEvents: \"none\" });",
-          "",
+          "...",
           "projectTl",
-          "  .to('.projects-txt', { opacity: 0 })",
+          "// 첫번째 프로젝트 박스 등장",
           "  .to(imgWrap1, { scale: 1, borderRadius: '40px', duration: 2 })",
-          "  .to([titleSplits[0].chars, descSplits1, scrollSplits[0].chars], { x: 0, opacity: 1, duration: 4 }, '>-0.3')",
+          "  .to([titleSplits[0].chars, descSplits1, scrollSplits[0].chars],",
+          "{ x: 0, opacity: 1, duration: 4 }, '>-0.3')",
           "  .to({}, { duration: 4 }) // 유예 시간",
+          "// 두번째 프로젝트 박스 등장과 동시에 첫번째 프로젝트 아웃 제어",
+          ".to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: \"power2.out\" })",
           "  .to(project1, { pointerEvents: 'none', scale: 0.7, opacity: 0, duration: 3 }, '<')",
-          "  .to(project2, { pointerEvents: 'auto' }, '<')"
+          "  .to(project2, { pointerEvents: 'auto' }, '<')",
+          "  .to([titleSplits[1].chars, descSplits2, scrollSplits[1].chars],",
+          "{ x: 0, opacity: 1, duration: 4,}, \">-0.3\" )"
         ]
       },
       {
-        "title": "메인페이지 로딩 시 3D 모델의 인/아웃 애니메이션 타이밍 조절",
-        "problem": "메인페이지의 텍스트 GSAP 타임라인 애니메이션과 3D 모델의 등장 애니메이션이 동시에 실행되어 의도한 3D 모델 인/아웃 애니메이션이 보이지 않음",
+        "title": "메인페이지 로딩 시 3D 모델의 등장 애니메이션 타이밍 조절",
+        "problem": "loadtl 텍스트 GSAP 타임라인 애니메이션과 3D 모델의 등장 애니메이션이 동시에 실행되어 의도한 3D 모델 등장 애니메이션이 보이지 않음",
         "solution": [
-          "텍스트 GSAP 타임라인 안에서 .call(() => introAnimation())으로 정확한 3D 모델 등장 애니메이션 실행 및 타이밍 제어",
-          "메인페이지의 푸터에 도착했을 때 3D 모델의 아웃 애니메이션이 진행되도록 .call(() => outAnimation())으로 정확한 타이밍 제어"
+          "loadtl 텍스트 GSAP 타임라인 안에서 .call(() => introAnimation())으로 정확한 3D 모델 등장 애니메이션 실행 및 타이밍 제어",
+          "메인페이지의 푸터에 도착했을 때 3D 모델의 아웃 애니메이션이 진행되도록 footerTl .call(() => outAnimation())으로 정확한 타이밍 제어"
         ],
         "beforecode": [
           "// GLB 모델 로드 세팅 내에서 인/아웃 애니메이션 호출",
@@ -85,7 +93,7 @@
           "}"
         ],
         "aftercode": [
-          "// 로딩 GSAP 애니메이션 타임라인 내에서 introAnimation 실행 시점 명확히 지정",
+          "// 로드 텍스트 GSAP 애니메이션 타임라인 내 introAnimation 실행 시점 명확히 지정",
           "loadtl",
           "  .to(\".loading\", {",
           "    clipPath: \"inset(0% 0% 100% 0%)\",",
@@ -108,50 +116,49 @@
         "problem": "3D GLB 모델에 gsap.to(model.scale)로 확대하거나 회전 애니메이션을 적용하면 모델이 화면 중심에서 벗어나 오른쪽으로 치우치고 기존 회전 축도 달라지는 문제",
         "solution": [
           "THREE.Box3().getCenter()로 중심 좌표를 계산한 뒤 model.position.sub(center)로 원점 기준 정렬",
-          "모델을 .Group()으로 감싸고 그룹 단위로 애니메이션 처리",
-          "매 프레임에 modelGroup.setRotationFromEuler()으로 초기 회전값을 고정",
-          "rotateOnWorldAxis()으로 브라우저 화면 기준 가로축 회전 적용"
+          "회전, 위치 이동, 스케일 등의 기준 축을 일관되게 제어하기 위해 모델을 .Group()으로 감싸고 그룹 단위로 애니메이션 처리",
+          "모델 사이즈를 기반으로 x, y, z 방향 중 가장 큰 축의 길이 체크하여 모델이 화면 안에 충분히 들어오도록 확보된 거리로 자동으로 계산",
+          "회전 애니메이션에서 매 프레임 modelGroup.setRotationFromEuler()으로 초기 회전값을 고정",
+          "rotateOnWorldAxis()으로 브라우저 화면 기준 가로축 회전 적용하여 애니메이션 진행"
         ],
         "beforecode": [
-          "// GLB 모델 로드",
+          "// GLB 모델을 직접 scene에 추가하고 회전 적용",
           "let model;",
           "const loader = new THREE.GLTFLoader();",
           "loader.load(\"./assets/glb/keyboard2.glb\", function (gltf) {",
-          "  model = gltf.scene;",
+          "  const model = gltf.scene;",
           "  scene.add(model);",
-          "  model.scale.set(0, 0, 0);",
-          "  model.rotation.set(Math.PI / 3, Math.PI / 6, 0);",
-          "  camera.position.set(0, 0, 10);",
+          "  camera.position.set(0, 0, 0);",
           "  camera.lookAt(0, 0, 0);",
-          "// basicAnimate종료 메인 루프 전환",
-          "  cancelAnimationFrame(basicAnimate);",
-          "  animate();",
+          "...",
           "});"
         ],
         "aftercode": [
-          "// GLB 모델 로드",
-          "// 중심 맞추기 (바운딩 박스 계산)",
-          "  const box = new THREE.Box3().setFromObject(model);",
-          "  const center = box.getCenter(new THREE.Vector3());",
-          "  model.position.sub(center);",
-          "  modelGroup.add(model);",
-          "  modelGroup.scale.set(0, 0, 0);",
-          "  modelGroup.rotation.set(Math.PI / 3, Math.PI / 6, 0);",
-          "  scene.add(modelGroup);",
-          "// 모델 크기를 기반으로 카메라 z축 거리 자동 조절",
-          "  const size = box.getSize(new THREE.Vector3());",
-          "  const maxDim = Math.max(size.x, size.y, size.z);",
-          "  camera.position.set(0, 0, maxDim * 2);",
-          "  camera.lookAt(0, 0, 0);",
-          "// basicAnimate종료 메인 루프 전환",
-          "  cancelAnimationFrame(basicAnimate);",
-          "  animate();",
-          "});"
+          "// GLB 모델 로드 중심 정렬 후 그룹에 추가",
+          "loader.load(\"keyboard2.glb\", function (gltf) {",
+          "  const model = gltf.scene;",
+          "const box = new THREE.Box3().setFromObject(model);",
+          "const center = box.getCenter(new THREE.Vector3());",
+          "model.position.sub(center);",
+          "modelGroup.add(model);",
+          "scene.add(modelGroup);",
+          "...",
+          "// 모델 사이즈를 기반으로 x, y, z 방향 중 가장 큰 축의 길이 체크 하여 전체가 잘 보이는 적절한 거리를 자동으로 계산",
+          "const size = box.getSize(new THREE.Vector3());",
+          "const maxDim = Math.max(size.x, size.y, size.z);",
+          "camera.position.set(0, 0, maxDim * 2);",
+          "...",
+          "function animate() {",
+          "// 매 프레임마다 회전값을 고정",
+          "modelGroup.setRotationFromEuler(new THREE.Euler(Math.PI / 3, Math.PI / 6, 0));",
+          "// 브라우저 기준 X축(수평축)으로 회전",
+          "modelGroup.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), scrollProgress * Math.PI * 8);",
+          "..."
         ]
       },
       {
-        "title": "다른 페이지로 이동 후 다시 메인 페이지로 돌아왔을 때 로딩페이지의 애니메이션이 반복 실행",
-        "problem": "로딩페이지의 반복 구현은 UX의 불필요한 요소",
+        "title": "다른 페이지로 이동 후 다시 메인 페이지로 돌아왔을 때 로딩페이지의 애니메이션의 반복 실행",
+        "problem": "로딩페이지의 반복 구현은 가독성이 좋아야하는 포트폴리오 페이지 구성의 불필요한 요소",
         "solution": [
           "sessionStorage.getItem('hasVisited')로 첫 방문 여부를 판단",
           "최초 방문 시에만 로딩 애니메이션 타임라인 실행 및 sessionStorage.setItem('hasVisited', 'true') 저장",
@@ -205,7 +212,7 @@
       "CSS Transition",
       "Responsive Design"
     ],
-    "description": "React로 제작한 디테일한 CSS 구현 실력이 돋보이는 COEX 공식 사이트의 클론 코딩 프로젝트입니다. <br> 웹 접근성을 고려한 설계와 1px 단위까지 놓치지 않고 섬세하게 반응형으로 구현한 사이트입니다.",
+    "description": "React로 제작하고 데이터 JSON을 만들어 비동기 렌더링하고 브라우저에 구현한 COEX 공식 사이트의 클론 코딩 프로젝트입니다. <br> 웹 접근성을 고려한 설계는 물론 1px 차이의 디테일에 집착하여 디자인한 SCSS, 반응형으로 구현한 사이트입니다.",
     "functions": [
       "JSX 컴포넌트를 페이지 단위로 분리하여 유지보수가 쉬운 구조 구현",
       "페이지에 들어가는 Data.json를 비동기 로드하여 데이터 기반으로 렌더링 처리",
@@ -261,12 +268,12 @@
         ]
       },
       {
-        "title": "섹션 등장 GSAP fadein 애니메이션 구현 시 wrapper 태그로인한 레이아웃이 깨지는 문제",
-        "problem": "GSAP용 React 컴포넌트 생성 후 ref를 연결하기 위해 wrapper div 추가 시 기존 CSS 구조가 깨지는 상황 발생",
+        "title": "섹션 등장 GSAP 등장 애니메이션 구현 시 wrapper 태그로 인한 레이아웃이 깨지는 문제",
+        "problem": "GSAP React 컴포넌트 생성 후 ref를 연결하기 위해 wrapper div 추가 시 기존 CSS 구조가 깨지는 상황 발생 <br> 직접 CSS 구조를 수정할 수도 있지만 SCSS의 중첩 구조 특성상 비효율적",
         "solution": [
+          "useRef를 통한 DOM 직접 제어로 GSAP과 React가 충돌하지 않도록 설계",
           "React의 cloneElement를 사용하여 자식 엘리먼트에 직접 ref를 주입해 추가 wrapper 없이 애니메이션 처리",
-          "isValidElement를 사용해 단일 엘리먼트만 허용하여 구조 안정성과 오류 방지 확보",
-          "useRef를 통한 DOM 직접 제어로 GSAP과 React가 충돌하지 않도록 설계"
+          "isValidElement를 사용해 children이 실제 DOM 요소일 때만 cloneElement를 적용하게 하여 오류 방지"
         ],
         "beforecode": [
           "// wrapper div 사용 시 기존 스타일이 깨짐",
@@ -283,6 +290,11 @@
         ],
         "aftercode": [
           "import { useRef, useEffect, isValidElement, cloneElement } from 'react';",
+          "const FadeInGSAP = ({ children, delay = 0 }) => {",
+          "const sectionRef = useRef();",
+          "useEffect(() => {",
+          "const el = sectionRef.current;",
+          "gsap.fromTo(el,",
           "...",
           "// 자식 엘리먼트에 ref를 직접 전달해 구조를 그대로 유지",
           "if (isValidElement(children)) {",
@@ -291,12 +303,12 @@
         ]
       },
       {
-        "title": "Event 섹션 내 테이블의 Breakpoint에 따른 조건부 디자인 문제",
+        "title": "Event 섹션 내 테이블 디자인이 Breakpoint에 따라 조건부 디자인 필요",
         "problem": "1024px 이상의 해상도에서는 4행 3열 레이아웃이 필요, 1024px 이하에서는 3행 4열, 모바일에서는 완전히 새로운 레이아웃과 Swiper 구성을 추가해야하는 문제",
         "solution": [
           "브라우저의 해상도 상태를 세분화할 수 있도록 useResponsive 커스텀 훅을 만들어 모바일(≤747), 태블릿(748~1024), 데스크탑(>1024) 구간으로 구분",
-          "Event 섹션 컴포넌트 내부의 isMobile, isTablet, isDesktop 상태에 따라 조건부 렌더링 및 클래스명을 명확하게 분기",
-          "태블릿 및 데스크탑 각각에 테이블 레이아웃 디자인 관련 클래스를 다르게 적용",
+          "Event 섹션 컴포넌트 내부의 isMobile, isTablet, isDesktop 상태에 따라 조건부 렌더링",
+          "반응형에 따라 필요한 해상도별 테이블 레이아웃 디자인을 위해 클래스를 다르게 적용",
           "useResponsive 훅은 추후 더 많은 디바이스 대응이 가능하도록 유연하게 설계"
         ],
         "beforecode": [
