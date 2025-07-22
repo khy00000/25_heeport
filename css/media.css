@@ -1,13 +1,6 @@
 /*  데스크탑 */
 @media (min-width: 1471px) {
   /* main */
-  .intro .intro-row1 {
-    height: 50vh;
-  }
-  .intro .intro-row2 {
-    height: 50vh;
-  }
-
   .howiwork .howiworktx {
     max-width: 43vw;
   }
@@ -16,16 +9,76 @@
   .projects-p .pp-wrap .projects-p-title {
     font-size: 150px;
   }
-
-  /* project page */
-  .project-container p {
-    width: 50%;
-  }
 }
 
 /* 1025 ~ 1470 노트북 기본 */
 
-/* 태블릿용 height 768 */
+/* 윈도우 노트북 용 */
+@media (max-width: 1366px) {
+  /* main */
+  .intro .intro-row2 .intro-text-wrap div {
+    font-size: 45px;
+  }
+
+  .about .about-item p {
+    font-size: 80px;
+  }
+
+  .about .about-item span {
+    left: -5%;
+  }
+
+  .split5,
+  .split6 {
+    font-size: 35px;
+  }
+
+  .footer_top {
+    height: 60vh;
+    font-size: 60px;
+  }
+
+  /* project page */
+  .project-title .pt-mask {
+    height: 80px;
+  }
+
+  .project-title .pt-mask div {
+    height: 80px;
+    font-size: 70px;
+  }
+
+  .project-container p {
+    font-size: 17px;
+  }
+
+  .project-container .tool-wrap li {
+    font-size: 17px;
+  }
+
+  .project-container .function-wrap li {
+    font-size: 17px;
+  }
+
+  .project-container .ts-wrap {
+    font-size: 17px;
+  }
+
+  .ts-problem-discrip {
+    font-size: 16px;
+  }
+
+  .ts-fix-discrip {
+    font-size: 16px;
+  }
+
+  .ts-banda {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+}
+
+/* 태블릿용 / height 768 */
 @media (max-width: 1024px) {
   /* main */
   .loading-logo {
@@ -155,13 +208,41 @@
     font-size: 60px;
   }
 
-  .project-container p {
-    width: 100%;
-  }
-
   .ts-problem-discrip {
     width: 100%;
     padding-right: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  /* main */
+  .intro .intro-row2 .intro-text-wrap div {
+    font-size: 35px;
+  }
+
+  .about .about-item p {
+    font-size: 55px;
+  }
+
+  .project-item-title {
+    font-size: 60px;
+  }
+
+  /* projects */
+  .projects-p .pp-wrap .projects-p-title {
+    font-size: 70px;
+  }
+
+  .toproject-p {
+    bottom: -16%;
+  }
+
+  .project-p-title h1 {
+    font-size: 24px;
+  }
+
+  .project-p-title p {
+    font-size: 15px;
   }
 }
 
@@ -361,6 +442,10 @@
   }
 
   /* project page */
+  #project {
+    line-height: 1.7;
+  }
+
   #project .pin-spacer {
     height: 50vh !important;
   }
@@ -412,15 +497,18 @@
 
   .project-info .project-container p {
     font-size: 16px;
+    margin-right: 20px;
   }
 
   .project-info .project-container .tool-wrap li {
     font-size: 16px;
     margin-bottom: 10px;
+    margin-right: 20px;
   }
 
   .project-info .project-container .function-wrap li {
     font-size: 16px;
+    margin-right: 20px;
   }
 
   .project-container .ts-wrap {
@@ -434,10 +522,73 @@
 
   .ts-problem-discrip {
     font-size: 16px;
+    padding-right: 30px;
   }
 
   .ts-fix-discrip {
     font-size: 16px;
+  }
+
+  .ts-fix-discrip li {
+    margin-right: 20px;
+  }
+
+  .ts-banda {
+    flex-direction: column;
+  }
+
+  .ts-before {
+    width: 100%;
+  }
+
+  .ts-banda-arrow::before {
+    content: "↓";
+  }
+
+  .ts-after {
+    width: 100%;
+  }
+}
+
+/* 아이폰 대 */
+@media (max-width: 640px) {
+  /* main */
+  .footer_top {
+    font-size: 30px;
+  }
+
+  /* project page */
+  .project-title .pt-mask {
+    height: 60px;
+  }
+
+  .project-title .pt-mask div {
+    height: 60px;
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* main */
+  .about .about-item p {
+    font-size: 40px;
+  }
+
+  .project-item-title {
+    font-size: 50px;
+  }
+  .description-item {
+    font-size: 20px;
+  }
+
+  /* project page */
+  .project-title .pt-mask {
+    height: 50px;
+  }
+
+  .project-title .pt-mask div {
+    height: 50px;
+    font-size: 40px;
   }
 }
 
@@ -465,7 +616,7 @@
   }
 
   .scroll {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .footer_top {
@@ -501,13 +652,30 @@
     font-size: 20px;
   }
 
+  .project-info {
+    padding: 0 20px 0 20px;
+  }
+
   .project-title .pt-mask {
-    height: 40px;
+    height: 45px;
   }
 
   .project-title .pt-mask div {
     font-size: 35px;
-    height: 40px;
+    height: 45px;
+  }
+
+  .ts-banda {
+    padding: 0 20px 30px 20px;
+    gap: 30px;
+  }
+
+  .ts-before {
+    padding: 20px;
+  }
+
+  .ts-after {
+    padding: 20px;
   }
 
   .next-project {
@@ -581,16 +749,7 @@
   }
 
   .description-list {
-    top: 55%;
     gap: 6px;
-  }
-
-  .description-item {
-    font-size: 14px;
-  }
-
-  .scroll {
-    font-size: 25px;
   }
 
   .footer_top {

@@ -341,12 +341,13 @@ body {
   width: 1em;
 }
 
+/* 코드 영역 */
 .ts-banda {
   font-size: 15px;
   line-height: 1.9;
   display: flex;
   gap: 40px;
-  padding: 0 30px 30px 30px;
+  padding: 0 30px 40px 30px;
 }
 
 .ts-before {

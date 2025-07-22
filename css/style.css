@@ -83,7 +83,7 @@ canvas {
 /* 인트로 */
 .intro .intro-row1 {
   width: 100%;
-  height: 40vh;
+  height: 50vh;
   position: relative;
 }
 
@@ -168,7 +168,7 @@ canvas {
 /* 인트로 텍스트 */
 .intro .intro-row2 {
   width: 100%;
-  height: 60vh;
+  height: 50vh;
   position: relative;
 }
 

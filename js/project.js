@@ -145,7 +145,7 @@ fetch("./data/projectData.json")
       const maintitle = document.querySelector(".old");
       const subtitle = document.querySelector(".new");
 
-      gsap.set(subtitle, { y: 110, opacity: 0 });
+      gsap.set(subtitle, { yPercent: 100, opacity: 0 });
 
       gsap.fromTo(
         [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
@@ -187,7 +187,7 @@ fetch("./data/projectData.json")
           .to(
             maintitle,
             {
-              y: -110,
+              yPercent: -100,
               duration: 0.5,
             },
             0
@@ -195,7 +195,7 @@ fetch("./data/projectData.json")
           .to(
             subtitle,
             {
-              y: 0,
+              yPercent: 0,
               opacity: 1,
               duration: 0.5,
             },
@@ -209,7 +209,7 @@ fetch("./data/projectData.json")
           .to(
             maintitle,
             {
-              y: 0,
+              yPercent: 0,
               duration: 0.5,
             },
             0
@@ -217,7 +217,7 @@ fetch("./data/projectData.json")
           .to(
             subtitle,
             {
-              y: 110,
+              yPercent: 100,
               duration: 0.5,
             },
             0
@@ -261,6 +261,7 @@ fetch("./data/projectData.json")
     nextProjectEl.style.display = "block";
 
     initProjectAnimation();
+    ScrollTrigger.refresh();
   });
 
 // 프로젝트 인트로 고정 애니메이션
