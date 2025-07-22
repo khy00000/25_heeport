@@ -20,7 +20,7 @@
       "각 섹션 맞춤 GSAP 타임라인 애니메이션과 ScrollTrigger를 연동하여 자연스러운 애니메이션 흐름 연출",
       "정적 project.html 템플릿을 만들어 projectData.json을 비동기 로드해 데이터 기반으로 렌더링 처리",
       "URL 쿼리 파라미터를 활용해 단일 project 페이지를 동적으로 렌더링하는 SPA 유사 구조 설계",
-      "6가지 Breakpoint마다 디테일하게 CSS, JS로 반응형으로 디자인하고 모든 인터렉션 애니메이션까지 반응형으로 제어"
+      "9가지 Breakpoint마다 디테일하게 CSS, JS로 반응형으로 디자인하고 모든 인터렉션 애니메이션까지 반응형으로 제어"
     ],
     "troubleshooting": [
       {

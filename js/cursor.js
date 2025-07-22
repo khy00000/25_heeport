@@ -1,5 +1,6 @@
 // 마우스 커서
 const cursor = document.querySelector(".cursor");
+const cursorText = cursor.querySelector(".cursor-text");
 
 let mouseX = 0;
 let mouseY = 0;
@@ -12,19 +13,30 @@ window.addEventListener("mousemove", (e) => {
   mouseY = e.clientY;
 });
 
-gsap.ticker.add(() => {
-  cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
-  cursor.style.backgroundColor = color;
-});
-
 // 호버 효과
 document.querySelectorAll("a, button").forEach((el) => {
   el.addEventListener("mouseenter", () => {
     scale = 3;
     color = "white";
+    opacity = 1;
+
+    if (el.classList.contains("logo")) {
+      text = "";
+    } else {
+      text = "Open";
+    }
   });
+
   el.addEventListener("mouseleave", () => {
     scale = 1;
     color = "transparent";
+    opacity = 0;
   });
+});
+
+gsap.ticker.add(() => {
+  cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
+  cursor.style.backgroundColor = color;
+  cursorText.style.opacity = opacity;
+  cursorText.textContent = text;
 });
