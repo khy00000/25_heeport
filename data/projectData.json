@@ -413,10 +413,11 @@
           "});"
         ],
         "aftercode": [
-          "// 헤더 픽스 + body에 패딩 적용",
+          "// 헤더 픽스 + nav 높이에 따라 body에 패딩 적용",
           "$(window).on(\"scroll\", function () {",
           "  const scrollTop = $(window).scrollTop();",
           "  const topnavHeight = $(\"#topnav\").outerHeight();",
+          " const navHeight = $(\"#nav\").outerHeight();",
           "",
           "  if (scrollTop >= topnavHeight) {",
           "    $(\"#nav\").addClass(\"fixed\");",
@@ -425,39 +426,108 @@
           "    $(\"#nav\").removeClass(\"fixed\");",
           "    $(\"body\").css(\"padding-top\", \"0\");",
           "  }",
-          "});",
-          "body.fixed-nav-padding {",
-          "  padding-top: 70px;",
-          "}"
+          "});"
         ]
       },
       {
-        "title": "모바일 이미지 슬라이드 구현 후 브라우저 리사이즈 시 이미지 영역 오류",
-        "problem": "모바일에서만 이미지 슬라이드가 동작하도록 구현했으나 뷰포트를 줄이거나 늘릴 경우 기존 슬라이드 상태가 유지되어 레이아웃이 깨지는 문제 발생",
+        "title": "모바일 메뉴 활성 시 상대적 높이 적용",
+        "problem": "헤더 고정 여부와 상단 띠배너 노출 상태에 따라 모바일 메뉴의 높이를 상대적으로 설정해야하는 문제",
         "solution": [
-          "슬라이드 초기화 로직이 한 번만 실행되도록 되어 있어 반응형 변화에 대응하지 못함",
-          "`resize` 이벤트를 통해 브라우저 너비 변경 시 페이지를 새로고침하여 레이아웃을 초기화",
-          "이로 인해 모바일/데스크탑 간 전환 시 슬라이드 구조가 꼬이지 않고 항상 정상 초기 상태로 렌더링"
+          "모바일 메뉴 활성 시점에 헤더(#nav) 높이와 보이는 띠배너 높이를 합산해 상단 오프셋을 계산",
+          "#nav가 fixed이면 헤더 높이  fixed가 아니면 헤더 + 띠배너 높이를 반영",
+          ".m-nav 높이를 `calc(100vh - offset)`로 설정하여 화면에 꽉 차게 조정",
+          "메뉴 열릴 때뿐만 아니라 스크롤 헤더 픽스, 띠배너 닫기의 상태 변화가 있을 때도 updateMNavHeight() 호출"
         ],
         "beforecode": [
-          "// 초기 렌더링 시 한 번만 슬라이드 설정",
-          "$(function () {",
+          "// 모바일 메뉴 토글만 수행",
+          "$('.mo-button').on('click', function(){",
+          "  $(this).toggleClass('active');",
+          "  $('.m-nav').toggleClass('active');",
+          "});"
+        ],
+        "aftercode": [
+          "// 모바일 메뉴 높이 업데이트",
+          "function updateMNavHeight(){",
           "  if ($(window).width() <= 1024) {",
-          "    // 슬라이드 동작 설정",
+          "    const $nav = $('#nav');",
+          "    const navH = $nav.outerHeight() || 0;",
+          "    const tH = $('.topnav_t:visible').outerHeight() || 0;",
+          "    const bH = $('.topnav_b:visible').outerHeight() || 0;",
+          "    const isFixed = $nav.hasClass('fixed');",
+          "    const offset = isFixed ? navH : navH + tH + bH;",
+          "    $('.m-nav').css('height', `calc(100vh - ${offset}px)`);",
+          "  } else {",
+          "    $('.m-nav').css('height', '');",
+          "  }",
+          "}",
+          "",
+          "// 상태 변경 시 updateMNavHeight() 호출",
+          "$('.mo-button').on('click', function(){",
+          "  ...",
+          "  updateMNavHeight();",
+          "});",
+          "$('.topnav_t_close, .topnav_b_close').on('click', function(){",
+          "  ...",
+          "  updateMNavHeight();",
+          "});"
+        ]
+      },
+      {
+        "title": "카카오 로그인 구현 시 토큰 획득 및 사용자 정보 요청 오류",
+        "problem": "카카오 JS SDK 로그인 구현 시 redirectUri를 사용한 OAuth2 인증 과정에서 토큰 자동 발급이 안되어 사용자 정보 요청에 실패하는 문제로 로그인 상태 유지 및 사용자 정보 확보가 어려운 문제",
+        "solution": [
+          "JS SDK 방식의 한계를 보완하기 위해 REST API를 최소한으로 사용하여 access_token을 직접 POST 요청으로 발급",
+          "REST API로 access_token을 받아온 후 Kakao.Auth.setAccessToken()으로 SDK에 수동 세팅",
+          "JS SDK의 사용자 정보 요청 API를 정상 활용",
+          "토큰 발급과 사용자 정보 조회가 안정적으로 이뤄져 로그인 과정에서 오류를 줄이고 유지보수와 확장성을 개선"
+        ],
+        "beforecode": [
+          "// SDK 방식만 사용한 로그인 (토큰 자동 발급 문제 발생)",
+          "Kakao.Auth.login({",
+          "  success: function(authObj) {",
+          "    Kakao.API.request({",
+          "      url: '/v2/user/me',",
+          "      success: function(res) {",
+          "        console.log('사용자 정보:', res);",
+          "      },",
+          "      fail: function(err) {",
+          "        console.error('사용자 정보 요청 실패:', err);",
+          "      }",
+          "    });",
+          "  },",
+          "  fail: function(err) {",
+          "    console.error('로그인 실패:', err);",
           "  }",
           "});"
         ],
         "aftercode": [
-          "// 리사이즈 시 페이지 새로고침 추가",
-          "$(function () {",
-          "  if ($(window).width() <= 1024) {",
-          "    // 슬라이드 동작 설정",
-          "  }",
+          "// REST API로 access_token 발급 후 SDK에 토큰 세팅하여 사용자 정보 요청",
+          "const urlParams = new URLSearchParams(window.location.search);",
+          "const code = urlParams.get('code');",
           "",
-          "  $(window).on(\"resize\", function () {",
-          "    location.reload();",
+          "if (code) {",
+          "  fetch('https://kauth.kakao.com/oauth/token', {",
+          "    method: 'POST',",
+          "    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },",
+          "    body: new URLSearchParams({",
+          "      grant_type: 'authorization_code',",
+          "      client_id: KAKAO_JS_KEY,",
+          "      redirect_uri: KAKAO_REDIRECT_URI,",
+          "      code: code,",
+          "    }),",
+          "  })",
+          "  .then(res => res.json())",
+          "  .then(data => {",
+          "    Kakao.Auth.setAccessToken(data.access_token);",
+          "    return Kakao.API.request({ url: '/v2/user/me' });",
+          "  })",
+          "  .then(res => {",
+          "    console.log('사용자 정보:', res);",
+          "  })",
+          "  .catch(err => {",
+          "    console.error('토큰 요청 실패 또는 사용자 정보 요청 실패:', err);",
           "  });",
-          "});"
+          "}"
         ]
       },
       {
@@ -466,14 +536,6 @@
         "solution": [
           ".env를 이용해 환경별 Redirect URI를 분리",
           "카카오 개발자 페이지에서 프로덕션 URL을 정확히 등록하여 해결"
-        ]
-      },
-      {
-        "title": "Geolocation API가 안드로이드 디바이스에서 잘 작동하지만 iOS에서 반응하지 않는 문제",
-        "problem": "모바일 Safari 브라우저에서 위치 정보를 받아오지 못하는 문제",
-        "solution": [
-          "HTTPS 환경에서만 동작하므로, 로컬은 localhost, 실서버는 HTTPS 기반 도메인으로 통일",
-          "getCurrentPosition() 호출 시 오류 처리 콜백도 추가하여 실패 시 대체 메시지를 UI에 제공"
         ]
       }
     ]
