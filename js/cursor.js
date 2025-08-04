@@ -6,6 +6,8 @@ let mouseX = 0;
 let mouseY = 0;
 let scale = 1;
 let color = "transparent";
+let opacity = 0;
+let text = ""; 
 
 // 마우스 좌표 저장
 window.addEventListener("mousemove", (e) => {

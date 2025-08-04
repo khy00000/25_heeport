@@ -221,9 +221,12 @@ canvas {
 
 .about .about-item {
   height: 17vh;
-  position: relative;
   opacity: 0.2;
   transition: opacity 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 30px;
 }
 
 .about-item.active {
@@ -232,14 +235,11 @@ canvas {
 
 .about .about-item span {
   font-size: 20px;
-  position: absolute;
-  top: 37%;
-  left: -7%;
 }
 
 .about .about-item p {
   font-family: "UntitledSerif";
-  font-size: 100px;
+  font-size: 90px;
   letter-spacing: -0.8px;
   line-height: 1;
   white-space: nowrap;
@@ -344,22 +344,22 @@ canvas {
   text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.331);
 }
 
+.project-item > div{
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+}
+
 .project-item-title {
   font-weight: 300;
   font-size: 70px;
   margin-bottom: 10px;
   letter-spacing: -2px;
-  position: absolute;
-  top: 50%;
-  left: 1.5%;
-  transform: translateY(-50%);
   white-space: nowrap;
 }
 
 .description-list {
-  position: absolute;
-  top: 56%;
-  left: 1.5%;
   display: flex;
   gap: 10px;
 }
@@ -375,7 +375,7 @@ canvas {
   font-size: 30px;
   position: absolute;
   top: 50%;
-  right: 1.5%;
+  right: 2%;
   transform: translateY(-50%);
 }
 

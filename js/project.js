@@ -19,9 +19,9 @@ fetch("./data/projectData.json")
     const intro = document.createElement("div");
     intro.className = "intro";
     intro.innerHTML = `
-        <a href="/" class="home">
-          <div class="project-logo">Heeyon Kim</div>
-        </a>
+        <div class="home">
+          <a href="/" class="project-logo">Heeyon Kim</a>
+        </div>
         <div class="intro-bottom">
           <div class="intro-bottom-wrap">
             <div class="project-date">${project.date}</div>
