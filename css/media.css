@@ -1,4 +1,4 @@
-/*  데스크탑 */
+/* 데스크탑 */
 @media (min-width: 1471px) {
   /* main */
   .howiwork .howiworktx {
@@ -74,7 +74,7 @@
   }
 }
 
-/* 태블릿용 / height 768 */
+/* 태블릿용 */
 @media (max-width: 1024px) {
   /* main */
   .loading-logo {
@@ -362,6 +362,10 @@
     display: none;
   }
 
+  .top-button button {
+    font-size: 30px;
+  }
+
   /* projects page */
   body.projects {
     width: unset;
@@ -594,7 +598,7 @@
 
   .footer_top {
     justify-content: flex-end;
-    font-size: 23px;
+    font-size: 22px;
     height: 50vh;
     padding-bottom: 3vh;
   }
