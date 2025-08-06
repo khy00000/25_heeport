@@ -10,7 +10,8 @@ body.projects {
   padding: 10px;
   touch-action: none;
   overscroll-behavior: none;
-  background-color: #151515;
+  /* background-color: #151515; */
+  background-image: linear-gradient(to top, #312c2a 0%, #252221 100%);
   color: white;
 }
 
@@ -91,7 +92,6 @@ body.projects {
   width: 33.333%;
   height: 100%;
   position: relative;
-  overflow: hidden;
 }
 
 .projects-p-item .project-p-container a {
@@ -112,7 +112,7 @@ body.projects {
 
 .projects-p-item .project-p-container:hover a img {
   transform: scale(1);
-  filter: blur(0);
+  filter: blur(2px);
 }
 
 .projects-p-item .project-p-container:hover .project-p-title h1,
@@ -132,7 +132,7 @@ body.projects {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.176);
+  mix-blend-mode: difference;
 }
 
 .project-p-title h1 {
