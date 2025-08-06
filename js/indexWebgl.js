@@ -12,7 +12,7 @@ gsap.ticker.lagSmoothing(0);
 
 // Scene, Camera, Renderer 기본 셋업
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x111111);
+// scene.background = new THREE.Color(0x151515);
 
 const camera = new THREE.PerspectiveCamera(
   75, //시야각
@@ -29,7 +29,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 // 배경 초기화, 투명도
-renderer.setClearColor(0x000000, 1);
+renderer.setClearColor(0x000000, 0);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 // 그림자 촬성화
