@@ -132,7 +132,7 @@ body.projects {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  mix-blend-mode: difference;
+  mix-blend-mode: exclusion;
 }
 
 .project-p-title h1 {

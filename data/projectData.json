@@ -6,7 +6,7 @@
     "date": "June 15, 2025",
     "stack": ["GSAP", "Three.js", "REST API"],
     "url": "/",
-    "image": "./assets/img/project1-1.png",
+    "image": "./assets/img/project-p-1.png",
     "technologies": [
       "GSAP",
       "Three.js",
@@ -204,7 +204,7 @@
     "date": "April 10, 2025",
     "stack": ["React", "SCSS", "Swiper.js"],
     "url": "/",
-    "image": "./assets/img/project2.png",
+    "image": "./assets/img/project-p-2.png",
     "technologies": [
       "React",
       "SCSS",
@@ -374,7 +374,7 @@
     "date": "March 25, 2025",
     "stack": ["KakaoOAuth", "Geolocation", "Responsive"],
     "url": "/",
-    "image": "./assets/img/project3.png",
+    "image": "./assets/img/project-p-3.png",
     "technologies": [
       "Kakao OAuth",
       "Geolocation API",
