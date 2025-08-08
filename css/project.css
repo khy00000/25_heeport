@@ -106,7 +106,7 @@ body {
 
 .project-img a img {
   object-fit: cover;
-  object-position: top left;
+  object-position: top center;
 }
 
 /* 프로젝트 정보 */
