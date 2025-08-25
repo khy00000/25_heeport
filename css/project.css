@@ -73,15 +73,15 @@ body {
   position: relative;
   overflow: hidden;
   display: block;
-  height: 110px;
+  height: 100px;
 }
 
 .project-title .pt-mask div {
   position: absolute;
   right: 0;
-  height: 110px;
+  height: 100px;
   white-space: nowrap;
-  font-size: 90px;
+  font-size: 80px;
   line-height: 1.2;
   letter-spacing: -1.7px;
 }
@@ -93,19 +93,17 @@ body {
 /* 이미지 */
 .project-img {
   width: 100%;
-  height: 100vh;
 }
 
 .project-img a {
-  width: 100%;
-  height: 100%;
   display: block;
   overflow: hidden;
   border-radius: 100px;
+  background-color: white;
 }
 
 .project-img a img {
-  object-fit: cover;
+  width: 100vw;
   object-position: top center;
 }
 

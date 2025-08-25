@@ -305,13 +305,33 @@ window.addEventListener("load", () => {
         scrub: 2,
         pin: true,
       },
+      // onUpdate: () => {
+      //   const hoveredEl = document.querySelector("a:hover, button:hover");
+      //   if (!hoveredEl) return;
+
+      //   let currentScale = 1;
+      //   if (imgWrap1) currentScale = gsap.getProperty(imgWrap1, "scale");
+
+      //   if (hoveredEl.classList.contains("top-button")) {
+      //     text = "GoToTop";
+      //   } else if (hoveredEl.classList.contains("logo")) {
+      //     text = "";
+      //   } else {
+      //     text = currentScale < 1 ? "" : "Open";
+      //   }
+      // },
     });
 
     projectTl
       .to(".projects-txt", { opacity: 0 })
       .to(
         imgWrap1,
-        { scale: 1, borderRadius: "40px", duration: 2, ease: "power2.out" },
+        {
+          scale: 1,
+          borderRadius: "40px",
+          duration: 2,
+          ease: "power2.out",
+        },
         "<"
       )
       .to(

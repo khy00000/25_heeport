@@ -30,7 +30,7 @@ fetch("./data/projectData.json")
             </div>
           </div>
           <div class="project-title">
-            <a href="${project.url}" class="pt-mask">
+            <a href="${project.url}" class="pt-mask" target="_blank" rel="noopener noreferrer">
               <div class="old">${project.title}</div>
               <div class="new">${project.subtitle}</div>
             </a>
@@ -43,7 +43,7 @@ fetch("./data/projectData.json")
     const imgSection = document.createElement("div");
     imgSection.className = "project-img";
     imgSection.innerHTML = `
-  <a href="${project.url}"><img src="${project.image}" alt="${project.title}" /></a>
+  <a href="${project.url}" target="_blank" rel="noopener noreferrer"><img src="${project.image}" alt="${project.title}" /></a>
 `;
     projectEl.appendChild(imgSection);
 
@@ -269,7 +269,7 @@ function initProjectAnimation() {
   ScrollTrigger.create({
     trigger: ".intro",
     start: "top top",
-    end: "+=100%",
+    end: "bottom top",
     pin: true,
     pinSpacing: false,
   });

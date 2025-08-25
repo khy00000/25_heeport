@@ -192,12 +192,12 @@
 
   /* project page */
   .project-title .pt-mask {
-    height: 70px;
+    height: 60px;
   }
 
   .project-title .pt-mask div {
-    height: 70px;
-    font-size: 60px;
+    height: 60px;
+    font-size: 50px;
   }
 
   .ts-problem-discrip {
@@ -539,16 +539,6 @@
   /* main */
   .footer_top {
     font-size: 27px;
-  }
-
-  /* project page */
-  .project-title .pt-mask {
-    height: 60px;
-  }
-
-  .project-title .pt-mask div {
-    height: 60px;
-    font-size: 50px;
   }
 }
 

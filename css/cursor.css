@@ -4,6 +4,8 @@ body {
 
 /* 마우스 커서 */
 .cursor {
+  opacity: 0;
+  pointer-events: none;
   display: block;
   position: fixed;
   top: 0;
