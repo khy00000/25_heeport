@@ -305,22 +305,9 @@ window.addEventListener("load", () => {
         scrub: 2,
         pin: true,
       },
-      // onUpdate: () => {
-      //   const hoveredEl = document.querySelector("a:hover, button:hover");
-      //   if (!hoveredEl) return;
-
-      //   let currentScale = 1;
-      //   if (imgWrap1) currentScale = gsap.getProperty(imgWrap1, "scale");
-
-      //   if (hoveredEl.classList.contains("top-button")) {
-      //     text = "GoToTop";
-      //   } else if (hoveredEl.classList.contains("logo")) {
-      //     text = "";
-      //   } else {
-      //     text = currentScale < 1 ? "" : "Open";
-      //   }
-      // },
     });
+
+    window.imgWrap1Ready = false;
 
     projectTl
       .to(".projects-txt", { opacity: 0 })
@@ -331,6 +318,12 @@ window.addEventListener("load", () => {
           borderRadius: "40px",
           duration: 2,
           ease: "power2.out",
+          onStart: () => {
+            window.imgWrap1Ready = false;
+          },
+          onComplete: () => {
+            window.imgWrap1Ready = true;
+          },
         },
         "<"
       )

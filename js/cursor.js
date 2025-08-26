@@ -9,6 +9,7 @@ let scale = 1;
 let color = "transparent";
 let opacity = 0;
 let text = "";
+let pjTLTarget = null;
 
 // 마우스 좌표 저장
 window.addEventListener("mousemove", (e) => {
@@ -27,27 +28,37 @@ document.querySelectorAll("a, button").forEach((el) => {
     scale = 3;
     color = "white";
     opacity = 1;
-
-    if (el.classList.contains("logo")) {
-      text = "";
-    } else if (el.classList.contains("top-button-hover")) {
-      text = "ToTop";
-    } else {
-      text = "Open";
-    }
+    text = "Open";
+    pjTLTarget = el;
   });
 
   el.addEventListener("mouseleave", () => {
     scale = 1;
     color = "transparent";
     opacity = 0;
+    text = "";
+    pjTLTarget = null;
   });
 });
 
 gsap.ticker.add(() => {
   if (!mousemoved) return;
+
   cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
   cursor.style.backgroundColor = color;
   cursorText.style.opacity = opacity;
+
+  if (pjTLTarget) {
+    if (pjTLTarget.classList.contains("logo")) {
+      text = "";
+    } else if (pjTLTarget.classList.contains("top-button-hover")) {
+      text = "ToTop";
+    } else if (pjTLTarget.classList.contains("cursor-effect")) {
+      text = window.imgWrap1Ready ? "Open" : "";
+    } else {
+      text = "Open";
+    }
+  }
+
   cursorText.textContent = text;
 });
