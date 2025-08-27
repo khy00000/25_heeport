@@ -1,64 +1,55 @@
-// 마우스 커서
 const cursor = document.querySelector(".cursor");
 const cursorText = cursor.querySelector(".cursor-text");
+let mouseX = 0,
+  mouseY = 0;
+let scale = 1,
+  color = "transparent",
+  opacity = 0;
+// 커서 텍스트 효과
+let hoverTarget = null;
 
-let mousemoved = false;
-let mouseX = 0;
-let mouseY = 0;
-let scale = 1;
-let color = "transparent";
-let opacity = 0;
-let text = "";
-let pjTLTarget = null;
+// 커서 텍스트 효과 대상
+const cursorTargets = document.querySelectorAll(
+  ".project-list-wrap, .logo, .top-button-hover, .goProject"
+);
 
-// 마우스 좌표 저장
+// 마우스 움직여야 커서 보이게
 window.addEventListener("mousemove", (e) => {
   mouseX = e.clientX;
   mouseY = e.clientY;
-
-  if (!mousemoved) {
-    cursor.style.opacity = 1;
-    mousemoved = true;
-  }
+  cursor.style.opacity = 1;
 });
 
-// 호버 효과
-document.querySelectorAll("a, button").forEach((el) => {
+// 커서 텍스트 효과 베이직
+cursorTargets.forEach((el) => {
   el.addEventListener("mouseenter", () => {
-    scale = 3;
+    scale = 2.5;
     color = "white";
     opacity = 1;
-    text = "Open";
-    pjTLTarget = el;
+    hoverTarget = el;
   });
-
   el.addEventListener("mouseleave", () => {
     scale = 1;
     color = "transparent";
     opacity = 0;
-    text = "";
-    pjTLTarget = null;
+    hoverTarget = null;
   });
 });
 
 gsap.ticker.add(() => {
-  if (!mousemoved) return;
-
   cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
   cursor.style.backgroundColor = color;
   cursorText.style.opacity = opacity;
 
-  if (pjTLTarget) {
-    if (pjTLTarget.classList.contains("logo")) {
-      text = "";
-    } else if (pjTLTarget.classList.contains("top-button-hover")) {
-      text = "ToTop";
-    } else if (pjTLTarget.classList.contains("cursor-effect")) {
-      text = window.imgWrap1Ready ? "Open" : "";
-    } else {
-      text = "Open";
-    }
+  if (!hoverTarget) {
+    cursorText.textContent = "";
+  } else if (hoverTarget.classList.contains("logo")) {
+    cursorText.textContent = "";
+  } else if (hoverTarget.classList.contains("top-button-hover")) {
+    cursorText.textContent = "ToTop";
+  } else if (hoverTarget.classList.contains("project-list-wrap")) {
+    cursorText.textContent = window.openOff ? "Open" : "";
+  } else {
+    cursorText.textContent = "Open";
   }
-
-  cursorText.textContent = text;
 });

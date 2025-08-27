@@ -331,6 +331,7 @@ canvas {
   overflow: hidden;
   will-change: transform;
   /* box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); */
+  position: relative;
 }
 
 .project-list-wrap .project-img img {

@@ -297,6 +297,8 @@ window.addEventListener("load", () => {
     gsap.set(project1, { pointerEvents: "auto" });
     gsap.set([project2, project3], { pointerEvents: "none" });
 
+    window.openOff = false;
+
     const projectTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".projects",
@@ -307,8 +309,6 @@ window.addEventListener("load", () => {
       },
     });
 
-    window.imgWrap1Ready = false;
-
     projectTl
       .to(".projects-txt", { opacity: 0 })
       .to(
@@ -318,11 +318,14 @@ window.addEventListener("load", () => {
           borderRadius: "40px",
           duration: 2,
           ease: "power2.out",
-          onStart: () => {
-            window.imgWrap1Ready = false;
-          },
-          onComplete: () => {
-            window.imgWrap1Ready = true;
+          onUpdate: () => {
+            const currentScale = gsap.getProperty(imgWrap1, "scale");
+
+            if (currentScale >= 1){
+              window.openOff = true;
+            } else {
+              window.openOff = false;
+            }
           },
         },
         "<"
