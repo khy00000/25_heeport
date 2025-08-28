@@ -1,5 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
+// 데이터 로딩
 const urlParams = new URLSearchParams(window.location.search);
 const projectId = parseInt(urlParams.get("id"));
 
@@ -13,12 +14,31 @@ fetch("./data/projectData.json")
       return;
     }
 
-    const projectEl = document.getElementById("project");
+    // 프로젝트 페이지 돔 렌더링
+    renderProject(project);
 
-    // 1. Intro 영역
-    const intro = document.createElement("div");
-    intro.className = "intro";
-    intro.innerHTML = `
+    // 애니메이션
+    initIntroAnimation();
+    initProjectAnimation();
+    initNextProjectAnimation(data, projectId);
+
+    ScrollTrigger.refresh();
+  });
+
+// 프로젝드 페이지 돔 렌더링
+function renderProject(project) {
+  const projectEl = document.getElementById("project");
+
+  renderIntro(project, projectEl);
+  renderImage(project, projectEl);
+  renderInfo(project, projectEl);
+}
+
+// 인트로 영역
+function renderIntro(project, container) {
+  const intro = document.createElement("div");
+  intro.className = "intro";
+  intro.innerHTML = `
         <div class="home">
           <a href="/" class="project-logo">Heeyon Kim</a>
         </div>
@@ -30,27 +50,33 @@ fetch("./data/projectData.json")
             </div>
           </div>
           <div class="project-title">
-            <a href="${project.url}" class="pt-mask" target="_blank" rel="noopener noreferrer">
+            <a href="${
+              project.url
+            }" class="pt-mask" target="_blank" rel="noopener noreferrer">
               <div class="old">${project.title}</div>
               <div class="new">${project.subtitle}</div>
             </a>
           </div>
         </div>
     `;
-    projectEl.appendChild(intro);
+  container.appendChild(intro);
+}
 
-    // 2. 이미지 영역
-    const imgSection = document.createElement("div");
-    imgSection.className = "project-img";
-    imgSection.innerHTML = `
+// 이미지 영역
+function renderImage(project, container) {
+  const imgSection = document.createElement("div");
+  imgSection.className = "project-img";
+  imgSection.innerHTML = `
   <a href="${project.url}" target="_blank" rel="noopener noreferrer"><img src="${project.image}" alt="${project.title}" /></a>
 `;
-    projectEl.appendChild(imgSection);
+  container.appendChild(imgSection);
+}
 
-    // 3. 정보 섹션
-    const info = document.createElement("div");
-    info.className = "project-info";
-    info.innerHTML = `
+// 인포 영역
+function renderInfo(project, container) {
+  const info = document.createElement("div");
+  info.className = "project-info";
+  info.innerHTML = `
       <div class="project-container">
         <h1>Description</h1>
         <p>${project.description}</p>
@@ -113,158 +139,125 @@ fetch("./data/projectData.json")
         </div>
       </div>
     `;
-    projectEl.appendChild(info);
 
-    // 페이드인 애니메이션 실행
-    document.fonts.ready.then(() => {
-      const plogoSplit = new SplitText(".project-logo", {
-        type: "chars",
-        linesClass: "char",
-        mask: "chars",
-      });
+  container.appendChild(info);
+}
 
-      const pdateSplit = new SplitText(".project-date", {
-        type: "chars",
-        linesClass: "char",
-        mask: "chars",
-      });
-
-      const ptoolSplit = new SplitText(".project-tool-wrap p", {
-        type: "chars",
-        linesClass: "char",
-        mask: "chars",
-      });
-
-      const ptitleSplit = new SplitText(".old", {
-        type: "chars",
-        linesClass: "char",
-        mask: "chars",
-      });
-
-      const mask = document.querySelector(".pt-mask");
-      const maintitle = document.querySelector(".old");
-      const subtitle = document.querySelector(".new");
-
-      gsap.set(subtitle, { yPercent: 100, opacity: 0 });
-
-      gsap.fromTo(
-        [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
-        { xPercent: 100, opacity: 0 },
-        {
-          xPercent: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power1.out",
-        }
-      );
-
-      gsap.fromTo(
-        [ptitleSplit.chars],
-        { xPercent: 100, opacity: 0 },
-        {
-          xPercent: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: "power1.out",
-        }
-      );
-
-      gsap.fromTo(
-        ".project-img a",
-        {
-          borderRadius: "100px",
-        },
-        {
-          borderRadius: 0,
-          duration: 1,
-          ease: "power2.out",
-        }
-      );
-
-      mask.addEventListener("mouseenter", () => {
-        const hoverTl = gsap.timeline();
-        hoverTl
-          .to(
-            maintitle,
-            {
-              yPercent: -100,
-              duration: 0.5,
-            },
-            0
-          )
-          .to(
-            subtitle,
-            {
-              yPercent: 0,
-              opacity: 1,
-              duration: 0.5,
-            },
-            0
-          );
-      });
-
-      mask.addEventListener("mouseleave", () => {
-        const leaveTl = gsap.timeline();
-        leaveTl
-          .to(
-            maintitle,
-            {
-              yPercent: 0,
-              duration: 0.5,
-            },
-            0
-          )
-          .to(
-            subtitle,
-            {
-              yPercent: 100,
-              duration: 0.5,
-            },
-            0
-          );
-      });
+// 애니메이션
+// 인트로 스프릿 텍스트
+function initIntroAnimation() {
+  document.fonts.ready.then(() => {
+    const plogoSplit = new SplitText(".project-logo", {
+      type: "chars",
+      linesClass: "char",
+      mask: "chars",
     });
 
-    // 하단 next-project progress
-    const totalProjects = data.length;
+    const pdateSplit = new SplitText(".project-date", {
+      type: "chars",
+      linesClass: "char",
+      mask: "chars",
+    });
 
-    // 다음 id 계산
-    const nextId = projectId < totalProjects ? projectId + 1 : null;
-    const nextUrl = nextId ? `project.html?id=${nextId}` : "index.html";
-    const bar = document.querySelector(".bar");
+    const ptoolSplit = new SplitText(".project-tool-wrap p", {
+      type: "chars",
+      linesClass: "char",
+      mask: "chars",
+    });
 
-    ScrollTrigger.create({
-      trigger: ".next-project",
-      start: "top bottom",
-      end: "bottom bottom",
-      scrub: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        bar.style.width = `${progress * 100}%`;
+    const ptitleSplit = new SplitText(".old", {
+      type: "chars",
+      linesClass: "char",
+      mask: "chars",
+    });
 
-        if (progress >= 0.997 && !bar.dataset.completed) {
-          // 중복 실행 체크
-          bar.dataset.completed = "true";
-          setTimeout(() => {
-            window.location.href = nextUrl;
-          }, 400);
-        }
+    // 링크 호버
+    const mask = document.querySelector(".pt-mask");
+    const maintitle = document.querySelector(".old");
+    const subtitle = document.querySelector(".new");
+
+    gsap.set(subtitle, { yPercent: 100, opacity: 0 });
+
+    gsap.fromTo(
+      [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
+      { xPercent: 100, opacity: 0 },
+      {
+        xPercent: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power1.out",
+      }
+    );
+
+    gsap.fromTo(
+      [ptitleSplit.chars],
+      { xPercent: 100, opacity: 0 },
+      {
+        xPercent: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: "power1.out",
+      }
+    );
+
+    gsap.fromTo(
+      ".project-img a",
+      {
+        borderRadius: "100px",
       },
+      {
+        borderRadius: 0,
+        duration: 1,
+        ease: "power2.out",
+      }
+    );
+
+    mask.addEventListener("mouseenter", () => {
+      const hoverTl = gsap.timeline();
+      hoverTl
+        .to(
+          maintitle,
+          {
+            yPercent: -100,
+            duration: 0.5,
+          },
+          0
+        )
+        .to(
+          subtitle,
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 0.5,
+          },
+          0
+        );
     });
 
-    //
-    const txt = document.querySelector(".left");
-    txt.textContent = nextId ? "Next Project" : "Back to Home";
-
-    // 데이터 모두 로딩되고 보여진 후 보이기
-    const nextProjectEl = document.querySelector(".next-project");
-    nextProjectEl.style.display = "block";
-
-    initProjectAnimation();
-    ScrollTrigger.refresh();
+    mask.addEventListener("mouseleave", () => {
+      const leaveTl = gsap.timeline();
+      leaveTl
+        .to(
+          maintitle,
+          {
+            yPercent: 0,
+            duration: 0.5,
+          },
+          0
+        )
+        .to(
+          subtitle,
+          {
+            yPercent: 100,
+            duration: 0.5,
+          },
+          0
+        );
+    });
   });
+}
 
-// 프로젝트 인트로 고정 애니메이션
+// 인트로 고정
 function initProjectAnimation() {
   ScrollTrigger.create({
     trigger: ".intro",
@@ -272,5 +265,41 @@ function initProjectAnimation() {
     end: "bottom top",
     pin: true,
     pinSpacing: false,
+  });
+}
+
+// 하단 다음 프로젝트 스코롤 트리거
+function initNextProjectAnimation(data, projectId) {
+  const totalProjects = data.length;
+
+  // 다음 id 계산
+  const nextId = projectId < totalProjects ? projectId + 1 : null;
+  const nextUrl = nextId ? `project.html?id=${nextId}` : "index.html";
+  const bar = document.querySelector(".bar");
+
+  const txt = document.querySelector(".left");
+  txt.textContent = nextId ? "Next Project" : "Back to Home";
+
+  // 데이터 모두 로딩되고 보여진 후 보이기
+  const nextProjectEl = document.querySelector(".next-project");
+  nextProjectEl.style.display = "block";
+
+  ScrollTrigger.create({
+    trigger: ".next-project",
+    start: "center bottom",
+    end: "bottom bottom",
+    scrub: true,
+    onUpdate: (self) => {
+      const progress = self.progress;
+      bar.style.width = `${progress * 100}%`;
+
+      if (progress >= 0.997 && !bar.dataset.completed) {
+        // 중복 실행 체크
+        bar.dataset.completed = "true";
+        setTimeout(() => {
+          window.location.href = nextUrl;
+        }, 2000);
+      }
+    },
   });
 }
