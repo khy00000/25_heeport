@@ -298,7 +298,7 @@ function initNextProjectAnimation(data, projectId) {
         bar.dataset.completed = "true";
         setTimeout(() => {
           window.location.href = nextUrl;
-        }, 2000);
+        }, 1500);
       }
     },
   });
