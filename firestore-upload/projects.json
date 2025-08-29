@@ -4,7 +4,7 @@
     "title": "Heeyon Kim Portfolio",
     "subtitle": "Interactive 3D Design",
     "date": "June 15, 2025",
-    "stack": ["GSAP", "Three.js", "Firestore"],
+    "stack": ["GSAP", "Three.js", "REST API"],
     "url": "https://hee-port.web.app/",
     "image": "./assets/img/project-p-1.png",
     "technologies": [
@@ -12,15 +12,15 @@
       "Three.js",
       "CSS Transition",
       "Responsive Design",
-      "Firebase Firestore"
+      "Firestore REST API"
     ],
-    "description": "3D 모델을 렌더링하고 GSAP 타임라인, ScrollTrigger로 인터랙티브 애니메이션을 구현한 반응형 인터랙티브 김희연 포트폴리오입니다. <br> 각 프로젝트 페이지의 데이터를 비동기 로드하여 데이터 기반으로 렌더링 처리하였습니다.",
+    "description": "3D 모델을 렌더링하고 GSAP 타임라인, ScrollTrigger로 인터랙티브 애니메이션을 구현한 반응형 인터랙티브 김희연 포트폴리오입니다. <br> Firestore의 REST API로 각 프로젝트 페이지 데이터를 동적으로 렌더링하였습니다.",
     "functions": [
-      "GLB 형식의 3D 모델을 Three.js로 렌더링 후 스크롤에 따른 인터랙티브 애니메이션 구현",
-      "각 섹션 맞춤 GSAP 타임라인 애니메이션과 ScrollTrigger를 연동하여 자연스러운 애니메이션 흐름 연출",
-      "정적 project.html 템플릿을 만들어 projectData.json을 비동기 로드해 데이터 기반으로 렌더링 처리",
-      "URL 쿼리 파라미터를 활용해 단일 project 페이지를 동적으로 렌더링하는 SPA 유사 구조 설계",
-      "PC/MO 환경에 최적화되도록 반응형으로 디자인하고 모든 인터렉션 애니메이션까지 반응형으로 제어"
+      "3D 모델 구현 → GLB 형식의 3D 모델을 Three.js로 렌더링 후 스크롤에 따른 인터랙티브 애니메이션 구현",
+      "GSAP 애니메이션 연출 → GSAP 타임라인과 ScrollTrigger로 자연스러운 애니메이션 흐름 연출",
+      "Firestore 데이터 연동 → 직접 JSON 데이터를 Firestore에 업로드하고 REST API 기반으로 동적 렌더링",
+      "Project 페이지 라우팅 → URL 쿼리 파라미터를 활용해 단일 project 페이지를 SPA 유사 구조로 동적 렌더링",
+      "반응형/인터랙션 최적화 → PC/MO 환경에 최적화되도록 반응형으로 디자인하고 모든 인터렉션 애니메이션까지 반응형으로 제어"
     ],
     "troubleshooting": [
       {

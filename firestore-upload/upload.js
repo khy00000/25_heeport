@@ -21,7 +21,6 @@ async function uploadAndVerifyProjects() {
   // 업로드
   for (const project of data) {
     await db.collection(collectionName).doc(project.id.toString()).set(project);
-    console.log(`Uploaded project ${project.id}`);
   }
 
   console.log("All projects uploaded!");
