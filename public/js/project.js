@@ -46,8 +46,6 @@ async function loadData() {
   console.log("Fetched data:", data);
 
   const project = data.find((p) => p.id === projectId);
-  console.log("URL id:", projectId);
-console.log("Firestore IDs:", data.map(d => d.id));
 
   if (!project) {
     document.getElementById("project").innerHTML = "<p>Project not found.</p>";
@@ -82,7 +80,7 @@ function renderIntro(project, container) {
   intro.className = "intro";
   intro.innerHTML = `
         <div class="home">
-          <a href="/" class="project-logo">Heeyon Kim</a>
+          <a href="index.html" class="project-logo">Heeyon Kim</a>
         </div>
         <div class="intro-bottom">
           <div class="intro-bottom-wrap">
