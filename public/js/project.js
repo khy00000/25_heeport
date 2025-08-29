@@ -1,29 +1,65 @@
+import { config } from "./config.js";
+
 gsap.registerPlugin(ScrollTrigger);
 
-// 데이터 로딩
-const urlParams = new URLSearchParams(window.location.search);
-const projectId = parseInt(urlParams.get("id"));
+window.addEventListener("DOMContentLoaded", () => {
+  loadData();
+});
 
-fetch("./data/projectData.json")
-  .then((res) => res.json())
-  .then((data) => {
-    const project = data.find((p) => p.id === projectId);
-    if (!project) {
-      document.getElementById("project").innerHTML =
-        "<p>Project not found.</p>";
-      return;
-    }
+const url = `https://firestore.googleapis.com/v1/projects/${config.projectId}/databases/(default)/documents/${config.collectionName}?key=${config.apiKey}`;
 
-    // 프로젝트 페이지 돔 렌더링
-    renderProject(project);
+// Firestore 데이터 가져오기
+async function fetchProjectsFromFirestore() {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
 
-    // 애니메이션
-    initIntroAnimation();
-    initProjectAnimation();
-    initNextProjectAnimation(data, projectId);
+    if (!data.documents) return [];
 
-    ScrollTrigger.refresh();
-  });
+    return data.documents.map((doc) => {
+      const f = doc.fields;
+      return {
+        id: doc.name.split("/").pop(),
+        title: unwrap(f.title),
+        subtitle: unwrap(f.subtitle),
+        description: unwrap(f.description),
+        image: unwrap(f.image),
+        url: unwrap(f.url),
+        date: unwrap(f.date),
+        stack: unwrap(f.stack) || [],
+        technologies: unwrap(f.technologies) || [],
+        functions: unwrap(f.functions) || [],
+        troubleshooting: unwrap(f.troubleshooting) || [],
+      };
+    });
+  } catch (err) {
+    console.error("Firestore fetch error:", err);
+    return [];
+  }
+}
+
+async function loadData() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const projectId = urlParams.get("id");
+  const data = await fetchProjectsFromFirestore();
+
+  const project = data.find((p) => p.id === projectId);
+
+  if (!project) {
+    document.getElementById("project").innerHTML = "<p>Project not found.</p>";
+    return;
+  }
+
+  // 프로젝트 페이지 돔 렌더링
+  renderProject(project);
+
+  // 애니메이션
+  initIntroAnimation();
+  initProjectAnimation();
+  initNextProjectAnimation(data, projectId);
+
+  ScrollTrigger.refresh();
+}
 
 // 프로젝드 페이지 돔 렌더링
 function renderProject(project) {
@@ -259,21 +295,24 @@ function initIntroAnimation() {
 
 // 인트로 고정
 function initProjectAnimation() {
-  ScrollTrigger.create({
-    trigger: ".intro",
-    start: "top top",
-    end: "bottom top",
-    pin: true,
-    pinSpacing: false,
-  });
+  if (window.innerWidth > 768) {
+    ScrollTrigger.create({
+      trigger: ".intro",
+      start: "top top",
+      endTrigger: ".project-img",
+      pin: true,
+      pinSpacing: false,
+    });
+  }
 }
 
 // 하단 다음 프로젝트 스코롤 트리거
 function initNextProjectAnimation(data, projectId) {
   const totalProjects = data.length;
+  const currentId = parseInt(projectId, 10);
 
   // 다음 id 계산
-  const nextId = projectId < totalProjects ? projectId + 1 : null;
+  const nextId = currentId < totalProjects ? currentId + 1 : null;
   const nextUrl = nextId ? `project.html?id=${nextId}` : "index.html";
   const bar = document.querySelector(".bar");
 
@@ -291,15 +330,65 @@ function initNextProjectAnimation(data, projectId) {
     scrub: true,
     onUpdate: (self) => {
       const progress = self.progress;
-      bar.style.width = `${progress * 100}%`;
+
+      gsap.to(bar, {
+        width: `${progress * 100}%`,
+        duration: 3,
+        ease: "power1.out"
+      });
 
       if (progress >= 0.997 && !bar.dataset.completed) {
         // 중복 실행 체크
         bar.dataset.completed = "true";
         setTimeout(() => {
           window.location.href = nextUrl;
-        }, 1500);
+        }, 1300);
       }
     },
   });
 }
+
+// 파이어베이스 데이터 언래핑 함수
+function unwrap(field) {
+  if (!field) return null;
+
+  if (field.stringValue !== undefined) return field.stringValue;
+  if (field.integerValue !== undefined) return Number(field.integerValue);
+  if (field.doubleValue !== undefined) return Number(field.doubleValue);
+  if (field.booleanValue !== undefined) return field.booleanValue;
+  if (field.arrayValue !== undefined)
+    return (field.arrayValue.values || []).map(unwrap);
+  if (field.mapValue !== undefined) {
+    const obj = {};
+    for (const [k, v] of Object.entries(field.mapValue.fields || {})) {
+      obj[k] = unwrap(v);
+    }
+    return obj;
+  }
+  return null;
+}
+
+// // 데이터 로딩
+// const urlParams = new URLSearchParams(window.location.search);
+// const projectId = parseInt(urlParams.get("id"));
+
+// fetch("./data/projectData.json")
+//   .then((res) => res.json())
+//   .then((data) => {
+//     const project = data.find((p) => p.id === projectId);
+//     if (!project) {
+//       document.getElementById("project").innerHTML =
+//         "<p>Project not found.</p>";
+//       return;
+//     }
+
+//     // 프로젝트 페이지 돔 렌더링
+//     renderProject(project);
+
+//     // 애니메이션
+//     initIntroAnimation();
+//     initProjectAnimation();
+//     initNextProjectAnimation(data, projectId);
+
+//     ScrollTrigger.refresh();
+//   });

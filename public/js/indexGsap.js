@@ -51,7 +51,7 @@ window.addEventListener("load", () => {
       mask: "chars",
     });
 
-    // 인트로 애니메이션
+    // 메인 페이지 인트로 애니메이션
     const introtxts = [
       ".split1",
       ".split2",
