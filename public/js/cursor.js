@@ -1,7 +1,7 @@
 const cursor = document.querySelector(".cursor");
 const cursorText = cursor.querySelector(".cursor-text");
-let mouseX = 0,
-  mouseY = 0;
+let mouseX = -100,
+    mouseY = -100;
 let scale = 1,
   color = "transparent",
   opacity = 0;

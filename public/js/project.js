@@ -55,7 +55,7 @@ async function loadData() {
   renderProject(project);
 
   await waitForResources();
-  
+
   // 애니메이션
   initIntroAnimation();
   initProjectAnimation();
@@ -303,7 +303,7 @@ function initProjectAnimation() {
       ScrollTrigger.create({
         trigger: ".intro",
         start: "top top",
-        endTrigger: ".project-img",
+        end: "bottom top",
         pin: true,
         pinSpacing: false,
       });

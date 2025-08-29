@@ -418,10 +418,12 @@
   }
 
   .project-p-title h1 {
+    opacity: 1;
     font-size: 30px;
   }
 
   .project-p-title p {
+    opacity: 1;
     font-size: 20px;
   }
 
