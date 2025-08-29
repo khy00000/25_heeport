@@ -41,6 +41,7 @@ async function fetchProjectsFromFirestore() {
 async function loadData() {
   const urlParams = new URLSearchParams(window.location.search);
   const projectId = urlParams.get("id");
+
   const data = await fetchProjectsFromFirestore();
 
   const project = data.find((p) => p.id === projectId);
@@ -53,6 +54,8 @@ async function loadData() {
   // 프로젝트 페이지 돔 렌더링
   renderProject(project);
 
+  await waitForResources();
+  
   // 애니메이션
   initIntroAnimation();
   initProjectAnimation();
@@ -295,15 +298,20 @@ function initIntroAnimation() {
 
 // 인트로 고정
 function initProjectAnimation() {
-  if (window.innerWidth > 768) {
-    ScrollTrigger.create({
-      trigger: ".intro",
-      start: "top top",
-      endTrigger: ".project-img",
-      pin: true,
-      pinSpacing: false,
-    });
-  }
+  ScrollTrigger.matchMedia({
+    "(min-width: 769px)": function () {
+      ScrollTrigger.create({
+        trigger: ".intro",
+        start: "top top",
+        endTrigger: ".project-img",
+        pin: true,
+        pinSpacing: false,
+      });
+    },
+    "(max-width: 768px)": function () {
+      // 모바일에서는 pin 제거
+    },
+  });
 }
 
 // 하단 다음 프로젝트 스코롤 트리거
@@ -334,7 +342,7 @@ function initNextProjectAnimation(data, projectId) {
       gsap.to(bar, {
         width: `${progress * 100}%`,
         duration: 3,
-        ease: "power1.out"
+        ease: "power1.out",
       });
 
       if (progress >= 0.997 && !bar.dataset.completed) {
@@ -366,6 +374,23 @@ function unwrap(field) {
     return obj;
   }
   return null;
+}
+
+// 리소스 로딩 체크 함수
+function waitForResources() {
+  return new Promise(resolve => {
+    // 1. 이미지 로딩 체크
+    const images = Array.from(document.images);
+    const imagesLoaded = images.map(img => {
+      if (img.complete) return Promise.resolve();
+      return new Promise(r => (img.onload = r));
+    });
+
+    // 2. 폰트 로딩 체크
+    document.fonts.ready.then(() => {
+      Promise.all(imagesLoaded).then(resolve);
+    });
+  });
 }
 
 // // 데이터 로딩

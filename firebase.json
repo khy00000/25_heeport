@@ -8,6 +8,10 @@
         "destination": "/project.html"
       },
       {
+        "source": "/projects.html",
+        "destination": "/projects.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
