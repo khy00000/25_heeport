@@ -1,8 +1,10 @@
 html,
 body {
-  overflow-x: hidden !important;
-  overflow: hidden !important;
+  /* overflow-x: hidden !important;
+  overflow: hidden !important; */
   scroll-behavior: auto !important;
+  overflow-y: auto;
+  touch-action: pan-y;
 }
 
 body {

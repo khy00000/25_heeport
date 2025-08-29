@@ -102,6 +102,7 @@ window.addEventListener("load", () => {
 
       // 로딩 페이지 초기 상태
       loadtl
+        .set("#main", { autoAlpha: 0 })
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".loading", { autoAlpha: 1, y: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
@@ -124,6 +125,10 @@ window.addEventListener("load", () => {
           },
           "+=0.3"
         )
+
+        // 로딩 되며 메인페이지 살리기
+        .to("#main", { autoAlpha: 1 })
+
         // 3. 로딩 페이지 제거
         .set([".loading", ".loading-logo"], { display: "none" })
 
@@ -321,7 +326,7 @@ window.addEventListener("load", () => {
           onUpdate: () => {
             const currentScale = gsap.getProperty(imgWrap1, "scale");
 
-            if (currentScale >= 1){
+            if (currentScale >= 1) {
               window.openOff = true;
             } else {
               window.openOff = false;

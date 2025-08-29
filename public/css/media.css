@@ -384,13 +384,13 @@
   }
 
   .projects-p {
-    height: 80vh;
+    height: 70vh;
   }
 
   .projects-p .pp-wrap {
     flex-direction: column;
     justify-content: unset;
-    padding-bottom: 15vh;
+    padding-bottom: 10vh;
   }
 
   .projects-p .pp-wrap .projects-p-title {
