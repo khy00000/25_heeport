@@ -43,8 +43,11 @@ async function loadData() {
   const projectId = urlParams.get("id");
 
   const data = await fetchProjectsFromFirestore();
+  console.log("Fetched data:", data);
 
   const project = data.find((p) => p.id === projectId);
+  console.log("URL id:", projectId);
+console.log("Firestore IDs:", data.map(d => d.id));
 
   if (!project) {
     document.getElementById("project").innerHTML = "<p>Project not found.</p>";
