@@ -6,7 +6,7 @@
     "date": "June 15, 2025",
     "stack": ["GSAP", "Three.js", "REST API"],
     "url": "https://hee-port.web.app/",
-    "image": "./assets/img/project-p-1.png",
+    "image": "https://raw.githubusercontent.com/khy00000/storage/refs/heads/main/heeport/img/project-p-1.png",
     "technologies": [
       "GSAP",
       "Three.js",
@@ -14,11 +14,11 @@
       "Responsive Design",
       "Firestore REST API"
     ],
-    "description": "3D 모델을 렌더링하고 GSAP 타임라인, ScrollTrigger로 인터랙티브 애니메이션을 구현한 반응형 인터랙티브 김희연 포트폴리오입니다. <br> Firestore의 REST API로 각 프로젝트 페이지 데이터를 동적으로 렌더링하였습니다.",
+    "description": "3D 모델을 렌더링하고 GSAP 타임라인, ScrollTrigger로 인터랙티브 애니메이션을 구현한 반응형 인터랙티브 김희연 포트폴리오입니다. <br> Firestore의 REST API를 사용하여 각 프로젝트 페이지 데이터를 동적으로 렌더링하였습니다.",
     "functions": [
       "3D 모델 구현 → GLB 형식의 3D 모델을 Three.js로 렌더링 후 스크롤에 따른 인터랙티브 애니메이션 구현",
       "GSAP 애니메이션 연출 → GSAP 타임라인과 ScrollTrigger로 자연스러운 애니메이션 흐름 연출",
-      "Firestore 데이터 연동 → 직접 JSON 데이터를 Firestore에 업로드하고 REST API 기반으로 동적 렌더링",
+      "백엔드 연동 경험 → 직접 JSON 데이터를 Firestore(클라우드 DB)에 업로드하고 REST API 기반으로 동적 렌더링",
       "Project 페이지 라우팅 → URL 쿼리 파라미터를 활용해 단일 project 페이지를 SPA 유사 구조로 동적 렌더링",
       "반응형/인터랙션 최적화 → PC/MO 환경에 최적화되도록 반응형으로 디자인하고 모든 인터렉션 애니메이션까지 반응형으로 제어"
     ],
@@ -223,12 +223,12 @@
     "title": "COEX React Site",
     "subtitle": "React + Firestore + SCSS",
     "date": "April 10, 2025",
-    "stack": ["React", "Firestore", "SCSS"],
+    "stack": ["React", "Firestore SDK", "SCSS"],
     "url": "https://hee-coex.web.app",
-    "image": "./assets/img/project-p-2.png",
+    "image": "https://raw.githubusercontent.com/khy00000/storage/refs/heads/main/heeport/img/project-p-2.png",
     "technologies": [
       "React",
-      "Firebase Firestore",
+      "Firebase Firestore SDK",
       "SCSS",
       "Swiper.js",
       "CSS Transition",
@@ -237,7 +237,7 @@
     "description": "React를 기반으로 클라우드 DB에 직접 데이터를 업로드하여 실시간 비동기 데이터 통신으로 구현한 COEX 공식 사이트의 클론 코딩 프로젝트입니다. <br> 웹 접근성 고려는 물론 SCSS를 활용하여 1px 단위의 디테일까지 반영한 반응형 UI를 완성하였습니다.",
     "functions": [
       "컴포넌트 구조화 → 섹션 단위로 JSX 컴포넌트를 분리하여 유지보수성 강화",
-      "백엔드 연동 경험 → 직접 JSON 데이터를 Firestore(클라우드 DB)에 업로드 후 JSON 데이터를 커스텀 훅으로 가져와 상태 관리",
+      "백엔드 연동 경험 → Firebase SDK로 실시간 데이터 통신 및 브라우저 구현",
       "가볍고 효율적인 애니메이션 → CSS Transition 애니메이션 구현으로 디테일하고 동적이지만 가벼운 UI 연출",
       "SCSS 활용 → mixin을 활용해 공통 레이아웃 스타일 재사용 및 반응형 처리",
       "조건부 반응형 처리 → 직접 만든 useResponsive 훅으로 디바이스 크기에 따른 디자인 조건 분기"
@@ -415,7 +415,7 @@
     "date": "Feb 25, 2025",
     "stack": ["KakaoOAuth", "Geolocation", "Responsive"],
     "url": "https://hee-cos.web.app/",
-    "image": "./assets/img/project-p-3.png",
+    "image": "https://raw.githubusercontent.com/khy00000/storage/refs/heads/main/heeport/img/project-p-3.png",
     "technologies": [
       "Kakao OAuth",
       "Geolocation API",

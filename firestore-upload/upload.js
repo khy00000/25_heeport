@@ -23,8 +23,6 @@ async function uploadAndVerifyProjects() {
     await db.collection(collectionName).doc(project.id.toString()).set(project);
   }
 
-  console.log("All projects uploaded!");
-
   // 업로드 확인
   const snapshot = await db.collection(collectionName).get();
   console.log(`--- Uploaded Documents in "${collectionName}" Collection ---`);
