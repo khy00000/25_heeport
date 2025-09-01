@@ -213,9 +213,6 @@ function initIntroAnimation() {
     const maintitle = document.querySelector(".old");
     const subtitle = document.querySelector(".new");
 
-    //ios borderRadius 버그 대응
-    // const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
     gsap.set(subtitle, { yPercent: 100, opacity: 0 });
     gsap.set(".project-img a", { borderRadius: "70px" });
 

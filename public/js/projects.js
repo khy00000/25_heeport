@@ -11,9 +11,7 @@ document.fonts.ready.then(() => {
     mask: "chars",
   });
 
-  //ios borderRadius 버그 대응
-  // const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  gsap.set(".project-p-container a", { borderRadius: "0px" });
+  gsap.set(".project-p-container a", { borderRadius: "1px" });
 
   // 타임라인 생성
   const tl = gsap.timeline();
@@ -26,7 +24,7 @@ document.fonts.ready.then(() => {
   )
     .fromTo(
       ".project-p-container a",
-      { borderRadius: "0px" },
+      { borderRadius: "1px" },
       { borderRadius: "70px", duration: 1, ease: "power2.out" },
       "<"
     )
