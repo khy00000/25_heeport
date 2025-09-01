@@ -97,7 +97,7 @@ body.projects {
 .projects-p-item .project-p-container a {
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 70px;
   display: block;
   overflow: hidden;
   will-change: border-radius, transform;

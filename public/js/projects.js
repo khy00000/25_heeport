@@ -28,7 +28,7 @@ document.fonts.ready.then(() => {
       ".project-p-container a",
       { borderRadius: "0px" },
       { borderRadius: "70px", duration: 1, ease: "power2.out" },
-      "<" // "<"는 이전 애니메이션과 동시에 시작
+      "<"
     )
     .add(() => {
       if (window.innerWidth > 768) {
