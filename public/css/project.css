@@ -97,7 +97,6 @@ body {
 
 .project-img a {
   display: block;
-  overflow: hidden;
   border-radius: 100px;
   background-color: white;
 }

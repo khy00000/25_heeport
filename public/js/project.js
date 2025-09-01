@@ -214,7 +214,6 @@ function initIntroAnimation() {
     const subtitle = document.querySelector(".new");
 
     gsap.set(subtitle, { yPercent: 100, opacity: 0 });
-    gsap.set(".project-img a", { borderRadius: "100px" });
 
     gsap.fromTo(
       [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
@@ -241,14 +240,8 @@ function initIntroAnimation() {
 
     gsap.fromTo(
       ".project-img a",
-      {
-        borderRadius: "100px",
-      },
-      {
-        borderRadius: "0px",
-        duration: 1,
-        ease: "power2.out",
-      },
+      { clipPath: "inset(0% round 25%)" },
+      { clipPath: "inset(0% round 0%)", duration: 1, ease: "power2.out" },
       "<"
     );
 
