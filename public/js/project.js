@@ -214,41 +214,41 @@ function initIntroAnimation() {
     const subtitle = document.querySelector(".new");
 
     //ios borderRadius 버그 대응
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    // const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     gsap.set(subtitle, { yPercent: 100, opacity: 0 });
+    gsap.set(".project-img a", { borderRadius: "70px" });
 
-    gsap.fromTo(
-      [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
-      { xPercent: 100, opacity: 0 },
-      {
-        xPercent: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power1.out",
-      }
-    );
+    const projectTl = gsap.timeline();
 
-    gsap.fromTo(
-      [ptitleSplit.chars],
-      { xPercent: 100, opacity: 0 },
-      {
-        xPercent: 0,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power1.out",
-      },
-      "<"
-    );
-
-    if (!isIOS) {
-      gsap.fromTo(
+    projectTl
+      .fromTo(
+        [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
+        { xPercent: 100, opacity: 0 },
+        {
+          xPercent: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power1.out",
+        }
+      )
+      .fromTo(
+        [ptitleSplit.chars],
+        { xPercent: 100, opacity: 0 },
+        {
+          xPercent: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: "power1.out",
+        },
+        "<"
+      )
+      .fromTo(
         ".project-img a",
         { borderRadius: "70px" },
         { borderRadius: "0px", duration: 1, ease: "power2.out" },
         "<"
       );
-    }
 
     mask.addEventListener("mouseenter", () => {
       const hoverTl = gsap.timeline();
