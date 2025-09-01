@@ -25,14 +25,14 @@ document.fonts.ready.then(() => {
   );
 
   // 버튼 애니메이션 (문자와 동시에 실행)
-  if (!isIOS) {
+  // if (!isIOS) {
     tl.fromTo(
       ".project-p-container a",
       { borderRadius: "0px" },
       { borderRadius: "70px", duration: 1, ease: "power2.out" },
       "<" // "<"는 이전 애니메이션과 동시에 시작
     );
-  }
+  // }
 
   // onComplete 작업
   tl.add(() => {
