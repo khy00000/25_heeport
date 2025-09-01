@@ -214,7 +214,7 @@ function initIntroAnimation() {
     const subtitle = document.querySelector(".new");
 
     gsap.set(subtitle, { yPercent: 100, opacity: 0 });
-    // gsap.set(".project-img a", { yPercent: 100, opacity: 0 });
+    gsap.set(".project-img a", { borderRadius: "100px" });
 
     gsap.fromTo(
       [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
@@ -235,7 +235,8 @@ function initIntroAnimation() {
         opacity: 1,
         duration: 0.5,
         ease: "power1.out",
-      }
+      },
+      "<"
     );
 
     gsap.fromTo(
@@ -247,7 +248,8 @@ function initIntroAnimation() {
         borderRadius: "0px",
         duration: 1,
         ease: "power2.out",
-      }
+      },
+      "<"
     );
 
     mask.addEventListener("mouseenter", () => {
