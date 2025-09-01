@@ -245,6 +245,10 @@ window.addEventListener("load", () => {
     const imgWrap2 = project2.querySelector(".project-img");
     const imgWrap3 = project3.querySelector(".project-img");
 
+    function getViewportHeight() {
+      return window.innerHeight || document.documentElement.clientHeight;
+    }
+
     const titles = gsap.utils.toArray(".project-item-title");
     const titleSplits = titles.map(
       (title) =>
@@ -297,11 +301,17 @@ window.addEventListener("load", () => {
     const flatChars = allchars.flatMap((arr) => arr.chars || arr);
 
     gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
-    gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: window.innerHeight });
+    gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: getViewportHeight() });
+    // 애니메이션 시작 전에 높이 다시 계산
+    ScrollTrigger.addEventListener("refreshInit", () => {
+      gsap.set([imgWrap2, imgWrap3], { y: getViewportHeight() });
+    });
+
     gsap.set(flatChars, { opacity: 0, x: 100 });
     gsap.set(project1, { pointerEvents: "auto" });
     gsap.set([project2, project3], { pointerEvents: "none" });
 
+    // 커서 디자인 플래그
     window.openOff = false;
 
     const projectTl = gsap.timeline({
