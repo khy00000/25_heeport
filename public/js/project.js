@@ -213,8 +213,10 @@ function initIntroAnimation() {
     const maintitle = document.querySelector(".old");
     const subtitle = document.querySelector(".new");
 
+    //ios borderRadius 버그 대응
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
     gsap.set(subtitle, { yPercent: 100, opacity: 0 });
-    gsap.set(".project-img a", { borderRadius: "15%"});
 
     gsap.fromTo(
       [plogoSplit.chars, pdateSplit.chars, ptoolSplit.chars],
@@ -239,12 +241,14 @@ function initIntroAnimation() {
       "<"
     );
 
-    gsap.fromTo(
-      ".project-img a",
-      { borderRadius: "15%" },
-      { borderRadius: "0%", duration: 1, ease: "power2.out" },
-      "<"
-    );
+    if (!isIOS) {
+      gsap.fromTo(
+        ".project-img a",
+        { borderRadius: "70px" },
+        { borderRadius: "0px", duration: 1, ease: "power2.out" },
+        "<"
+      );
+    }
 
     mask.addEventListener("mouseenter", () => {
       const hoverTl = gsap.timeline();
