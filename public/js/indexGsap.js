@@ -245,9 +245,11 @@ window.addEventListener("load", () => {
     const imgWrap2 = project2.querySelector(".project-img");
     const imgWrap3 = project3.querySelector(".project-img");
 
-    const pjVH = window.visualViewport
-      ? window.visualViewport.height
-      : window.innerHeight;
+    function getVH() {
+      return window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+    }
 
     const titles = gsap.utils.toArray(".project-item-title");
     const titleSplits = titles.map(
@@ -301,8 +303,11 @@ window.addEventListener("load", () => {
     const flatChars = allchars.flatMap((arr) => arr.chars || arr);
 
     gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
-    // 애니메이션 시작 전에 높이 다시 계산
-    gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: pjVH });
+    gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: getVH() });
+    // 모바일에서 높이 바뀔 시 다시 계산
+    window.addEventListener("resize", () => {
+      gsap.set([imgWrap2, imgWrap3], { y: getVH() });
+    });
 
     gsap.set(flatChars, { opacity: 0, x: 100 });
     gsap.set(project1, { pointerEvents: "auto" });
