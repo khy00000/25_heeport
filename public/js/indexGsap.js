@@ -99,14 +99,15 @@ window.addEventListener("load", () => {
     const hasVisited = sessionStorage.getItem("hasVisited");
 
     if (!hasVisited) {
-      loading.classList.add("first-visit");
       sessionStorage.setItem("hasVisited", "true");
+      loading.classList.add("first-visit-loading");
 
       // 로딩 페이지 초기 상태
       loadtl
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".loading", { y: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
+        .set("#main", { display: "block" })
 
         // 1. 로고 마스크 애니메이션
         .from(loadingSplit.chars, {
@@ -242,12 +243,6 @@ window.addEventListener("load", () => {
     const imgWrap2 = project2.querySelector(".project-img");
     const imgWrap3 = project3.querySelector(".project-img");
 
-    function getVH() {
-      return window.visualViewport
-        ? window.visualViewport.height
-        : window.innerHeight;
-    }
-
     const titles = gsap.utils.toArray(".project-item-title");
     const titleSplits = titles.map(
       (title) =>
@@ -300,12 +295,7 @@ window.addEventListener("load", () => {
     const flatChars = allchars.flatMap((arr) => arr.chars || arr);
 
     gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
-    gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: getVH() });
-    // 모바일에서 높이 바뀔 시 다시 계산
-    window.addEventListener("resize", () => {
-      gsap.set([imgWrap2, imgWrap3], { y: getVH() });
-    });
-
+    gsap.set([imgWrap2, imgWrap3], { opacity: 1, yPercent: 100 });
     gsap.set(flatChars, { opacity: 0, x: 100 });
     gsap.set(project1, { pointerEvents: "auto" });
     gsap.set([project2, project3], { pointerEvents: "none" });
@@ -452,4 +442,8 @@ window.addEventListener("load", () => {
 
     ScrollTrigger.refresh(); // 트리거 새로고침
   });
+});
+
+window.addEventListener("resize", () => {
+  ScrollTrigger.refresh(); // 높이 변화에 맞춰 트리거 범위 재계산
 });

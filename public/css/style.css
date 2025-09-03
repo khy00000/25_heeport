@@ -17,7 +17,7 @@ body {
   display: none;
 }
 
-.first-visit {
+.first-visit-loading {
   display: block;
   background-color: #1d1d1d;
   position: fixed;
