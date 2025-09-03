@@ -8,6 +8,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 9999;
+}
+
 #project {
   background-color: white;
   color: #151515;

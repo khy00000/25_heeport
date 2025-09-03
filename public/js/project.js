@@ -54,12 +54,16 @@ async function loadData() {
   // 프로젝트 페이지 돔 렌더링
   renderProject(project);
 
-  // 애니메이션
-  initIntroAnimation();
-  initProjectAnimation();
-  initNextProjectAnimation(data, projectId);
+  setTimeout(() => {
+    document.getElementById("preloader").style.display = "none";
 
-  ScrollTrigger.refresh();
+    // 애니메이션
+    initIntroAnimation();
+    initProjectAnimation();
+    initNextProjectAnimation(data, projectId);
+
+    ScrollTrigger.refresh();
+  }, 300);
 }
 
 // 프로젝드 페이지 돔 렌더링
