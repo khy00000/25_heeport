@@ -97,10 +97,12 @@ window.addEventListener("load", () => {
     // 첫 로딩 시에만 로딩페이지 애니메이션
     const loading = document.querySelector(".loading");
     const hasVisited = sessionStorage.getItem("hasVisited");
+    const main = document.getElementById("main");
+    const lateral = document.querySelector(".lateral");
 
     if (!hasVisited) {
       sessionStorage.setItem("hasVisited", "true");
-      loading.classList.add("first-visit-loading");
+      loading.classList.add("first-visit");
 
       // 로딩 페이지 초기 상태
       loadtl
@@ -129,6 +131,7 @@ window.addEventListener("load", () => {
 
         // 3. 로딩 페이지 제거와 동시에 메인 페이지 준비
         .set([".loading", ".loading-logo"], { display: "none" })
+        .set([main, lateral], { autoAlpha: 1 })
 
         // 4. 로딩 후 intro1 등장 / "-=0.3" 이전 타임라인 블록이 끝나기 0.3초 전에 이 애니메이션을 시작 / ">" 애니메이션이 끝난 직후
         .add(animateIn(split1), "-=0.3")
@@ -146,6 +149,7 @@ window.addEventListener("load", () => {
         });
     } else {
       loadtl
+        .set([main, lateral], { autoAlpha: 1 })
         // 로딩 애니메이션 건너뛰기
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
@@ -343,7 +347,12 @@ window.addEventListener("load", () => {
         ">-0.3"
       )
       .to({}, { duration: 4 })
-      .to(imgWrap2, { opacity: 1, yPercent: 0, duration: 3, ease: "power2.out" })
+      .to(imgWrap2, {
+        opacity: 1,
+        yPercent: 0,
+        duration: 3,
+        ease: "power2.out",
+      })
       .to(
         project1,
         {
@@ -366,7 +375,12 @@ window.addEventListener("load", () => {
         ">-0.3"
       )
       .to({}, { duration: 4 })
-      .to(imgWrap3, { opacity: 1, yPercent: 0, duration: 3, ease: "power2.out" })
+      .to(imgWrap3, {
+        opacity: 1,
+        yPercent: 0,
+        duration: 3,
+        ease: "power2.out",
+      })
       .to(
         project2,
         {
