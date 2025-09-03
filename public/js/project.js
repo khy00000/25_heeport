@@ -56,6 +56,7 @@ async function loadData() {
 
   setTimeout(() => {
     document.getElementById("preloader").style.display = "none";
+    document.getElementById("project").style.display = "block";
 
     // 애니메이션
     initIntroAnimation();

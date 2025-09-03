@@ -12,9 +12,9 @@ body {
   color: white;
 }
 
-
 /* 로딩 페이지 */
 .loading {
+  display: none;
   background-color: #1d1d1d;
   position: fixed;
   top: 0;
@@ -24,6 +24,10 @@ body {
   overflow: hidden;
   z-index: 9999;
   clip-path: inset(0% 0% 0% 0%);
+}
+
+.first-visit{
+  display: block;
 }
 
 .loading-logo {
@@ -63,11 +67,6 @@ canvas {
   height: 100vh;
   /* background: radial-gradient(circle, #312C2A, #252221); */
   background-image: linear-gradient(to top, #312c2a 0%, #252221 100%);
-}
-
-#main {
-  position: relative;
-  z-index: 1;
 }
 
 /* 측면 박스 */
@@ -120,6 +119,11 @@ canvas {
 .lateral2 div {
   padding-top: 0.7vw;
   font-size: 30px;
+}
+
+#main {
+  position: relative;
+  z-index: 1;
 }
 
 /* 인트로 */

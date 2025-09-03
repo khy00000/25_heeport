@@ -95,15 +95,17 @@ window.addEventListener("load", () => {
 
     const loadtl = gsap.timeline();
     // 첫 로딩 시에만 로딩페이지 애니메이션
+    const loading = document.querySelector(".loading");
     const hasVisited = sessionStorage.getItem("hasVisited");
 
     if (!hasVisited) {
+      loading.classList.add("first-visit");
       sessionStorage.setItem("hasVisited", "true");
 
       // 로딩 페이지 초기 상태
       loadtl
         .set(".cursor", { opacity: 0, scale: 0 })
-        .set(".loading", { autoAlpha: 1, y: 0 })
+        .set(".loading", { y: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
 
         // 1. 로고 마스크 애니메이션
@@ -125,7 +127,7 @@ window.addEventListener("load", () => {
           "+=0.3"
         )
 
-        // 3. 로딩 페이지 제거
+        // 3. 로딩 페이지 제거와 동시에 메인 페이지 준비
         .set([".loading", ".loading-logo"], { display: "none" })
 
         // 4. 로딩 후 intro1 등장 / "-=0.3" 이전 타임라인 블록이 끝나기 0.3초 전에 이 애니메이션을 시작 / ">" 애니메이션이 끝난 직후
@@ -145,7 +147,7 @@ window.addEventListener("load", () => {
     } else {
       loadtl
         // 로딩 애니메이션 건너뛰기
-        .set([".loading", ".loading-logo"], { autoAlpha: 0 })
+        .set([".loading", ".loading-logo"], { display: "none" })
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
 
