@@ -98,7 +98,9 @@ window.addEventListener("load", () => {
     const loading = document.querySelector(".loading");
     const hasVisited = sessionStorage.getItem("hasVisited");
     const main = document.getElementById("main");
-    const lateral = document.querySelector(".lateral");
+    const navLinks = document.querySelectorAll(".intro .intro-row1 nav a");
+    const logo = document.querySelectorAll(".logo");
+    const lateral = document.querySelectorAll(".lateral");
 
     if (!hasVisited) {
       sessionStorage.setItem("hasVisited", "true");
@@ -106,6 +108,8 @@ window.addEventListener("load", () => {
 
       // 로딩 페이지 초기 상태
       loadtl
+        .set(main, { autoAlpha: 0 })
+        .set([navLinks, logo, lateral], { autoAlpha: 0 })
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".loading", { y: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
@@ -131,9 +135,10 @@ window.addEventListener("load", () => {
 
         // 3. 로딩 페이지 제거와 동시에 메인 페이지 준비
         .set([".loading", ".loading-logo"], { display: "none" })
-        .set([main, lateral], { autoAlpha: 1 })
+        .to(main, { autoAlpha: 1 })
+        .to([navLinks, logo, lateral], { autoAlpha: 1, duration: 0.5 })
 
-        // 4. 로딩 후 intro1 등장 / "-=0.3" 이전 타임라인 블록이 끝나기 0.3초 전에 이 애니메이션을 시작 / ">" 애니메이션이 끝난 직후
+        // 4. 로딩 후 intro1 등장
         .add(animateIn(split1), "-=0.3")
         .add(animateIn(split2), ">")
         // 5. 3d 인트로 애니메이션
@@ -149,12 +154,13 @@ window.addEventListener("load", () => {
         });
     } else {
       loadtl
-        .set([main, lateral], { autoAlpha: 1 })
         // 로딩 애니메이션 건너뛰기
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
 
-        .to({}, { duration: 1 })
+        .to({}, { duration: 0.5 })
+        .to(main, { autoAlpha: 1 })
+        .to([navLinks, logo, lateral], { autoAlpha: 1, duration: 0.5 })
 
         .add(animateIn(split1), "-=0.3")
         .add(animateIn(split2), ">")

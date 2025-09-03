@@ -159,7 +159,9 @@ canvas {
   border-radius: 100px 100px;
   font-size: 17px;
   position: relative;
-  transition: 0.5s ease-in;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
 }
 
 .intro .intro-row1 nav a:hover {
@@ -199,6 +201,9 @@ canvas {
   transition: none;
   font-size: 30px;
   font-weight: 400;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
 }
 
 .intro .intro-row1 .logo .logo-flex {
