@@ -107,7 +107,6 @@ window.addEventListener("load", () => {
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".loading", { y: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
-        .set("#main", { display: "block" })
 
         // 1. 로고 마스크 애니메이션
         .from(loadingSplit.chars, {
@@ -295,7 +294,7 @@ window.addEventListener("load", () => {
     const flatChars = allchars.flatMap((arr) => arr.chars || arr);
 
     gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
-    gsap.set([imgWrap2, imgWrap3], { opacity: 1, yPercent: 100 });
+    gsap.set([imgWrap2, imgWrap3], { opacity: 1, yPercent: 105 });
     gsap.set(flatChars, { opacity: 0, x: 100 });
     gsap.set(project1, { pointerEvents: "auto" });
     gsap.set([project2, project3], { pointerEvents: "none" });
@@ -344,7 +343,7 @@ window.addEventListener("load", () => {
         ">-0.3"
       )
       .to({}, { duration: 4 })
-      .to(imgWrap2, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
+      .to(imgWrap2, { opacity: 1, yPercent: 0, duration: 3, ease: "power2.out" })
       .to(
         project1,
         {
@@ -367,7 +366,7 @@ window.addEventListener("load", () => {
         ">-0.3"
       )
       .to({}, { duration: 4 })
-      .to(imgWrap3, { opacity: 1, y: 0, duration: 3, ease: "power2.out" })
+      .to(imgWrap3, { opacity: 1, yPercent: 0, duration: 3, ease: "power2.out" })
       .to(
         project2,
         {
@@ -442,8 +441,4 @@ window.addEventListener("load", () => {
 
     ScrollTrigger.refresh(); // 트리거 새로고침
   });
-});
-
-window.addEventListener("resize", () => {
-  ScrollTrigger.refresh(); // 높이 변화에 맞춰 트리거 범위 재계산
 });

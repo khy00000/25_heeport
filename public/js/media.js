@@ -28,12 +28,12 @@ if (window.innerWidth <= 768) {
 //   }, 10); // layout이 안정된 뒤 위치 이동
 // });
 
-// // 리사이즈 후 300ms 동안 멈추면 새로고침
-// let resizeTimer;
+// 리사이즈 후 300ms 동안 멈추면 새로고침
+let resizeTimer;
 
-// window.addEventListener("resize", () => {
-//   clearTimeout(resizeTimer);
-//   resizeTimer = setTimeout(() => {
-//     location.reload();
-//   }, 300);
-// });
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    location.reload();
+  }, 300);
+});
