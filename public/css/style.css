@@ -15,6 +15,10 @@ body {
 /* 로딩 페이지 */
 .loading {
   display: none;
+}
+
+.first-visit {
+  display: block;
   background-color: #1d1d1d;
   position: fixed;
   top: 0;
@@ -24,10 +28,6 @@ body {
   overflow: hidden;
   z-index: 9999;
   clip-path: inset(0% 0% 0% 0%);
-}
-
-.first-visit{
-  display: block;
 }
 
 .loading-logo {

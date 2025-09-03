@@ -147,7 +147,6 @@ window.addEventListener("load", () => {
     } else {
       loadtl
         // 로딩 애니메이션 건너뛰기
-        .set([".loading", ".loading-logo"], { display: "none" })
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
 
