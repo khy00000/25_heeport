@@ -99,6 +99,8 @@ body.projects {
   height: 100%;
   display: block;
   overflow: hidden;
+  will-change: border-radius, transform;
+  backface-visibility: hidden;
 }
 
 .projects-p-item .project-p-container a img {

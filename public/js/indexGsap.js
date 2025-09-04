@@ -410,8 +410,7 @@ window.addEventListener("load", () => {
           duration: 4,
         },
         ">-0.3"
-      )
-      .to({}, { duration: 4 });
+      );
 
     // footer 애니메이션
     const footertops = document.querySelectorAll(".footer_top p");
