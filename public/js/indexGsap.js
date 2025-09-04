@@ -319,7 +319,7 @@ window.addEventListener("load", () => {
       scrollTrigger: {
         trigger: ".projects",
         start: "top top",
-        end: "+=3000",
+        end: window.innerWidth < 768 ? "+=4000" : "+=3000",
         scrub: 2,
         pin: true,
       },
@@ -466,7 +466,7 @@ window.addEventListener("load", () => {
   });
 });
 
-//리사이즈 리로드
+// 리사이즈 리로드
 let resizeTimer;
 let lastWidth = window.innerWidth;
 

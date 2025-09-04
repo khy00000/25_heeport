@@ -10,7 +10,7 @@ let hoverTarget = null;
 
 // 커서 텍스트 효과 대상
 const cursorTargets = document.querySelectorAll(
-  ".project-list-wrap, .logo, .top-button-hover, .goProject"
+  ".project-list-wrap, .logo, .top-button-hover, .goProject, .projects-hover"
 );
 
 // 마우스 움직여야 커서 보이게
