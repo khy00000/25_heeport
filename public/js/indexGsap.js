@@ -468,21 +468,21 @@ window.addEventListener("load", () => {
   });
 });
 
-// 리사이즈 리로드
+//리사이즈 리로드
 let resizeTimer;
-let lastSize = { w: window.innerWidth, h: window.innerHeight };
+let lastWidth = window.innerWidth;
 
 function handleResize() {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(()=>{
-    const dw = Math.abs(window.innerWidth - lastSize.w);
-    const dh = Math.abs(window.innerHeight - lastSize.h);
+  resizeTimer = setTimeout(() => {
+    const dw = Math.abs(window.innerWidth - lastWidth);
 
-    if (dw > 50 || dh > 140){
+    // 가로폭이 50px 이상 바뀌면 reload
+    if (dw > 50) {
       location.reload();
     }
 
-    lastSize = { w: window.innerWidth, h: window.innerHeight };
+    lastWidth = window.innerWidth;
   }, 300);
 }
 
