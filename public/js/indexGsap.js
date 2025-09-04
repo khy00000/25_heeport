@@ -319,7 +319,7 @@ window.addEventListener("load", () => {
       scrollTrigger: {
         trigger: ".projects",
         start: "top top",
-        end: window.innerWidth < 768 ? "+=4000" : "+=3000",
+        end: window.innerWidth < 768 ? "+=5000" : "+=4000",
         scrub: 2,
         pin: true,
       },
@@ -388,6 +388,7 @@ window.addEventListener("load", () => {
         yPercent: 0,
         duration: 3,
         ease: "power2.out",
+        overwrite: "auto",
       })
       .to(
         project2,
