@@ -99,6 +99,7 @@ window.addEventListener("load", () => {
     const loading = document.querySelector(".loading");
     const hasVisited = sessionStorage.getItem("hasVisited");
 
+    // 메인 요소
     const navLinks = document.querySelectorAll(".intro .intro-row1 nav a");
     const logo = document.querySelectorAll(".logo");
     const lateral = document.querySelectorAll(".lateral");
@@ -477,7 +478,7 @@ function handleResize() {
     const dw = Math.abs(window.innerWidth - lastSize.w);
     const dh = Math.abs(window.innerHeight - lastSize.h);
 
-    if (dw > 50 || dh > 100){
+    if (dw > 50 || dh > 140){
       location.reload();
     }
 
@@ -487,8 +488,3 @@ function handleResize() {
 
 // PC/모바일 공통 resize 감지
 window.addEventListener("resize", handleResize);
-
-// 모바일 화면 회전도 별도로 감지
-window.addEventListener("orientationchange", ()=>{
-  setTimeout(() => location.reload(), 500);
-});
