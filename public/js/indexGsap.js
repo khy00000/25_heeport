@@ -385,7 +385,6 @@ window.addEventListener("load", () => {
       )
       .to({}, { duration: 4 })
       .to(imgWrap3, {
-        opacity: 1,
         yPercent: 0,
         duration: 3,
         ease: "power2.out",
