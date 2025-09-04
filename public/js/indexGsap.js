@@ -138,7 +138,7 @@ window.addEventListener("load", () => {
 
         // 3. 로딩 페이지 제거, 메인 페이지 준비
         .to([".loading", ".loading-logo"], { autoAlpha: 0 })
-        .to([main, navLinks, logo, lateral], { autoAlpha: 1}, "-=0.3")
+        .to([main, navLinks, logo, lateral], { autoAlpha: 1 }, "-=0.3")
 
         // 4. 로딩 후 메인 텍스트 애니메이션 intro1
         .add(animateIn(split1), "-=0.3")
@@ -163,7 +163,7 @@ window.addEventListener("load", () => {
         .set(".introwrap-2", { autoAlpha: 0 })
 
         .to("#main", { autoAlpha: 1 })
-        .to([navLinks, logo, lateral], { autoAlpha: 1})
+        .to([navLinks, logo, lateral], { autoAlpha: 1 })
 
         .add(animateIn(split1), "-=0.3")
         .add(animateIn(split2), ">")
@@ -307,7 +307,9 @@ window.addEventListener("load", () => {
     const flatChars = allchars.flatMap((arr) => arr.chars || arr);
 
     gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
-    gsap.set([imgWrap2, imgWrap3], { opacity: 1, yPercent: 105 });
+    const vh = window.innerHeight;
+    gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: vh * 1.05 });
+    gsap.set(imgWrap3, { y: vh * 1.05 });
     gsap.set(flatChars, { opacity: 0, x: 100 });
     gsap.set(project1, { pointerEvents: "auto" });
     gsap.set([project2, project3], { pointerEvents: "none" });
@@ -358,7 +360,7 @@ window.addEventListener("load", () => {
       .to({}, { duration: 4 })
       .to(imgWrap2, {
         opacity: 1,
-        yPercent: 0,
+        y: 0,
         duration: 3,
         ease: "power2.out",
       })
@@ -385,10 +387,11 @@ window.addEventListener("load", () => {
       )
       .to({}, { duration: 4 })
       .to(imgWrap3, {
-        yPercent: 0,
+        y: 0,
         duration: 3,
         ease: "power2.out",
         overwrite: "auto",
+        immediateRender: false,
       })
       .to(
         project2,
@@ -410,7 +413,8 @@ window.addEventListener("load", () => {
           duration: 4,
         },
         ">-0.3"
-      );
+      )
+      .to({}, { duration: 4 });
 
     // footer 애니메이션
     const footertops = document.querySelectorAll(".footer_top p");
