@@ -94,10 +94,11 @@ window.addEventListener("load", () => {
     }
 
     const loadtl = gsap.timeline();
+
     // 첫 로딩 시에만 로딩페이지 애니메이션
     const loading = document.querySelector(".loading");
     const hasVisited = sessionStorage.getItem("hasVisited");
-    const main = document.getElementById("main");
+
     const navLinks = document.querySelectorAll(".intro .intro-row1 nav a");
     const logo = document.querySelectorAll(".logo");
     const lateral = document.querySelectorAll(".lateral");
@@ -108,13 +109,14 @@ window.addEventListener("load", () => {
 
       // 로딩 페이지 초기 상태
       loadtl
-        .set(main, { autoAlpha: 0 })
+        // 0. 로딩 페이지 애니메이션 중 깜빡임 방지
+        .set("#main", { autoAlpha: 0 })
         .set([navLinks, logo, lateral], { autoAlpha: 0 })
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".loading", { y: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
 
-        // 1. 로고 마스크 애니메이션
+        // 1. 로딩페이지 로고 마스크
         .from(loadingSplit.chars, {
           y: "-100%",
           stagger: 0.05,
@@ -122,7 +124,7 @@ window.addEventListener("load", () => {
           ease: "back.out(1.7)",
         })
 
-        // 2. 로딩 섹션 위로 사라지기
+        // 2. 로딩페이지 위로 효과
         .to(
           ".loading",
           {
@@ -133,18 +135,20 @@ window.addEventListener("load", () => {
           "+=0.3"
         )
 
-        // 3. 로딩 페이지 제거와 동시에 메인 페이지 준비
-        .set([".loading", ".loading-logo"], { display: "none" })
+        // 3. 로딩 페이지 제거, 메인 페이지 준비
+        .to([".loading", ".loading-logo"], { display: "none" })
         .to(main, { autoAlpha: 1 })
         .to([navLinks, logo, lateral], { autoAlpha: 1, duration: 0.5 })
 
-        // 4. 로딩 후 intro1 등장
+        // 4. 로딩 후 메인 텍스트 애니메이션 intro1
         .add(animateIn(split1), "-=0.3")
         .add(animateIn(split2), ">")
+
         // 5. 3d 인트로 애니메이션
         .call(() => {
           introAnimation();
         })
+
         // 6. 로딩 후 커서 등장
         .to(".cursor", {
           opacity: 1,
@@ -159,7 +163,7 @@ window.addEventListener("load", () => {
         .set(".introwrap-2", { autoAlpha: 0 })
 
         .to({}, { duration: 0.5 })
-        .to(main, { autoAlpha: 1 })
+        .to("#main", { autoAlpha: 1 })
         .to([navLinks, logo, lateral], { autoAlpha: 1, duration: 0.5 })
 
         .add(animateIn(split1), "-=0.3")
