@@ -392,6 +392,7 @@ window.addEventListener("load", () => {
           yPercent: 0,
           duration: 3,
           ease: "power2.out",
+          immediateRender: false,
         }
       )
       .to(
