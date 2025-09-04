@@ -309,7 +309,6 @@ window.addEventListener("load", () => {
     gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
     const vh = window.innerHeight;
     gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: vh * 1.05 });
-    gsap.set(imgWrap3, { y: vh * 1.05 });
     gsap.set(flatChars, { opacity: 0, x: 100 });
     gsap.set(project1, { pointerEvents: "auto" });
     gsap.set([project2, project3], { pointerEvents: "none" });
@@ -321,7 +320,7 @@ window.addEventListener("load", () => {
       scrollTrigger: {
         trigger: ".projects",
         start: "top top",
-        end: window.innerWidth < 768 ? "+=5000" : "+=4000",
+        end: "+=4000",
         scrub: 2,
         pin: true,
       },
