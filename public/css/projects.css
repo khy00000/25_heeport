@@ -97,11 +97,8 @@ body.projects {
 .projects-p-item .project-p-container a {
   width: 100%;
   height: 100%;
-  border-radius: 70px;
   display: block;
   overflow: hidden;
-  border-radius: 1px;
-  will-change: border-radius, transform;
 }
 
 .projects-p-item .project-p-container a img {
