@@ -137,9 +137,8 @@ window.addEventListener("load", () => {
         )
 
         // 3. 로딩 페이지 제거, 메인 페이지 준비
-        .to([".loading", ".loading-logo"], { display: "none" })
-        .to(main, { autoAlpha: 1 })
-        .to([navLinks, logo, lateral], { autoAlpha: 1, duration: 0.5 })
+        .to([".loading", ".loading-logo"], { autoAlpha: 0 })
+        .to([main, navLinks, logo, lateral], { autoAlpha: 1}, "-=0.3")
 
         // 4. 로딩 후 메인 텍스트 애니메이션 intro1
         .add(animateIn(split1), "-=0.3")
@@ -163,9 +162,8 @@ window.addEventListener("load", () => {
         .set(".cursor", { opacity: 0, scale: 0 })
         .set(".introwrap-2", { autoAlpha: 0 })
 
-        .to({}, { duration: 0.5 })
         .to("#main", { autoAlpha: 1 })
-        .to([navLinks, logo, lateral], { autoAlpha: 1, duration: 0.5 })
+        .to([navLinks, logo, lateral], { autoAlpha: 1})
 
         .add(animateIn(split1), "-=0.3")
         .add(animateIn(split2), ">")
