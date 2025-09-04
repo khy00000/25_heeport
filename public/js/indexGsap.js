@@ -307,8 +307,7 @@ window.addEventListener("load", () => {
     const flatChars = allchars.flatMap((arr) => arr.chars || arr);
 
     gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
-    const vh = window.innerHeight;
-    gsap.set([imgWrap2, imgWrap3], { opacity: 1, y: vh * 1.05 });
+    gsap.set([imgWrap2, imgWrap3], { opacity: 1, yPercent: 105 });
     gsap.set(flatChars, { opacity: 0, x: 100 });
     gsap.set(project1, { pointerEvents: "auto" });
     gsap.set([project2, project3], { pointerEvents: "none" });
@@ -359,7 +358,7 @@ window.addEventListener("load", () => {
       .to({}, { duration: 4 })
       .to(imgWrap2, {
         opacity: 1,
-        y: 0,
+        yPercent: 0,
         duration: 3,
         ease: "power2.out",
       })
@@ -385,13 +384,16 @@ window.addEventListener("load", () => {
         ">-0.3"
       )
       .to({}, { duration: 4 })
-      .to(imgWrap3, {
-        y: 0,
-        duration: 3,
-        ease: "power2.out",
-        overwrite: "auto",
-        immediateRender: false,
-      })
+      .fromTo(
+        imgWrap3,
+        { opacity: 1, yPercent: 105 },
+        {
+          opacity: 1,
+          yPercent: 0,
+          duration: 3,
+          ease: "power2.out",
+        }
+      )
       .to(
         project2,
         {
