@@ -466,3 +466,29 @@ window.addEventListener("load", () => {
     ScrollTrigger.refresh(); // 트리거 새로고침
   });
 });
+
+// 리사이즈 리로드
+let resizeTimer;
+let lastSize = { w: window.innerWidth, h: window.innerHeight };
+
+function handleResize() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(()=>{
+    const dw = Math.abs(window.innerWidth - lastSize.w);
+    const dh = Math.abs(window.innerHeight - lastSize.h);
+
+    if (dw > 50 || dh > 100){
+      location.reload();
+    }
+
+    lastSize = { w: window.innerWidth, h: window.innerHeight };
+  }, 300);
+}
+
+// PC/모바일 공통 resize 감지
+window.addEventListener("resize", handleResize);
+
+// 모바일 화면 회전도 별도로 감지
+window.addEventListener("orientationchange", ()=>{
+  setTimeout(() => location.reload(), 500);
+});

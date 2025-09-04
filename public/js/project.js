@@ -342,8 +342,7 @@ function initNextProjectAnimation(data, projectId) {
 
       gsap.to(bar, {
         width: `${progress * 100}%`,
-        duration: 3,
-        ease: "power1.out",
+        duration: 1,
       });
 
       if (progress >= 0.997 && !bar.dataset.completed) {
@@ -351,7 +350,7 @@ function initNextProjectAnimation(data, projectId) {
         bar.dataset.completed = "true";
         setTimeout(() => {
           window.location.href = nextUrl;
-        }, 1300);
+        }, 1000);
       }
     },
   });
