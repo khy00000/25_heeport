@@ -21,9 +21,3 @@ if (window.innerWidth <= 768) {
   document.querySelector(".split4").innerHTML =
     "And Communicate Clearly<br>to Deliver the Best Results.";
 }
-
-// window.addEventListener("load", () => {
-//   setTimeout(() => {
-//     window.scrollTo(0, 0);
-//   }, 10); // layout이 안정된 뒤 위치 이동
-// });
