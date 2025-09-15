@@ -240,6 +240,7 @@
 
 /* 모바일 가로모드 */
 @media (max-width: 900px) and (orientation: landscape) {
+  /* main */
   .lateral {
     display: none;
   }
@@ -307,6 +308,177 @@
 
   .top-button button {
     font-size: 20px;
+  }
+
+  /* projects page */
+  body.projects {
+    width: unset;
+    height: unset;
+    overflow: unset;
+  }
+
+  .toproject-p {
+    display: none;
+  }
+
+  #projects-p {
+    height: auto;
+    touch-action: auto;
+    overscroll-behavior: auto;
+  }
+
+  .projects-p{
+    height: 130vh;
+  }
+
+  .projects-p .pp-wrap {
+    flex-direction: column;
+    justify-content: unset;
+    padding-bottom: 10vh;
+  }
+
+  .projects-p .pp-wrap .projects-p-title {
+        font-size: 70px;
+    line-height: 1;
+    letter-spacing: -5px;
+  }
+
+  .projects-p-responsive {
+    display: block;
+    font-size: 25px;
+    text-transform: uppercase;
+  }
+
+  .projects-p-item {
+    height: 300vh;
+    flex-direction: column;
+    align-items: unset;
+    justify-content: unset;
+    gap: unset;
+  }
+
+  .projects-p-item .project-p-container {
+    width: 100%;
+    height: 100vh;
+    padding: 0.5em;
+  }
+
+  .project-p-title h1 {
+    opacity: 1;
+    font-size: 30px;
+  }
+
+  .project-p-title p {
+    opacity: 1;
+    font-size: 20px;
+  }
+
+  /* project page */
+  #project {
+    line-height: 1.7;
+  }
+
+  #project .pin-spacer {
+    height: 50vh !important;
+  }
+
+  #project .intro {
+    height: 50vh !important;
+  }
+
+  #project .intro .home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+  }
+
+  #project .intro .home .project-logo {
+    font-size: 25px;
+  }
+
+  #project .intro .intro-bottom {
+    width: 100%;
+    height: 80%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    gap: 7vh;
+  }
+
+  .intro-bottom .intro-bottom-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .intro-bottom .project-title {
+    width: 100%;
+  }
+
+  .project-title .pt-mask {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-title .pt-mask div {
+    right: unset;
+  }
+
+  .project-info .project-container p {
+    font-size: 16px;
+    margin-right: 20px;
+  }
+
+  .project-info .project-container .tool-wrap li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+  }
+
+  .project-info .project-container .function-wrap li {
+    font-size: 16px;
+    margin-right: 20px;
+  }
+
+  .project-container .ts-wrap {
+    font-size: 16px;
+  }
+
+  .ts-problem,
+  .ts-fix {
+    margin-bottom: 10px;
+  }
+
+  .ts-problem-discrip {
+    font-size: 16px;
+    padding-right: 30px;
+  }
+
+  .ts-fix-discrip {
+    font-size: 16px;
+  }
+
+  .ts-fix-discrip li {
+    margin-right: 20px;
+  }
+
+  .ts-banda {
+    flex-direction: column;
+  }
+
+  .ts-before {
+    width: 100%;
+  }
+
+  .ts-banda-arrow::before {
+    content: "↓";
+  }
+
+  .ts-after {
+    width: 100%;
   }
 }
 
