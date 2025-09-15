@@ -253,7 +253,8 @@
     bottom: unset;
     transform: unset;
     transform-origin: unset;
-    height: 15vh;
+    width: 100vw;
+    height: 20vh;
     text-transform: unset;
     overflow: hidden;
   }
