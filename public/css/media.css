@@ -238,6 +238,78 @@
   }
 }
 
+/* 모바일 가로모드 */
+@media (max-width: 900px) and (orientation: landscape) {
+  .lateral {
+    display: none;
+  }
+
+  .intro .intro-row1 .logo {
+    top: 20px;
+    font-size: 20px;
+  }
+
+  .intro .intro-row2 .intro-text-wrap div {
+    font-size: 25px;
+  }
+
+  .intro .intro-row1 nav a {
+    font-size: 13px;
+  }
+
+  .intro .intro-row1 nav a::after {
+    background-size: 9px 9px;
+    width: 9px;
+    height: 9px;
+  }
+
+  .cursor {
+    display: none;
+  }
+
+  .about .about-item p {
+    font-size: 35px;
+  }
+
+  .howiwork {
+    padding: 1em;
+  }
+
+  .howiwork h1 {
+    font-size: 17px;
+  }
+
+  .split5,
+  .split6 {
+    font-size: 20px;
+  }
+
+  .split5 {
+    margin-bottom: 40px;
+  }
+
+  .project-item-title {
+    font-size: 35px;
+  }
+
+  .description-item {
+    font-size: 20px;
+  }
+
+  .scroll {
+    font-size: 20px;
+  }
+
+  .footer_top,
+  .footer_bottom {
+    font-size: 30px;
+  }
+
+  .top-button button {
+    font-size: 20px;
+  }
+}
+
 /* 모바일 대 */
 @media (max-width: 768px) and (orientation: portrait) {
   body {
@@ -538,14 +610,14 @@
 }
 
 /* 아이폰 대 */
-@media (max-width: 640px) and (orientation: portrait){
+@media (max-width: 640px) and (orientation: portrait) {
   /* main */
   .footer_top {
     font-size: 27px;
   }
 }
 
-@media (max-width: 576px) and (orientation: portrait){
+@media (max-width: 576px) and (orientation: portrait) {
   /* main */
   .about .about-item p {
     font-size: 30px;
@@ -570,7 +642,7 @@
   }
 }
 
-@media (max-width: 430px) and (orientation: portrait){
+@media (max-width: 430px) and (orientation: portrait) {
   /* main */
   .split5,
   .split6 {
@@ -658,7 +730,7 @@
 }
 
 /* 모바일 */
-@media (max-width: 393px) and (orientation: portrait){
+@media (max-width: 393px) and (orientation: portrait) {
   /* main */
   .loading-logo {
     font-size: 90px;
