@@ -7,7 +7,10 @@ const introLogo = document.querySelector(".intro .intro-row1 .logo");
 // 측면 텍스트 정중앙으로 옮김
 const lateral1Text = document.querySelector(".lateral1 div");
 
-if (window.innerWidth <= 768) {
+const isMobile = window.innerWidth <= 768;
+const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+
+if (isMobile && isPortrait) {
   loadingLogo.innerHTML = "Heeyon<br>Kim";
   introLogo.innerHTML = "Heeyon Kim";
   lateral1Text.innerHTML =

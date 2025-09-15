@@ -238,8 +238,6 @@
   }
 }
 
-/* 가로모드 900px 동일 */
-
 /* 모바일 대 */
 @media (max-width: 768px) and (orientation: portrait) {
   body {
