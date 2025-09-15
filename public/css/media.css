@@ -327,7 +327,7 @@
     overscroll-behavior: auto;
   }
 
-  .projects-p{
+  .projects-p {
     height: 130vh;
   }
 
@@ -338,7 +338,7 @@
   }
 
   .projects-p .pp-wrap .projects-p-title {
-        font-size: 70px;
+    font-size: 70px;
     line-height: 1;
     letter-spacing: -5px;
   }
@@ -379,11 +379,11 @@
   }
 
   #project .pin-spacer {
-    height: 50vh !important;
+    height: 100vh !important;
   }
 
   #project .intro {
-    height: 50vh !important;
+    height: 100vh !important;
   }
 
   #project .intro .home {
@@ -467,6 +467,7 @@
 
   .ts-banda {
     flex-direction: column;
+    padding: 0 0 40px 0;
   }
 
   .ts-before {
