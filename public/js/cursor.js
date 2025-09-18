@@ -1,5 +1,5 @@
-const cursor = document.querySelector(".cursor");
-const cursorText = cursor.querySelector(".cursor-text");
+const customCursor = document.querySelector(".cursor");
+const cursorText = customCursor.querySelector(".cursor-text");
 let mouseX = -100,
     mouseY = -100;
 let scale = 1,
@@ -17,7 +17,7 @@ const cursorTargets = document.querySelectorAll(
 window.addEventListener("mousemove", (e) => {
   mouseX = e.clientX;
   mouseY = e.clientY;
-  cursor.style.opacity = 1;
+  customCursor.style.opacity = 1;
 });
 
 // 커서 텍스트 효과 베이직
@@ -37,8 +37,8 @@ cursorTargets.forEach((el) => {
 });
 
 gsap.ticker.add(() => {
-  cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
-  cursor.style.backgroundColor = color;
+  customCursor.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
+  customCursor.style.backgroundColor = color;
   cursorText.style.opacity = opacity;
 
   if (!hoverTarget) {

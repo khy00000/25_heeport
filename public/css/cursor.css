@@ -1,5 +1,15 @@
-body {
-  cursor: none;
+*,
+*::before,
+*::after,
+a,
+a:hover,
+a:active,
+a:focus,
+button,
+button:hover,
+button:active,
+button:focus {
+  cursor: none !important;
 }
 
 /* 마우스 커서 */

@@ -514,7 +514,6 @@ canvas {
 
 .top-button button {
   all: unset;
-  cursor: pointer;
   border: 1px solid white;
   padding: 0.2em 0.2em;
   border-radius: 100px 100px;
