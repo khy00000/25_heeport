@@ -378,13 +378,13 @@
     line-height: 1.7;
   }
 
-  #project .pin-spacer {
+  /* #project .pin-spacer {
     height: 100vh !important;
   }
 
   #project .intro {
     height: 100vh !important;
-  }
+  } */
 
   #project .intro .home {
     display: flex;
