@@ -231,6 +231,18 @@ body {
   transform: translateY(-50%);
 }
 
+.project-container .function-wrap li:nth-child(6)::before {
+  content: "";
+  position: absolute;
+  background-image: url(../assets/img/icon_f.svg);
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
+  top: 50%;
+  left: -27px;
+  transform: translateY(-50%);
+}
+
 /* 문제 해결 */
 .project-container .ts-wrap {
   font-size: 20px;
