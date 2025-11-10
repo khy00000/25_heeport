@@ -251,9 +251,11 @@ window.addEventListener("load", () => {
     const project1 = projects[0];
     const project2 = projects[1];
     const project3 = projects[2];
+    const project4 = projects[3];
     const imgWrap1 = project1.querySelector(".project-img");
     const imgWrap2 = project2.querySelector(".project-img");
     const imgWrap3 = project3.querySelector(".project-img");
+    const imgWrap4 = project4.querySelector(".project-img");
 
     const titles = gsap.utils.toArray(".project-item-title");
     const titleSplits = titles.map(
@@ -293,6 +295,12 @@ window.addEventListener("load", () => {
       descSplits[8].chars,
     ];
 
+    const descSplits4 = [
+      descSplits[9].chars,
+      descSplits[10].chars,
+      descSplits[11].chars,
+    ];
+
     const scrolls = gsap.utils.toArray(".scroll");
     const scrollSplits = scrolls.map(
       (scroll) =>
@@ -307,10 +315,10 @@ window.addEventListener("load", () => {
     const flatChars = allchars.flatMap((arr) => arr.chars || arr);
 
     gsap.set(imgWrap1, { scale: 0.5, borderRadius: "400px" });
-    gsap.set([imgWrap2, imgWrap3], { opacity: 1, yPercent: 105 });
+    gsap.set([imgWrap2, imgWrap3, imgWrap4], { opacity: 1, yPercent: 105 });
     gsap.set(flatChars, { opacity: 0, x: 100 });
     gsap.set(project1, { pointerEvents: "auto" });
-    gsap.set([project2, project3], { pointerEvents: "none" });
+    gsap.set([project2, project3, project4], { pointerEvents: "none" });
 
     // 커서 디자인 플래그
     window.openOff = false;
@@ -319,7 +327,7 @@ window.addEventListener("load", () => {
       scrollTrigger: {
         trigger: ".projects",
         start: "top top",
-        end: "+=4000",
+        end: "+=5000",
         scrub: 2,
         pin: true,
       },
@@ -409,6 +417,39 @@ window.addEventListener("load", () => {
       .to(project3, { pointerEvents: "auto" }, "<")
       .to(
         [titleSplits[2].chars, descSplits3, scrollSplits[2].chars],
+        {
+          x: 0,
+          opacity: 1,
+          duration: 4,
+        },
+        ">-0.3"
+      )
+      .to({}, { duration: 4 })
+      .fromTo(
+        imgWrap4,
+        { opacity: 1, yPercent: 105 },
+        {
+          opacity: 1,
+          yPercent: 0,
+          duration: 3,
+          ease: "power2.out",
+          immediateRender: false,
+        }
+      )
+      .to(
+        project3,
+        {
+          pointerEvents: "none",
+          scale: 0.7,
+          opacity: 0,
+          duration: 3,
+          ease: "power2.out",
+        },
+        "<"
+      )
+      .to(project4, { pointerEvents: "auto" }, "<")
+      .to(
+        [titleSplits[3].chars, descSplits4, scrollSplits[3].chars],
         {
           x: 0,
           opacity: 1,

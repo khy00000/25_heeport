@@ -137,13 +137,13 @@ body.projects {
 }
 
 .project-p-title h1 {
-  font-size: 40px;
+  font-size: 30px;
   opacity: 0;
   transition: 0.3s ease;
 }
 
 .project-p-title p {
-  font-size: 20px;
+  font-size: 18px;
   opacity: 0;
   transition: 0.3s ease;
 }
