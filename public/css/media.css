@@ -217,7 +217,7 @@
   }
 
   .project-item-title {
-    font-size: 55px;
+    font-size: 50px;
   }
 
   /* projects */
@@ -804,7 +804,7 @@
   }
 
   .project-item-title {
-    font-size: 40px;
+    font-size: 37px;
   }
 
   .description-item {
@@ -813,12 +813,12 @@
 
   /* project page */
   .project-title .pt-mask {
-    height: 50px;
+    height: 45px;
   }
 
   .project-title .pt-mask div {
-    height: 50px;
-    font-size: 40px;
+    height: 45px;
+    font-size: 35px;
   }
 }
 
@@ -830,7 +830,7 @@
   }
 
   .project-item-title {
-    font-size: 35px;
+    font-size: 30px;
   }
 
   .description-item {
@@ -879,12 +879,12 @@
   }
 
   .project-title .pt-mask {
-    height: 45px;
+    height: 40px;
   }
 
   .project-title .pt-mask div {
-    font-size: 35px;
-    height: 45px;
+    font-size: 30px;
+    height: 40px;
   }
 
   .ts-banda {
@@ -952,7 +952,7 @@
   }
 
   .project-item-title {
-    font-size: 35px;
+    font-size: 32px;
   }
 
   .description-list {
@@ -982,12 +982,12 @@
 
   /* project page */
   .project-title .pt-mask {
-    height: 35px;
+    height: 30px;
   }
 
   .project-title .pt-mask div {
-    height: 35px;
-    font-size: 30px;
+    height: 30px;
+    font-size: 25px;
   }
 
   .project-container h1 {
